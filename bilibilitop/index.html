@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bilibilitop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 6vw;
+            color: #91bef0;
+            text-shadow: 0.5vw 0.5vw violet;
+            margin-top: 5vh;
+        }
+
+        ul{
+            width: 100vw;
+            height: 30vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        li{
+            font-size: 3vw;
+        }
+
+        a{
+            text-decoration: none;
+            color: #91bef0;
+        }
+
+        #iframeb {
+            width: 100vw;
+            height: 50vh;
+            position: absolute;
+            top: 50vh;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>bilibili顶部鼠标移入效果的实现</h1>
+    <ul>
+        <li><a target="_blank" href="./bilibilitop.html">bilibilitop</a></li>
+        <li><a target="_blank" href="./origin.html">仅跟随pageXY改变translate</a></li>
+    </ul>
+    <iframe src="https://www.bilibili.com" frameborder="0" id="iframeb"></iframe>
+</body>
+
+</html>

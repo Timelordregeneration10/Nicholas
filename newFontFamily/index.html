@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在南区看到的字体</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box-space {
+            height: 15vh;
+        }
+
+        .box-text {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            justify-items: center;
+            align-items: center;
+            font-family: YouYuan;
+        }
+
+        .box-up {
+            height: 10vh;
+            overflow: hidden;
+            color: hotpink;
+            background-color: white;
+            font-size: 16vh;
+        }
+
+        .box-down {
+            height: 10vh;
+            overflow: hidden;
+            color: white;
+            background-color: #91bef0;
+            font-size: 16vh;
+        }
+
+        #text-down {
+            transform: translateY(-10vh);
+        }
+
+        .box-input {
+            position: absolute;
+            left: 35vw;
+            bottom: 30vh;
+        }
+
+        #text-input {
+            outline: none;
+            border: 1px violet solid;
+            width: 30vw;
+            height: 10vh;
+            font-size: 6vh;
+            border-radius: 10px;
+            text-align: center;
+            font-family: YouYuan;
+        }
+
+        #text-input:hover {
+            border: 1px rgb(182, 17, 182) solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-space">
+
+    </div>
+    <div class="box-text">
+        <div class="box-up">
+            <div id="text-up">
+                请输入
+            </div>
+        </div>
+        <div class="box-down">
+            <div id="text-down">
+                请输入
+            </div>
+        </div>
+    </div>
+    <div class="box-input">
+        <input type="text" value="请输入" id="text-input">
+    </div>
+    <script>
+        document.getElementById("text-input").onchange = function () {
+            document.getElementById("text-up").innerHTML = document.getElementById("text-input").value;
+            document.getElementById("text-down").innerHTML = document.getElementById("text-input").value;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+
+.corner-top-left{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 10vw;
+    transform: translateX(-1.5vw);
+}
+
+.corner-bottom-left{
+    position: absolute;
+    left:0;
+    bottom:0;
+    width: 7vw;
+}
+
+.corner-bottom-right{
+    position: absolute;
+    right:0;
+    bottom:0;
+    width: 9vw;
+    transform: translateX(1vw);
+}
+
+.QRcode1{
+    position: absolute;
+    left: 29vw;
+    top: 10vh;
+    width: 5.5vw;
+}
+
+.QRcode2{
+    position: absolute;
+    left: 36vw;
+    top: 10vh;
+    width: 5.17vw;
+}
+
+#jjshop{
+    position: absolute;
+    top: 9.5vh;
+    left: 10vw;
+    font-size: 4vw;
+    color: #fbc2eb;
+    text-shadow: 0.1vw 0.1vw rgb(0, 0, 0),
+        -0.1vw -0.1vw rgb(0, 0, 0),
+        0.1vw -0.1vw rgb(0, 0, 0),
+        -0.1vw 0.1vw rgb(0, 0, 0);
+}

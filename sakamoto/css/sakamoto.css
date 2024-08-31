@@ -1,0 +1,80 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    /* 字体名称随意起 */
+    font-family: huati;
+    /*你下载字体所在的位置*/
+    src: url('../font/EdwardianScriptITC.ttf');
+}
+
+.box-sakamoto{
+    font-family:huati;
+    width: 100vw;
+    height:100vh;
+    overflow: hidden;
+    position: absolute;
+}
+
+.biggest-sakamoto{
+    width: 400vw;
+    font-size: 25vw;
+    color:transparent;
+    text-shadow: 0vw 1vw #FE9913, -0vw -1vw #2EA2F8,0vw 0vw #FF1693;
+    position: absolute;
+    top:20vh;
+    animation: biggestSakamoto 10s linear infinite;
+}
+
+@keyframes biggestSakamoto{
+    from{
+        transform: translateX(100vw);
+    }
+    to{
+        transform: translateX(-400vw);
+    }
+}
+           
+@keyframes notbiggest{
+    from{
+        transform: translateX(100vw);
+    }
+    to{
+        transform: translateX(-300vw);
+    }
+}
+
+.img-sakamoto{
+    position: absolute;
+    left: 36vw;
+}
+
+.test1{
+    width: 300vw;
+    height: 30vw;
+    font-size: 25vw;
+    color: #FF1693;
+    opacity: 1;
+    transform:translateY(-1vw);
+}
+
+.test2{
+    width: 300vw;
+    height: 30vw;
+    font-size: 25vw;
+    color: #2EA2F8;
+    opacity: 1;
+    transform:translateY(-32vw);
+}
+
+.test3{
+    width: 300vw;
+    height: 30vw;
+    font-size: 25vw;
+    color: #FE9913;
+    opacity: 1;
+    transform:translateY(-60vw);
+}

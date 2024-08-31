@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch a",
+            "request": "launch",
+            "mainClass": "a",
+            "projectName": "lkc生日快乐_d4f9abbe"
+        },
+        {
+            "name": "C++ Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.exe",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "C++ tasks"
+        }
+    ]
+}

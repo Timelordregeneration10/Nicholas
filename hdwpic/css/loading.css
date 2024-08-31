@@ -1,0 +1,18 @@
+.loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+}
+
+.loading-title{
+    position: absolute;
+    top:20vh;
+    width: 100vw;
+    text-align: center;
+    font-size: 10vw;
+    color:white;
+}
