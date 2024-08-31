@@ -1,0 +1,122 @@
+
+.box-questionnaire{
+    width: 100vw;
+    height: 300vh;
+    background-attachment: fixed;
+    background-image: url(../img/musedash/bg5.png);
+    background-size: 100vw 100vh;
+}
+
+.questionnaire-title{
+    width: 100vw;
+    height: 30vh;
+    font-size: 12vw;
+    color:white;
+    text-shadow: 1vw 1vw 0.2vw violet;
+}
+
+.contain-box{
+    display: flex;
+    /* 纵向布局 */
+    flex-direction: column;
+    /* 水平居中 */
+    align-items: center;
+    overflow-y: scroll;
+    width:100vw;
+    height:60vh;
+}
+
+.contain-box::-webkit-scrollbar {
+    width:0vw;
+}
+
+#container{
+    width: 80%;
+}
+
+.questions{
+    text-align: start;
+    font-size: 7vw;
+    color:rgb(130, 238, 218);
+    text-shadow: #f0ca91 0.3vw 0.3vw;
+    animation: appear 1s ease;
+}
+
+.choices{
+    text-align: center;
+    font-size: 5vw;
+    color:#91bef0;
+    text-shadow: violet 0.2vw 0.2vw;
+    animation: appear 1s ease;
+}
+
+.choices:hover{
+    background-color: #dfecfb;
+    cursor: pointer;;
+}
+
+.answers{
+    text-align: end;
+    font-size: 3.5vw;
+    color:gainsboro;
+    text-shadow: rgb(199, 189, 235) 0.1vw 0.1vw;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    0% {
+        transform:translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.iframe-scrollarea{
+    width: 100vw;
+    height: 200vh;
+}
+
+.box-iframesstart0{
+    height: 0px;
+    text-align: start;
+}
+
+#iframes-start0Rem{
+    /* width: 30vw; */
+    /* height: 70vh; */
+    transform: translate(0vw,0vh);
+    transition: all 0.1s;
+}
+
+#iframes-start1Rem{
+    /* width: 30vw; */
+    /* height: 70vh; */
+    transform: translate(-10vw,60vh);
+    transition: all 0.1s;
+}
+
+#iframes-start2Rem{
+    /* width: 30vw; */
+    /* height: 70vh; */
+    transform: translate(20vw,120vh);
+    transition: all 0.1s;
+}
+
+#iframes-start3Rem{
+    /* width: 30vw; */
+    /* height: 70vh; */
+    transform: translate(-30vw,180vh);
+    transition: all 0.1s;
+}
+
+#iframes-start4Rem{
+    /* width: 30vw; */
+    /* height: 70vh; */
+    transform: translate(50vw,300vh);
+    transition: all 0.1s;
+    pointer-events: none;
+}

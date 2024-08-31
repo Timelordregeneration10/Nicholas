@@ -1,0 +1,80 @@
+.box-dinnerscene{
+    width: 100vw;
+    height: 700vh;
+    background-image: url(../img/musedash/bg2.png);
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+}
+
+.box-dinner {
+    width: 360vw;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    transition: all 0.1s ease;
+}
+
+.dinner-title{
+    width: 35vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 9vw;
+    color:white;
+    text-shadow: 0.5vw 0.5vw 0.2vw violet;
+}
+
+.dinner-title-left,
+.dinner-title-right{
+    width: 15vw;
+}
+
+
+.dinneritem {
+    width: 25vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.dinneritem-imgbg {
+    flex: 78;
+}
+
+.dinneritem-img-frame {
+    width: 20vw;
+    height: 75vh;
+    transform: translate(2vw, 1vw);
+    border-radius: 1vw;
+    overflow: hidden;
+}
+
+.dinneritem-img {
+    width: 20vw;
+    height: 75vh;
+    transition: all 0.7s;
+}
+
+.dinneritem-title {
+    flex: 14;
+    font-size: 5vw;
+    transform: translateX(4vw);
+    color: white;
+    text-shadow: 0.2vw 0.2vw 0.1vw violet;
+    transition: all 0.3s;
+}
+
+.dinneritem-discription {
+    flex: 8;
+    font-size: 2.5vw;
+    transform: translateX(4vw);
+    color: rgb(232, 226, 255);
+    text-shadow: 0.1vw 0.1vw 0.1vw violet;
+}
