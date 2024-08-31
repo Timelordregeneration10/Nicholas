@@ -14,7 +14,7 @@ CNAME
 
 timelordregeneration10.github.io.
 
-wWW
+www
 
 CNAME
 
