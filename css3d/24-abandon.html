@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .little {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            animation: turn 6s linear infinite;
+        }
+
+        @keyframes turn {
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        .little div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .little div img {
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            object-fit: cover;
+        }
+
+        .little-item {
+            transition: all 1s;
+        }
+
+        .image-item {
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="little">
+            <div class="little-item"><img class="image-item" src="img/1.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/2.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/3.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/4.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/5.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/6.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/1.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/2.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/3.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/4.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/5.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/6.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/1.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/2.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/3.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/4.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/5.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/6.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/1.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/2.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/3.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/4.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/5.jpg" alt="x" /></div>
+            <div class="little-item"><img class="image-item" src="img/6.jpg" alt="x" /></div>
+        </div>
+    </div>
+    <script>
+
+        // 先translate3d再rotate会导致全部都面向一个方向，要解决这个问题需要更加精密的计算
+        // 所以我还是选择了在16-rotate+translateZ.html的基础上，第17-24个面只使用translate3d的方法
+
+        var littleItems = document.getElementsByClassName("little-item");
+        var trans = [];
+        var translateDistance = 10;          //translate3d的移动距离
+        var translateDistance2 = 20;         //放大时translate3d的移动距离
+        var translate3dDic = [
+            [0, 0, 0],
+            [0, 0, translateDistance],
+            [0, translateDistance, 0],
+            [translateDistance, 0, 0],
+            [0, translateDistance, translateDistance],
+            [translateDistance, translateDistance, 0],
+            [translateDistance, 0, translateDistance],
+            [translateDistance, translateDistance, translateDistance]
+        ];
+        var translate3dDic2 = [
+            [0, 0, 0],
+            [0, 0, translateDistance2],
+            [0, translateDistance2, 0],
+            [translateDistance2, 0, 0],
+            [0, translateDistance2, translateDistance2],
+            [translateDistance2, translateDistance2, 0],
+            [translateDistance2, 0, translateDistance2],
+            [translateDistance2, translateDistance2, translateDistance2]
+        ];
+        var rotateXDic = [90, 90, 90, 90, 90, 90, 90, 90];
+        var rotateYDic = [90, 90, 90, 90, 90, 90, 90, 90];
+        for (let i = 0; i < littleItems.length; i++) {
+            let corner = (i - i % 3) / 3;
+            littleItems[i].style.transform = `translate3d(${translate3dDic[corner][0]}vw,${translate3dDic[corner][1]}vw,${translate3dDic[corner][2]}vw) rotateX(${i % 3 == 1 ? rotateXDic[corner] : 0}deg) rotateY(${i % 3 == 2 ? -rotateYDic[corner] : 0}deg)`;
+            trans.push(littleItems[i].style.transform);
+        }
+        console.log(trans);
+        document.getElementsByClassName("container")[0].onmouseenter = function () {
+            for (let i = 0; i < littleItems.length; i++) {
+                let corner = (i - i % 3) / 3;
+                littleItems[i].style.transform = `translate3d(${translate3dDic2[corner][0]}vw,${translate3dDic2[corner][1]}vw,${translate3dDic2[corner][2]}vw) rotateX(${i % 3 == 1 ? rotateXDic[corner] : 0}deg) rotateY(${i % 3 == 2 ? -rotateYDic[corner] : 0}deg)`;
+
+                document.getElementsByClassName("image-item")[i].style.width = "45%";
+                document.getElementsByClassName("image-item")[i].style.height = "45%";
+            }
+        };
+
+        document.getElementsByClassName("container")[0].onmouseleave = function () {
+            for (let i = 0; i < littleItems.length; i++) {
+                littleItems[i].style.transform = trans[i];
+                document.getElementsByClassName("image-item")[i].style.width = "20%";
+                document.getElementsByClassName("image-item")[i].style.height = "20%";
+            }
+        };
+    </script>
+</body>
+
+</html>
