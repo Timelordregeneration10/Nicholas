@@ -1,0 +1,27 @@
+@keyframes heart {
+    from {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(0px, -100px);
+        opacity: 0;
+        display:none;
+    }
+}
+
+.heart {
+    position: absolute;
+    z-index:2147483647;
+    width: 40px;
+    height: 40px;
+    animation-name: heart;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}

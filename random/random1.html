@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>number</title>
+  <style>
+    body {
+      background-color: #91bef0;
+    }
+
+    .gene {
+      font-size: 5vw;
+      text-align: center;
+      position: absolute;
+      left: 14vw;
+      top: 40vw;
+    }
+
+    .look {
+      text-shadow: 1vw 1vw violet;
+      font-size: 9vw;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 5vw;
+      height: 1em;
+      width: 2em;
+      border-radius: 0.4vw;
+      border: 1px solid #c8cccf;
+      color: #6a6f77;
+      outline: 0;
+      text-decoration: none;
+    }
+
+    input[type="text"]:focus {
+      border: 0.1vw solid #ff7496;
+    }
+  </style>
+  <script>
+    function generan() {
+      var x = 0, y = 0;
+      x = document.getElementById("rg1").value;
+      y = document.getElementById("rg2").value;
+      document.getElementById("ran").innerHTML =
+        Number(Math.floor(Math.random() * (y - x + 1))) + Number(x);
+    }
+
+    var locked = false;
+    var countdownTime = 6000;
+    function generan2() {
+      if (locked) { return; }
+      locked = true;
+      document.getElementById("ran").style.fontSize = "9vw";
+      for (let timeInterval = 10; timeInterval < countdownTime; timeInterval *= 1.1) {
+        setTimeout(() => {
+          generan();
+          // console.log(timeInterval);
+        }, timeInterval);
+      }
+      setTimeout(() => {
+        locked = false;
+        document.getElementById("ran").style.fontSize = "12vw";
+      }, countdownTime);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="gene">
+    range :&nbsp;
+    <input type="text" id="rg1" value=1 />
+    &nbsp;~&nbsp;
+    <input type="text" id="rg2" value=10 />
+    &nbsp;
+    <button type="button" style="font-size:5vw" onclick="generan2()">generate</button>
+    <!-- 想直接生成就onclick为generan()，想要有倒数效果就onclick为generan2() -->
+  </div>
+  <div id="ran" class="look"></div>
+</body>
+
+</html>

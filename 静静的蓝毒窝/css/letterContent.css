@@ -1,0 +1,75 @@
+#letter {
+    background-color: var(--letterContentColor);
+    box-shadow: 0px 2px 5px hsl(0, 0%, 10%);
+    border-radius: 1.5vw;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    margin: 0 0 0 5px;
+    width: 88vw;
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+.firstpart {
+    width: 88vw;
+    height: 140vh;
+    /* background-color: aquamarine; */
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.spacepart {
+    width: 88vw;
+    height: 1000vh;
+    /* background-color: aquamarine; */
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.scrollld {
+    height: 0px;
+    text-align: start;
+}
+
+#scrollld1{
+    transform: translate(0vw,10vh);
+    transition: all 0.1s;
+    width: 80vw;
+}
+
+#scrollld2{
+    transform: translate(-10vw,60vh);
+    transition: all 0.1s;
+    width: 70vw;
+}
+
+#scrollld3{
+    transform: translate(20vw,90vh);
+    transition: all 0.1s;
+    width: 150vw;
+}
+
+#scrollld4{
+    transform: translate(-30vw,240vh);
+    transition: all 0.1s;
+    width: 80vw;
+}
+
+#scrollld5{
+    transform: translate(80vw,340vh);
+    transition: all 0.1s;
+    width: 80vw;
+}
+
+#scrollld6{
+    transform: translate(-70vw,440vh);
+    transition: all 0.1s;
+}
+
+.xcbfpart {
+    width: 88vw;
+    height: 800vh;
+}

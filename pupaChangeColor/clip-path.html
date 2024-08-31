@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pupaChangeColor-clip-path</title>
+    <style>
+        #box-title {
+            position: absolute;
+            width: 100vw;
+            text-align: center;
+            font-size: 10vw;
+            color: hotpink;
+            transition: all 1s linear;
+        }
+
+        #box-title2 {
+            position: absolute;
+            top: 40vh;
+            width: 100vw;
+            text-align: center;
+            font-size: 10vw;
+            color: red;
+            transition: all 1s linear;
+            clip-path: inset(0% 0% 0% 0%);
+        }
+
+        #box-title3 {
+            position: absolute;
+            top:40vh;
+            width: 100vw;
+            text-align: center;
+            font-size: 10vw;
+            color: black;
+            z-index:-1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box-title">
+        pupa
+    </div>
+    <div id="box-title2">
+        pupa
+    </div>
+    <div id="box-title3">
+        pupa
+    </div>
+    <script>
+        setInterval(() => {
+            document.getElementById("box-title").style.color = `rgb(${Math.random() * 135 + 100},${Math.random() * 135 + 100},${Math.random() * 135 + 100})`;
+        }, 1000);
+        setInterval(() => {
+            document.getElementById("box-title2").style.clipPath = `inset(100% 100% 0% 0%)`;
+        }, 1000);
+    </script>
+    <pre>
+        #box-title {
+            width: 100vw;
+            text-align: center;
+            font-size: 10vw;
+            color: hotpink;
+            transition: all 1s linear;
+        }
+
+        #box-title2 {
+            position: absolute;
+            top: 40vh;
+            width: 100vw;
+            text-align: center;
+            font-size: 10vw;
+            color: red;
+            transition: all 1s linear;
+            clip-path: inset(0% 0% 0% 0%);
+        }
+
+        #box-title3 {
+            position: absolute;
+            top:40vh;
+            width: 100vw;
+            text-align: center;
+            font-size: 10vw;
+            color: black;
+            z-index:-1;
+        }
+
+    div id="box-title">
+        pupa
+    /div>
+    div id="box-title2">
+        pupa
+    /div>
+    div id="box-title3">
+        pupa
+    /div>
+    script>
+        setInterval(() => {
+            document.getElementById("box-title").style.color = `rgb(${Math.random() * 135 + 100},${Math.random() * 135 + 100},${Math.random() * 135 + 100})`;
+        }, 1000);
+        setInterval(() => {
+            document.getElementById("box-title2").style.clipPath = `inset(0% 100% 0% 0%)`;
+        }, 1000);
+    /script>
+    </pre>
+    <h2>clip-path完美解决</h2>
+</body>
+
+</html>

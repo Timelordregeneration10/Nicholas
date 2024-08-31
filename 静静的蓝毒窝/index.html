@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./fav.ico">
+    <link rel="stylesheet" href="./css/letter.css">
+    <link rel="stylesheet" href="./css/letterContent.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/box-all-forlsh.css">
+    <link rel="stylesheet" href="./css/box-option.css">
+    <link rel="stylesheet" href="./css/box-corner.css">
+    <link rel="stylesheet" href="./css/heart.css">
+    <link rel="stylesheet" href="./css/xcbf.css">
+    <title>静静的蓝毒窝</title>
+</head>
+
+<body>
+
+    <script type="importmap">
+        {
+            "imports":{
+                "three":"./lib/three.module.js",
+                "orbit":"./lib/OrbitControls.js",
+                "tween":"./lib/tween.esm.js"
+            }
+        }
+    </script>
+
+    <div id="perspective">
+        <div id="container">
+            <div class="face front">
+                <div class="letter-date">
+                    <div class="letter-date-item">2</div>
+                    <div class="letter-date-item">0</div>
+                    <div class="letter-date-item">2</div>
+                    <div class="letter-date-item">4</div>
+                    <div class="letter-date-item">0</div>
+                    <div class="letter-date-item">1</div>
+                    <div class="letter-date-item">1</div>
+                    <div class="letter-date-item">8</div>
+                </div>
+                <div class="tojj">
+                    To：静静
+                </div>
+                <img src="./image/letter/4.png" alt="" id="stamp">
+            </div>
+            <div class="face back">
+                <div id="open"></div>
+                <div id="folds"></div>
+                <img src="./image/letter/openpic3.png" alt="" id="openpic" />
+                <div id="letter">
+                    <div class="firstpart"></div>
+                    <div class="scrollld">
+                        <img src="./image/letter/8.png" id="scrollld1" alt="" />
+                    </div>
+                    <div class="scrollld">
+                        <img src="./image/letter/9.png" id="scrollld2" alt="" />
+                    </div>
+                    <div class="scrollld">
+                        <img src="./image/letter/10.png" id="scrollld3" alt="" />
+                    </div>
+                    <div class="scrollld">
+                        <img src="./image/letter/11.png" id="scrollld4" alt="" />
+                    </div>
+                    <div class="scrollld">
+                        <img src="./image/letter/12.png" id="scrollld5" alt="" />
+                    </div>
+                    <div class="scrollld">
+                        <img src="./image/letter/13.png" id="scrollld6" alt="" />
+                    </div>
+                    <div class="spacepart"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="wrapper"></div>
+
+    <div class="box-all">
+        <div class="box-colorful"> </div>
+
+        <div id="mainScene">
+            <div class="galary-item-frame">
+                <div class="galary-item">
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/gfd/1.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>精一立绘</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/gfd/2.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>精二立绘</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/gfd/3.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>浅滩律动立绘</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/gfd/4.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>1280px-立绘_蓝毒_skin1</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/gfd/5.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>官方原皮小人立绘</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="galary-item">
+
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/1.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/2.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/3.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/4.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/5.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/6.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/7.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/8.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/9.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/10.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/11.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/12.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/13.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/14.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/15.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/16.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/17.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/18.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/19.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/20.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/21.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/22.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/23.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/24.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/25.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/26.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/27.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/28.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/29.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/ldzb/30.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="galary-item">
+
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/1.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/2.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/3.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/4.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/5.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/6.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/7.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/8.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/9.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/10.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/11.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/12.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/13.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/14.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/15.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/16.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/17.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/18.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/19.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/20.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/21.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/qtd/22.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>Blue Poison</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="galary-item">
+
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/0118吧唧.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>0118吧唧</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/表情包x16.jpg" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>表情包x16</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/干饭透卡.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>干饭透卡</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/透卡.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>透卡</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/娃稿.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>娃稿</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/玩偶风.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>玩偶风</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/小卡1.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>小卡1</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/小卡2.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>小卡2</strong>
+                        </div>
+                    </div>
+                    <div class="draw-item">
+                        <div class="draw-item-imgbg">
+                            <div class="draw-item-img-frame">
+                                <img src="./image/jjhd/以前画的.png" class="draw-item-img" alt="" />
+                            </div>
+                        </div>
+                        <div class="draw-item-title">
+                            <strong>以前画的</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="title">
+            静静的<span style="color: #a6c1ee;">蓝</span>毒窝
+        </div>
+        <div class="box-option">
+            <div id="box-option1">
+                官方的
+            </div>
+            <div class="box-space"></div>
+            <div id="box-option2">
+                蓝毒周边
+            </div>
+            <div class="box-space"></div>
+            <div id="box-option3">
+                其他的
+            </div>
+            <div class="box-space"></div>
+            <div id="box-option4">
+                静静画的
+            </div>
+            <div class="box-space"></div>
+        </div>
+        <img src="./image/gif/1.gif" class="corner-top-left" alt="" />
+        <img src="./image/gif/2.gif" class="corner-bottom-left" alt="" />
+        <img src="./image/gif/3.gif" class="corner-bottom-right" alt="" />
+        <img src="./image/QRcode/1.png" class="QRcode1" alt="">
+        <img src="./image/QRcode/2.png" class="QRcode2" alt="">
+        <div id="jjshop">
+            静静的店：
+        </div>
+
+    </div>
+
+    <div class="box-xuancaibinfen">
+        <img id="xuancaibinfen" src="./image/qtd/20.png" alt="">
+    </div>
+
+    <div class="loading">
+        <div class="loading-title">
+            Loading...
+            <br>
+            <span id="loading-progress">1</span>%
+        </div>
+        <div class="loading-three"></div>
+    </div>
+
+
+
+
+    <script type="module" src="./js/loading.js"></script>
+    <script src="./js/xcbf.js"></script>
+    <script type="module" src="./js/heart.js"></script>
+    <script src="./js/cursor.js"></script>
+
+    <script src="./lib/jquery-3.5.1.min.js"></script>
+    <script src="./js/letter.js"></script>
+    <script type="module" src="./js/letterContent.js"></script>
+    <script type="module" src="./js/galary-forlsh.js"></script>
+</body>
+
+</html>

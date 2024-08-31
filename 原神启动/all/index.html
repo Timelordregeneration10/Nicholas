@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原神启动！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box-all {
+            text-align: center;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* .box-all::-webkit-scrollbar {
+            width: 0vw;
+            height: 0vw;
+        } */
+
+        .box-doorcontent {
+            width: 100vw;
+            height: 600vh;
+        }
+
+        .intodoorRem {
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        #intodoorRem {
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.1s ease;
+        }
+
+        .yuanshen {
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* opacity: 0; */
+        }
+
+        #yuanshen {
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: all 0.1s ease;
+        }
+
+        .tanchuang {
+            position: absolute;
+            top: 0vh;
+            left: 0vw;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+        }
+
+        .tanchuang-title {
+            position: absolute;
+            top: 20vh;
+            left: 30vw;
+            width: 40vw;
+            height: 20vh;
+            font-size: 4vw;
+            font-family: YouYuan;
+        }
+
+        .tanchuang-button1 {
+            position: absolute;
+            top: 60vh;
+            left: 20vw;
+            width: 20vw;
+            height: 10vh;
+            font-size: 2.5vw;
+            background-color: skyblue;
+            border: hidden;
+            border-radius: 2vw;
+            font-family: YouYuan;
+        }
+
+        .tanchuang-button2 {
+            position: absolute;
+            top: 60vh;
+            right: 20vw;
+            width: 20vw;
+            height: 10vh;
+            font-size: 2.5vw;
+            background-color: gainsboro;
+            border: hidden;
+            border-radius: 2vw;
+            font-family: YouYuan;
+        }
+
+        .test {
+            width: 100vw;
+            height: 300vw;
+            background-color: #91bef0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-all">
+        <div class="intodoorRem">
+            <img id="intodoorRem" src="../smalldoor.jpg" alt="" />
+            <!-- <script>
+                document.getElementById("intodoorRem").onclick = function () {
+                    alert("请使用鼠标滚轮滚动页面");
+                }
+            </script> -->
+        </div>
+        <div class="yuanshen">
+            <img id="yuanshen" src="../yuanshen.jpg" alt="" />
+        </div>
+        <audio src="../yuan.mp3" currentTime="8" id="yuanmp3"></audio>
+        <div class="box-doorcontent">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            向下滑动↓<br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            向下滑动↓<br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            向下滑动↓
+        </div>
+        <div class="test">
+        </div>
+    </div>
+    <div class="tanchuang">
+        <div class="tanchuang-title">欢迎来到提瓦特大陆！</div>
+        <button class="tanchuang-button1">进入</button>
+        <button class="tanchuang-button2">enter</button>
+    </div>
+    <script>
+        document.getElementsByClassName("tanchuang-button1")[0].onclick = function () { document.getElementsByClassName("tanchuang")[0].style.display = "none"; };
+        document.getElementsByClassName("tanchuang-button2")[0].onclick = function () { document.getElementsByClassName("tanchuang")[0].style.display = "none"; };
+        var firstplayyuan = true;
+
+        var all = document.getElementsByClassName("box-all")[0];
+        var imst = document.getElementById("intodoorRem").style;
+        var yuan = document.getElementById("yuanshen").style;
+        var currentscale = 1;
+        var updoor = true;
+        var downdoor = false;
+        var loopEnable = true;
+        var loopEnableTimeout = undefined;
+
+        // //尚未找到融合滚动和transition的方法                             //找到了，其实直接transition设为all 0.1s ease就可以了
+        // all.addEventListener("wheel", function (e) {
+        //     console.log(e.deltaY,all.scrollTop);
+        //     loopEnable = false;
+        //     if (loopEnableTimeout != undefined) {
+        //         clearTimeout(loopEnableTimeout);
+        //     }
+        //     loopEnableTimeout = setTimeout(function () {
+        //         loopEnable = true;
+        //         loopEnableTimeout = undefined;
+        //     }, (e.deltaY > 0 ? e.deltaY / 125 : e.deltaY / (-125)) * 2000);
+        //     imst.transition = `all ${(e.deltaY > 0 ? e.deltaY / 125 : e.deltaY / (-125))}s ease`;
+        //     yuan.transition = `all ${(e.deltaY > 0 ? e.deltaY / 125 : e.deltaY / (-125))}s ease`;
+        //     ysqd();
+
+        // })
+
+        function ysqd() {
+            if (all.scrollTop > 1200) {                     //
+                currentscale = (all.scrollTop - 1200) / 118.5 * 0.25 + 1;
+                if (currentscale >= 1 && currentscale <= 4) {
+                    if (currentscale < 2.5) {
+                        imst.transform = `scale3d(${currentscale},${currentscale},${currentscale})`;
+                        yuan.opacity = `0`;
+                    }
+                    else {
+                        imst.transform = `scale3d(${currentscale},${currentscale},${currentscale}) rotate(${(currentscale - 2.5) * 50}deg)`;
+                        imst.opacity = `${(4 - currentscale) / 1.5}`;
+                        yuan.opacity = `${(-3.2 + currentscale) / 0.8}`;
+                        if (firstplayyuan) {
+                            firstplayyuan = false;
+                            document.getElementById("yuanmp3").currentTime = 8;
+                            document.getElementById("yuanmp3").play();
+                        }
+                    }
+                    updoor = false;
+                    downdoor = false;
+                }
+                else if (currentscale > 4) {
+                    imst.transform = `scale3d(4,4,4) rotate(75deg)`;
+                    imst.opacity = `0`;
+                    yuan.opacity = `1`;
+                    if (!downdoor) {
+                        downdoor = true;
+                        currentscale = 4.03;
+                    }
+                }
+            }
+            else {
+                imst.transform = `scale3d(1,1,1) rotate(0deg)`;
+                imst.opacity = `1`
+                yuan.opacity = `0`
+                if (!updoor) {
+                    updoor = true;
+                    currentscale = 0.97;
+                }
+            }
+        }
+
+        function loop() {
+            if (!loopEnable) {
+                requestAnimationFrame(loop);
+                return;
+            }
+            ysqd();
+            // imst.transition = `none`;
+            // yuan.transition = `none`;
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+    </script>
+</body>
+
+</html>

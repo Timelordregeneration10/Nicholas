@@ -1,0 +1,1 @@
+inkscape test.svg -T -o testoutput.svg

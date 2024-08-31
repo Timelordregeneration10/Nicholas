@@ -1,0 +1,150 @@
+@font-face {
+    /* 字体名称随意起 */
+    font-family: keai;
+    /*你下载字体所在的位置*/
+    src: url('../font/xingyelangmanyuzhouwenrou.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: keai;
+    user-select: none;
+}
+
+body {
+    overflow: hidden;
+}
+
+.box-all {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: white;
+}
+
+.box-colorful {
+    position: absolute;
+    top: 2vh;
+    left: 2vw;
+    width: 96vw;
+    height: 96vh;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+#mainScene {
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    width: 90vw;
+    height: 90vh;
+    /* background-color: white; */
+    overflow: hidden;
+}
+
+#title {
+    position: absolute;
+    top: 5vh;
+    right: 5.5vw;
+    font-size: 7vw;
+    color: #fbc2eb;
+    text-shadow: 0.3vw 0.3vw 0.3vw white,
+        -0.3vw -0.3vw 0.3vw white;
+}
+
+.scrollarea {
+    width: 90vw;
+    height: 4000vh;
+}
+
+.galary-item-frame{
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    width: 90vw;
+    height: 90vh;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    background-color: white;
+}
+
+.galary-item{
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    /* width: 410vw; */
+    height: 90vh;
+    /* display: flex; */
+    flex-direction: row;
+    transition: all 0.1s ease;
+    display: none;
+}
+
+.galary-item:nth-child(1){
+    display: flex;
+    width: 170vw;
+}
+
+.galary-item:nth-child(2){
+    width: 1000vw;
+}
+
+.galary-item:nth-child(3){
+    width: 740vw;
+}
+
+.galary-item:nth-child(4){
+    width: 300vw;
+}
+
+.galary-item:nth-child(2n+1){
+    background-color: rgb(210, 229, 253);
+}
+.galary-item:nth-child(2n){
+    background-color: rgb(250, 210, 253);
+}
+
+
+.draw-item {
+    width: 33.333333vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.draw-item-imgbg {
+    flex: 77;
+}
+
+.draw-item-img-frame {
+    width: 30vw;
+    height: 55vh;
+    transform: translate(2vw, 1vw);
+    padding-top: 18vh;
+    border-radius: 2vw;
+    overflow: hidden;
+}
+
+.draw-item-img {
+    width: 30vw;
+    height: 70vh;
+    transition: all 0.7s;
+}
+
+
+.draw-item-title {
+    flex: 23;
+    font-size: 3vw;
+    /* transform: translateX(4vw); */
+    padding-left: 4vw;
+    padding-top: 2vh;
+    color: rgb(249, 200, 226);
+    text-shadow: 0.2vw 0.2vw grey;
+    transition: all 0.3s;
+}

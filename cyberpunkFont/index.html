@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cyberpunkFont</title>
+    <style>
+        @font-face {
+            font-family: 'cyberpunkFont';
+            src: url(./font/shangshousaiboti.ttf);
+        }
+
+        body {
+            font-family: 'cyberpunkFont';
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url(./image/bg1.png);
+            background-size: 100vw 100vh;
+        }
+
+        #cyberpunkFont,
+        #cyberpunkFont::after {
+            position: absolute;
+            bottom: 20vh;
+            left: 10vw;
+            width: 80vw;
+            height: 20vh;
+            font-size: 8.4vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(254, 191, 255);
+            background-image: linear-gradient(20deg, rgb(93, 237, 255) 0% 90%, rgb(189, 254, 255) 90%);
+            box-shadow: 15px 0 0 rgb(210, 189, 255);
+            cursor: pointer;
+            opacity: 0.9;
+            border:0px solid transparent;
+            font-family: 'cyberpunkFont';
+            clip-path:polygon(0 0, 100% 0%, 100% 100%, 20% 100%, 0 70%);
+        }
+
+        @media (max-width: 400px) {
+            body {
+                background-size: cover;
+                background-position: 30%;
+            }
+
+            #cyberpunkFont,
+            #cyberpunkFont::after {
+                height: 10vh;
+            }
+        }
+
+        #cyberpunkFont::after {
+            content: "cyberpunkFont";
+            top: 0;
+            left: 0;
+            text-shadow: 15px 7px #e4f0fc, -15px -7px #e5f0fc;
+            visibility: hidden;
+            animation: sanInfinity 3s infinite;
+            animation-timing-function: steps(1, end);
+        }
+
+        @keyframes sanInfinity {
+            0% {
+                clip-path: inset(20% -15px 60% 0);
+                transform: translate(-18px, 15px);
+                visibility: visible;
+            }
+
+            3% {
+                clip-path: inset(50% -15px 30% 0);
+                transform: translate(18px, -15px);
+            }
+
+            6% {
+                clip-path: inset(20% -15px 60% 0);
+                transform: translate(15px, 0px);
+
+            }
+
+            9% {
+                clip-path: inset(80% -15px 5% 0);
+                transform: translate(-24px, 15px);
+            }
+
+            12% {
+                clip-path: inset(0 -15px 80% 0);
+                transform: translate(-12px, -9px);
+
+            }
+
+            15% {
+                clip-path: inset(50% -15px 30% 0);
+                transform: translate(-18px, -15px);
+            }
+
+            18% {
+                clip-path: inset(80% -15px 5% 0);
+                transform: translate(-21px, 15px);
+
+            }
+
+            21% {
+                clip-path: inset(0 -15px 80% 0);
+                transform: translate(9px, 18px);
+            }
+
+            24% {
+                clip-path: inset(50% -15px 30% 0);
+                transform: translate(15px, 15px);
+            }
+
+            27% {
+                clip-path: inset(20% -15px 60% 0);
+                transform: translate(18px, -15px);
+            }
+
+            30% {
+                clip-path: inset(0 -15px 80% 0);
+                transform: translate(3px, 15px);
+            }
+
+            33% {
+                visibility: hidden;
+            }
+        }
+
+        /* 1表示0%到10%，10%到20%，…它们之间只用一帧，若写2就会是两帧，只用一帧是为了卡顿效果更好。
+        end 表示第一帧是第一步动画开始。若为start表示第一帧是第一步动画结束。 */
+
+        /* #cyberpunkFont:hover::after {
+            animation: sans 1s;
+            animation-timing-function: steps(1, end);
+        }
+
+        @keyframes sans {
+            0% {
+                clip-path: inset(20% -15px 60% 0);
+                transform: translate(-18px, 15px);
+                visibility: visible;
+            }
+
+            10% {
+                clip-path: inset(50% -15px 30% 0);
+                transform: translate(18px, -15px);
+            }
+
+            20% {
+                clip-path: inset(20% -15px 60% 0);
+                transform: translate(15px, 0px);
+
+            }
+
+            30% {
+                clip-path: inset(80% -15px 5% 0);
+                transform: translate(-24px, 15px);
+            }
+
+            40% {
+                clip-path: inset(0 -15px 80% 0);
+                transform: translate(-12px, -9px);
+
+            }
+
+            50% {
+                clip-path: inset(50% -15px 30% 0);
+                transform: translate(-18px, -15px);
+            }
+
+            60% {
+                clip-path: inset(80% -15px 5% 0);
+                transform: translate(-21px, 15px);
+
+            }
+
+            70% {
+                clip-path: inset(0 -15px 80% 0);
+                transform: translate(9px, 18px);
+            }
+
+            80% {
+                clip-path: inset(50% -15px 30% 0);
+                transform: translate(15px, 15px);
+
+            }
+
+            90% {
+                clip-path: inset(20% -15px 60% 0);
+                transform: translate(18px, -15px);
+
+            }
+
+            100% {
+                clip-path: inset(0 -15px 80% 0);
+                transform: translate(3px, 15px);
+
+            }
+        } */
+    </style>
+</head>
+
+<body>
+    <a href="https://blog.csdn.net/luo1831251387/article/details/113360844" target="_blank"
+        style="position: absolute;top:0;right:0;font-size:30px;text-decoration: none;color:orange">原文链接</a>
+    <button id="cyberpunkFont">cyberpunkFont</button>
+
+</body>
+
+</html>

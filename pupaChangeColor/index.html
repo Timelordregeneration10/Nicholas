@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pupaChangeColor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        a{
+            text-decoration: none;
+            color:white;
+            font-size: 6vw;
+        }
+
+        a:hover{
+            color:red;
+        }
+
+        #translateX {
+            position: absolute;
+            top: 10vh;
+            right: 10vw;
+        }
+
+        #clip-path {
+            position: absolute;
+            top: 65vh;
+            right: 10vw;
+        }
+    </style>
+</head>
+
+<body>
+    <video src="./video/pupa.mp4" poster="./image/pupa.jpg"
+        style="width: 100vw;height: 100vh;position: absolute;top:0;left:0;z-index: 0;" controls loop autoplay></video>
+    <a href="./translateX.html" target="_blank" id="translateX">translateX</a>
+    <a href="./clip-path.html" target="_blank" id="clip-path">clip-path</a>
+</body>
+
+</html>

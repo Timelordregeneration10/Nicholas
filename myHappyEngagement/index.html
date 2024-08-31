@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> my happy engagement </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1024px) {
+            video {
+                object-fit: fill;
+            }
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        @keyframes bluradd {
+            0% {
+                filter: blur(30px);
+            }
+
+            100% {
+                filter: blur(300px);
+            }
+        }
+
+        .color-wrapper {
+            position: absolute;
+            top: 0vw;
+            left: 0vw;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.6;
+            z-index: 1;
+            /* filter: blur(100px); */
+            animation: bluradd 11s linear alternate infinite;
+        }
+
+        .color {
+            width: 100%;
+            height: 100%;
+        }
+
+        #pink {
+            animation: pinkspread 11s linear alternate infinite;
+        }
+
+        @keyframes pinkspread {
+            0% {
+                clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%);
+                background-color: rgb(179, 103, 255);
+            }
+
+            25% {
+                clip-path: polygon(0 0, 30% 0, 60% 0, 40% 40%, 0 60%, 0 30%);
+                background-color: rgb(249, 67, 255);
+            }
+
+            50% {
+                clip-path: polygon(0 0, 100% 0, 100% 0, 40% 40%, 0 100%, 0 100%);
+                background-color: rgb(255, 67, 189);
+            }
+
+            75% {
+                clip-path: polygon(0 0, 100% 0, 100% 30%, 70% 70%, 30% 100%, 0 100%);
+                background-color: rgb(255, 104, 129);
+            }
+
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0 100%);
+                background-color: rgb(255, 138, 112);
+            }
+        }
+
+        #blue {
+            animation: bluespread 11s linear alternate infinite;
+        }
+
+        @keyframes bluespread {
+            0% {
+                clip-path: polygon(0 0, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+                background-color: rgb(121, 97, 255);
+            }
+
+            25% {
+                clip-path: polygon(40% 40%, 60% 0, 100% 0, 100% 100%, 0 100%, 0 60%);
+                background-color: rgb(143, 171, 255);
+            }
+
+            50% {
+                clip-path: polygon(40% 40%, 100% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+                background-color: rgb(0, 162, 255);
+            }
+
+            75% {
+                clip-path: polygon(70% 70%, 100% 30%, 100% 65%, 100% 100%, 65% 100%, 30% 100%);
+                background-color: rgb(0, 255, 255);
+            }
+
+            100% {
+                clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
+                background-color: rgb(23, 158, 255);
+            }
+        }
+
+        .controller {
+            position: fixed;
+            z-index: 99;
+            color: transparent;
+            background-image: linear-gradient(90deg, #ff7d7d, #ffb66d, #ffff00, #00ff00, #6f6fff, #d08fff, #ff7d7d);
+            background-size: 300% 100%;
+            animation: streamer 2s linear infinite;
+            cursor: pointer;
+            background-clip: text;
+            user-select: none;
+        }
+
+        @keyframes streamer {
+            100% {
+                background-position: 300% 0;
+            }
+        }
+
+        #colorController{
+            top: 10px;
+            right: 10px;
+        }
+
+        #videoController{
+            top: 35px;
+            right: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <video src="./myHappyEngagement.mp4" autoPlay={true} loop={true} muted={true} playsInline={true}></video>
+    <div class="color-wrapper">
+        <div id="pink" class="color"></div>
+    </div>
+    <div class="color-wrapper">
+        <div id="blue" class="color"></div>
+    </div>
+    <div id="colorController" class="controller">hide color wrapper</div>
+    <div id="videoController" class="controller">hide video</div>
+</body>
+<script>
+    var colorWappers = document.getElementsByClassName('color-wrapper');
+    document.getElementById("colorController").addEventListener('click', function () {
+        for (var i = 0; i < colorWappers.length; i++) {
+            colorWappers[i].style.visibility = colorWappers[i].style.visibility == 'hidden' ? 'visible' : 'hidden';
+        }
+        document.getElementById("colorController").innerHTML=document.getElementById("colorController").innerHTML=="hide color wrapper"?"show color wrapper":"hide color wrapper";
+    });
+    document.getElementById("videoController").addEventListener('click', function () {
+        var video = document.getElementsByTagName('video')[0];
+        video.style.visibility = video.style.visibility == 'hidden' ? 'visible' : 'hidden';
+        document.getElementById("videoController").innerHTML=document.getElementById("videoController").innerHTML=="hide video"?"show video":"hide video";
+    });
+</script>
+
+</html>

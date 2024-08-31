@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./fav.ico">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/box-all.css">
+    <link rel="stylesheet" href="./css/box-option.css">
+    <link rel="stylesheet" href="./css/box-corner.css">
+    <link rel="stylesheet" href="./css/heart.css">
+    <title>黄戴唯帅照集</title>
+</head>
+
+<body>
+
+    <script type="importmap">
+        {
+            "imports":{
+                "three":"./lib/three.module.js",
+                "orbit":"./lib/OrbitControls.js",
+                "tween":"./lib/tween.esm.js"
+            }
+        }
+    </script>
+
+    <div class="box-all">
+        <div class="box-colorful"> </div>
+        <div id="mainScene"></div>
+        <div id="title">
+            <span style="color: yellow;">黄</span>戴唯帅照集
+        </div>
+        <div class="box-option">
+            <div id="box-option1">
+                戴唯立方
+            </div>
+            <div class="box-space"></div>
+            <div id="box-option2">
+                下戴唯
+            </div>
+            <div class="box-space"></div>
+            <div id="box-option4">
+                戴唯球
+            </div>
+            <div class="box-space"></div>
+            <div id="box-option3">
+                上戴唯
+            </div>
+            <div class="box-space"></div>
+        </div>
+    </div>
+
+    <div class="loading">
+        <div class="loading-title">
+            Loading...
+            <br>
+            <span id="loading-progress">1</span>%
+        </div>
+    </div>
+
+    <script type="module" src="./js/loading.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/heart.js"></script>
+</body>
+
+</html>
