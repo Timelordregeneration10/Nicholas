@@ -1,0 +1,266 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-16 19:45:54
+ * @LastEditTime: 2021-04-17 00:12:02
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinedd:\练习\立方体相册\index.html
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* height: 100vh; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .beforecontainer {
+            position: relative;
+            width: 100px;
+            height: 100vh;
+            background-color: aqua;
+        }
+
+        .container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .little {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(12deg) rotateY(-28deg);
+            animation: turn 6s linear infinite;
+        }
+
+        @keyframes turn {
+            100% {
+                transform: rotateX(12deg) rotateY(-388deg);
+            }
+        }
+
+        .little img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 下面六个transform可以这样理解：
+           前后左右上下，分别对应不动，Y轴旋转180度，Y轴旋转-90度，Y轴旋转90度，X轴旋转90度，X轴旋转-90度，最后z轴移动50px，此处的移动50px是对应方向的
+           比如不动的时候，z轴移动50px，就是向前移动50px，Y轴旋转180度，z轴移动50px，就是向后移动50px，Y轴旋转-90度，z轴移动50px，就是向左移动50px，以此类推
+        */
+        .little img:nth-child(1) {
+            transform: translateZ(50px);
+            /* display: none; */
+        }
+
+        .little img:nth-child(2) {
+            transform: rotateY(180deg) translateZ(50px);
+            /* display: none; */
+        }
+
+        .little img:nth-child(3) {
+            transform: rotateY(-90deg) translateZ(50px);
+            /* display: none; */
+        }
+
+        .little img:nth-child(4) {
+            transform: rotateY(90deg) translateZ(50px);
+            /* display: none; */
+        }
+
+        .little img:nth-child(5) {
+            transform: rotateX(90deg) translateZ(50px);
+            /* display: none; */
+        }
+
+        .little img:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(50px);
+            /* display: none; */
+        }
+
+        /* little为100px，所以large为200px时，top和left-50px */
+        .large {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            transform: rotateX(12deg) rotateY(-28deg);
+            animation: turn2 6s linear infinite;
+        }
+
+        @keyframes turn2 {
+            100% {
+                transform: rotateX(12deg) rotateY(-388deg);
+            }
+        }
+
+        .large img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            border: 0.1px solid white;
+            transition: all 1s;
+        }
+
+        .large img:nth-child(1) {
+            transform: translateZ(100px);
+        }
+
+        .large img:nth-child(2) {
+            transform: rotateY(180deg) translateZ(100px);
+        }
+
+        .large img:nth-child(3) {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .large img:nth-child(4) {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        .large img:nth-child(5) {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        .large img:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        /* large为200px，所以lar为380px时，top和left-90px */
+        .container:hover .lar1 {
+            left: -90px;
+            top: -90px;
+            width: 380px;
+            height: 380px;
+            opacity: 1;
+            transform: translateZ(250px);
+        }
+
+        .container:hover .lar2 {
+            left: -90px;
+            top: -90px;
+            width: 380px;
+            height: 380px;
+            opacity: 1;
+            transform: rotateY(180deg) translateZ(250px);
+        }
+
+        .container:hover .lar3 {
+            left: -90px;
+            top: -90px;
+            width: 380px;
+            height: 380px;
+            opacity: 1;
+            transform: rotateY(-90deg) translateZ(250px);
+        }
+
+        .container:hover .lar4 {
+            left: -90px;
+            top: -90px;
+            width: 380px;
+            height: 380px;
+            opacity: 1;
+            transform: rotateY(90deg) translateZ(250px);
+        }
+
+        .container:hover .lar5 {
+            left: -90px;
+            top: -90px;
+            width: 380px;
+            height: 380px;
+            opacity: 1;
+            transform: rotateX(90deg) translateZ(250px);
+        }
+
+        .container:hover .lar6 {
+            left: -90px;
+            top: -90px;
+            width: 380px;
+            height: 380px;
+            opacity: 1;
+            transform: rotateX(-90deg) translateZ(250px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="beforecontainer"></div>
+    <div class="container">
+        <div class="little">
+            <img src="img/1.jpg" alt="x" />
+            <img src="img/2.jpg" alt="x" />
+            <img src="img/3.jpg" alt="x" />
+            <img src="img/4.jpg" alt="x" />
+            <img src="img/5.jpg" alt="x" />
+            <img src="img/6.jpg" alt="x" />
+        </div>
+        <div class="large">
+            <img class="lar lar1" src="img/1.jpg" alt="x" />
+            <img class="lar lar2" src="img/2.jpg" alt="x" />
+            <img class="lar lar3" src="img/3.jpg" alt="x" />
+            <img class="lar lar4" src="img/4.jpg" alt="x" />
+            <img class="lar lar5" src="img/5.jpg" alt="x" />
+            <img class="lar lar6" src="img/6.jpg" alt="x" />
+        </div>
+    </div>
+    <div class="beforecontainer"></div>
+    <script>
+        var lars = document.getElementsByClassName('lar');
+        for (let i = 0; i < lars.length; i++) {
+            lars[i].onclick = function () {
+                // window.open(lars[i].src);
+                let mask = document.createElement("div");
+                mask.style.position = "fixed";
+                mask.style.top = "0";
+                mask.style.left = "0";
+                mask.style.width = "100vw";
+                mask.style.height = "100vh";
+                mask.style.backgroundColor = "rgba(0,0,0,0.8)";
+                mask.style.zIndex = "10";
+                mask.style.textAlign = "center";
+                document.body.appendChild(mask);
+                mask.onclick = function () {
+                    document.body.removeChild(mask);
+                }
+                let img = document.createElement("img");
+                img.src = lars[i].src;
+                img.style.maxWidth = "80vw";
+                img.style.maxHeight = "80vh";
+                img.style.marginTop = "10vh";
+                img.style.marginBottom = "10vh";
+                mask.appendChild(img);
+
+            }
+        }
+    </script>
+</body>
+
+</html>

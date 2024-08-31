@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>magic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            position: relative;
+            height: 0vw;
+            /* perspective: 1000px; */
+            transform-style: preserve-3d;
+        }
+
+        .little {
+            position: absolute;
+            transform-style: preserve-3d;
+            transform: rotateX(10deg) rotateY(0deg);
+            animation: turn 6s linear infinite;
+        }
+
+        @keyframes turn {
+            100% {
+                transform: rotateX(10deg) rotateY(360deg);
+            }
+        }
+
+        .little img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: rotateX(-90deg);
+        }
+
+
+        .little1 {
+            width: 30vw;
+            height: 30vw;
+            left:35vw;
+        }
+
+        .little2 {
+            width: 90vw;
+            height: 90vw;
+            left: 5vw;
+        }
+
+        .little3 {
+            width: 60vw;
+            height: 60vw;
+            left: 20vw;
+            top:10vh;
+        }
+
+        .little4 {
+            width: 40vw;
+            height: 40vw;
+            left: 30vw;
+        }
+
+        .little5 {
+            width: 90vw;
+            height: 90vw;
+            left: 5vw;
+        }
+
+        .little6 {
+            width: 30vw;
+            height: 30vw;
+            left: 35vw;
+        }
+
+        .little7 {
+            width: 60vw;
+            height: 60vw;
+            left: 20vw;
+        }
+
+        .little8 {
+            width: 70vw;
+            height: 70vw;
+            left: 15vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="little little1">
+            <img src="magic/1.png" alt="x" />
+        </div>
+    </div>
+    <div class="container">
+        <div class="little little2">
+            <img src="magic/2.png" alt="x" />
+        </div>
+    </div>
+    <div class="container">
+        <div class="little little3">
+            <img src="magic/3.png" alt="x" />
+        </div>
+    </div>
+    <div class="container">
+        <div class="little little4">
+            <img src="magic/4.png" alt="x" />
+        </div>
+    </div>
+    <div class="container">
+        <div class="little little5">
+            <img src="magic/5.png" alt="x" />
+        </div>
+    </div>
+    <div class="container">
+        <div class="little little6">
+            <img src="magic/6.png" alt="x" />
+        </div>
+    </div>
+    <div class="container" style="top:-20vh">
+        <div class="little little7">
+            <img src="magic/7.png" alt="x" />
+        </div>
+    </div>
+    <div class="container" style="top:-10vh">
+        <div class="little little8">
+            <img src="magic/8.png" alt="x" />
+        </div>
+    </div>
+</body>
+
+</html>
