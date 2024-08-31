@@ -1,0 +1,79 @@
+.loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.loading-row {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-row-item {
+    width: 3.5vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5.2vw;
+    color: rgb(81, 80, 80);
+    /* font-family: SimHei; */
+    user-select: none;
+}
+
+.loading-white {
+    color: white;
+}
+
+#loading-L{
+    color: white;
+}
+
+#loading-O{
+    color: white;
+}
+
+#loading-A{
+    color: white;
+}
+
+#loading-D{
+    color: white;
+}
+
+#loading-I{
+    color: white;
+}
+
+#loading-N{
+    color: white;
+}
+
+#loading-G{
+    color: white;
+}
+
+#loading-dot1{
+    color: white;
+}
+
+#loading-dot2{
+    color: white;
+}
+
+#loading-dot3{
+    color: white;
+}

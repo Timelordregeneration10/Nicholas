@@ -1,0 +1,42 @@
+
+
+.leaveweb {
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-image: url(../img/musedash/leaving.png);
+    background-size: 100vw 100vh;
+    z-index: 99;
+}
+
+.leaveweb-title {
+    position: absolute;
+    top: 43vh;
+    right: 0vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    font-size: 6vw;
+    background-color: rgb(255, 158, 229);
+    color: white;
+}
+
+#leaveweb-button2 {
+    position: absolute;
+    bottom: 25vh;
+    right: 5vw;
+    width: 20vw;
+    height: 10vh;
+    font-size: 3.5vw;
+    background-color:rgb(124, 255, 130);
+    color: white;
+    border: hidden;
+    transition: all 0.7s;
+}
+
+#leaveweb-button2:hover{
+    cursor: pointer;
+    background-color: rgb(55, 255, 0);
+}

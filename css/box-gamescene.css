@@ -1,0 +1,187 @@
+.box-game{
+    width: 100vw;
+    background-attachment: fixed;
+    background-image: url(../img/musedash/bg3.png);
+    background-size: 100vw 100vh;
+}
+
+.game-title{
+    width: 100vw;
+    height:20vh;
+    font-size: 12vw;
+    color:white;
+    text-shadow: 0.5vw 0.5vw 0.2vw violet;
+}
+
+.game-grid1{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-rows: repeat(2,45vh);
+    grid-gap: 5vh;
+    grid-template-areas: 
+    "big11 big11 small13"
+    "big11 big11 small23";
+}
+
+.painpath{
+    grid-area: big11;
+}
+
+.orange{
+    grid-area: small13;
+}
+
+.volleyball{
+    grid-area: small23;
+}
+
+.game-grid2{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 0.9fr 0.7fr 0.6fr 1fr;
+    grid-template-rows: repeat(2,45vh);
+    grid-gap: 4vh;
+    grid-template-areas: 
+    "slai radius radius umm"
+    "qb radius radius mks";
+
+}
+
+.radius{
+    grid-area: radius;
+}
+
+.slai{
+    grid-area: slai;
+}
+
+.umm{
+    grid-area: umm;
+}
+
+.qb{
+    grid-area: qb;
+}
+
+.mks{
+    grid-area: mks;
+}
+
+.game-grid3{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: repeat(2,45vh);
+    grid-gap: 5vh;
+    grid-template-areas: 
+    "fswm wnwm wnwm"
+    "mfwm wnwm wnwm";
+}
+
+.fswm{
+    grid-area: fswm;
+}
+
+.wnwm{
+    grid-area: wnwm;
+}
+
+.mfwm{
+    grid-area: mfwm;
+}
+
+.game-grid4{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-rows: repeat(2,45vh);
+    grid-gap: 5vh;
+    grid-template-areas: 
+    "fireworks fireworks cdcp"
+    "fireworks fireworks yln";
+}
+
+.fireworks{
+    grid-area: fireworks;
+}
+
+.cdcp{
+    grid-area: cdcp;
+}
+
+.yln{
+    grid-area: yln;
+}
+
+.game-grid5{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 45vh;
+    grid-gap: 5vh;
+    grid-template-areas: 
+    "snas duet ultrajump skul";
+}
+
+.snas{
+    grid-area: snas;
+}
+
+.duet{
+    grid-area: duet;
+}
+
+.ultrajump{
+    grid-area: ultrajump;
+}
+
+.skul{
+    grid-area: skul;
+}
+
+.game-item{
+    padding: 2vw;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    overflow: hidden;
+}
+
+.game-item-img{
+    flex: 80;
+    border-radius: 2vw;
+    overflow: hidden;
+}
+
+.game-item-img>img{
+    width: 100%;
+    height: 150%;
+    transition: all 0.3s;
+}
+
+.game-item-img>img:hover{
+    cursor: pointer;
+}
+
+.game-item-title{
+    flex: 20;
+    padding-top: 1vh;
+    padding-bottom: 1.5vh;
+    font-size: 3vw;
+    transform: translateX(2vw);
+    transition: all 0.3s;
+}
+
+.game-item-title>a{
+    color: white;
+    text-decoration: none;
+    text-shadow: .2vw .2vw .1vw violet;
+    transition: all 0.3s;
+}
+
+.game-item-title>a:hover{
+    color: #91bef0;
+}

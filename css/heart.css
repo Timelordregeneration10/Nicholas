@@ -1,0 +1,26 @@
+@keyframes personwebheart {
+    from {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(0px, -100px);
+        opacity: 0;
+        display: none;
+    }
+}
+
+.personwebheart {
+    position: absolute;
+    /* background-color: red; */
+    width: 40px;
+    height: 40px;
+    animation-name: personwebheart;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}

@@ -1,0 +1,26 @@
+
+@font-face {
+    /* 字体名称随意起 */
+    font-family: saibo;
+    /*你下载字体所在的位置*/
+    src: url('../font/shangshousaiboti.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: saibo;
+}
+
+.box-all {
+    text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.box-all::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}

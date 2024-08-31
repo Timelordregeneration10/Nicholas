@@ -1,0 +1,209 @@
+.box-lunboscene {
+    width: 100vw;
+    height: 150vh;
+    background-attachment: fixed;
+    background-image: url(../img/musedash/bg1.png);
+    background-size: 100vw 100vh;
+    user-select: none;
+}
+
+.box-lunboscene-frame {
+    width: 100vw;
+    height: 150vh;
+    transition: all 0.1s;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-uplunboscene {
+    flex: 10;
+    display: flex;
+    flex-direction: row;
+}
+
+.box-upleftlunboscene {
+    flex: 7;
+}
+
+.box-uprightlunboscene {
+    flex: 3;
+}
+
+.box-animate{
+    width: 36vw;
+    height: 70vh;
+    transform: translate(1.4vw, 22vh);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.lunbo-title {
+    width: 30vw;
+    display: flex;
+    justify-content: start;
+    font-size: 2.5vw;
+    background-color: transparent;
+}
+
+.lunbo-title:first-child{
+    background-color: #91bef0;
+}
+
+.lunbo-title>a{
+    text-decoration: none;
+    color: white;
+    transition: all 0.5s;
+    text-shadow: 2px 2px 2px violet;
+}
+
+.box-lunbo {
+    width: 60vw;
+    height: 70vh;
+    transform: translate(5vw, 20vh);
+    border: 1vw solid violet;
+    border-radius: 1vw;
+    overflow: hidden;
+    background-size: 50vw 70vh;
+}
+
+.lunbo-img {
+    width: 60vw;
+    height: 70vh;
+    transition: all 1s;
+    position: absolute;
+    left: 0vw;
+    top: 0;
+}
+
+.lunbo-currentimg {
+    transform: translate(0vw, 0vh);
+}
+
+.lunbo-leftimg {
+    transform: translate(-60vw, 0vh);
+    left: 0vw;
+}
+
+.lunbo-rightimg {
+    transform: translate(60vw, 0vh);
+    left: 0vw;
+}
+
+.box-lunbo-dots {
+    width: 16vw;
+    height: 10vh;
+    transform: translate(26vw, 22vh);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.lunbo-dot {
+    width: 1vw;
+    height: 1vw;
+    /* border: 1px solid; */
+    border-radius: 0.5vw;
+    transition: all 0.4s;
+}
+
+.lunbo-dot:hover {
+    background-color: violet;
+}
+
+.lunbo-currentdot {
+    background-color: rgb(249, 31, 249);
+}
+
+.lunbo-waitingdot {
+    background-color: rgb(251, 205, 251);
+}
+
+#lunbo-left {
+    user-select: none;
+    width: 3vw;
+    height: 10vh;
+    transform: translate(6vw, -30vh);
+    font-size: 4vw;
+    color: white;
+    text-shadow: 0.4vw 0.1vw violet;
+    transition: all 0.4s;
+}
+
+#lunbo-left:hover {
+    color: rgb(242, 175, 242);
+}
+
+#lunbo-right {
+    user-select: none;
+    width: 3vw;
+    height: 10vh;
+    transform: translate(63vw, -40vh);
+    font-size: 4vw;
+    color: white;
+    text-shadow: -0.4vw 0.1vw violet;
+    transition: all 0.4s;
+}
+
+#lunbo-right:hover {
+    color: rgb(251, 176, 251);
+}
+
+
+.box-downlunboscene {
+    flex: 5;
+}
+
+.box-downlunbostart {
+    text-align: start;
+    height: 0px;
+}
+
+.box-downlunbocenter1 {
+    text-align: center;
+    height: 0px;
+}
+
+.box-downlunbocenter2 {
+    text-align: center;
+    height: 0px;
+}
+
+.box-downlunboend {
+    text-align: end;
+    height: 0px;
+}
+
+#lunbo-leftRem {
+    width: 25vw;
+    height: 70vh;
+    transform: translate(0vw, 13vh);
+    z-index: 1;
+    transition: all 0.1s ease;
+}
+
+#lunbo-center1Rem {
+    width: 55vw;
+    height: 140vh;
+    transform: translate(-15vw, 65vh);
+    z-index: -1;
+    transition: all 0.1s ease;
+}
+
+#lunbo-center2Rem {
+    width: 55vw;
+    height: 120vh;
+    transform: translate(17.5vw, 0vh);
+    z-index: -2;
+    transition: all 0.1s ease;
+}
+
+#lunbo-rightRem {
+    width: 26vw;
+    height: 70vh;
+    z-index: -1;
+    transform: translate(0vw, 45vh);
+    transition: all 0.1s ease;
+}
