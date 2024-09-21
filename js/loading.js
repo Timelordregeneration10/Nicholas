@@ -1,5 +1,3 @@
-var loaded = false;
-
 var topscale = window.innerHeight / 790;
 setInterval(() => {
     if (window.innerHeight / 790 != topscale) {
@@ -45,9 +43,3 @@ for (let i = 0; i < 360; i++) {
         if (undefined != loadingitems[i - 70]) loadingitems[i - 70].classList.remove("loading-white");
     }
 }
-
-window.onload = function () {
-    document.getElementsByClassName("loading")[0].style.display = "none";
-    loaded = true;
-}
-

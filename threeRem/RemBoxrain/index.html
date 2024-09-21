@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemBoxrain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #webGL {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #rmt {
+            position: absolute;
+            top: 10vh;
+            left: 15vw;
+            color: #91bef0;
+            font-size: 30vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rmt">
+        RMT
+    </div>
+    <div id="webGL">
+
+    </div>
+
+    <script type="importmap">
+        {
+            "imports":{
+                "three":"../three.module.js"
+            }
+        }
+        
+    </script>
+    <!-- <script type="importmap">
+        {
+            "imports":{
+                "three":"../three.module.js",
+                "three/addons/":"../jsm/"
+            }
+        }
+    </script> -->
+
+    <script type="module">
+        import * as THREE from "three";
+        // import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+        const scene = new THREE.Scene();
+        scene.background = null;
+
+        const axesHelper = new THREE.AxesHelper(3000); //坐标轴，参数表示坐标轴的长度
+        scene.add(axesHelper);
+
+        const texloader = new THREE.TextureLoader();
+        const texture = texloader.load('../img/winkRem.gif');
+
+        const group = new THREE.Group();
+        for (let i = 0; i < 300; i++) {
+            const size2 = 3;
+            const geo = new THREE.BoxGeometry(size2,size2,size2);
+            const material = new THREE.MeshLambertMaterial({
+                map: texture,
+                color: 0x91bef0,
+                transparent:true,
+                side:THREE.DoubleSide
+            })
+            const mesh = new THREE.Mesh(geo, material);
+            // const spritematerial = new THREE.SpriteMaterial({
+            //     color: `rgb(${Math.floor(Math.random() * 55 + 200)},${Math.floor(Math.random() * 55 + 200)},${Math.floor(Math.random() * 55 + 200)})`,
+            //     map: texture,
+            //     // rotation:Math.PI/4,//旋转精灵对象45度，弧度值
+            // });
+            // const mesh = new THREE.Sprite(spritematerial);
+            group.add(mesh);
+            const size = Math.random() * 20 + 10;
+            mesh.scale.set(size, size, size);
+            const x = 1000 * (Math.random() - 0.5);
+            const y = 300 * Math.random() - 150;
+            const z = 1000 * (Math.random() - 0.5);
+            mesh.position.set(x, y, z);
+        }
+        scene.add(group);
+
+        const geo = new THREE.BoxGeometry(100, 100, 100);
+        const material = new THREE.MeshLambertMaterial({
+            map: texture,
+            color: 0x91bef0
+        })
+        const mesh1 = new THREE.Mesh(geo, material);
+        // scene.add(mesh1);
+
+        const geo2 = new THREE.SphereGeometry(70, 100, 100);
+        const mesh2 = new THREE.Mesh(geo2, material);
+        // scene.add(mesh2);
+
+
+        const ambient = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(ambient);
+
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+
+        // 30:视场角度, width / height:Canvas画布宽高比, 1:近裁截面, 3000：远裁截面
+        const camera = new THREE.PerspectiveCamera(30, width / height, 100, 3000);
+        // camera.position.set(200, 200, 200);
+        // camera.lookAt(0, 0, 0);
+
+
+        const renderer = new THREE.WebGLRenderer({
+            //抗锯齿属性，WebGLRenderer常用的一个属性
+            antialias: true,
+            //透明度alpha，用来使背景透明
+            alpha: true
+        });
+        renderer.setClearAlpha(0);//设置alpha
+        renderer.setSize(width, height);
+        renderer.render(scene, camera);      //每次scene或者camera改变都需要重新render
+
+
+        document.getElementById("webGL").appendChild(renderer.domElement);
+
+        // 设置相机控件轨道控制器OrbitControls
+        // const controls = new OrbitControls(camera, renderer.domElement);
+        // 如果OrbitControls改变了相机参数，重新调用渲染器渲染三维场景
+        // controls.addEventListener('change', handleChange);
+        // function handleChange() {
+        //     renderer.render(scene, camera);
+        //     console.log('camera.position', camera.position);
+        // }
+
+        const clock = new THREE.Clock();
+        //渲染函数
+        function render() {
+            const t = clock.getDelta();
+            group.children.forEach(mesh => {
+                mesh.position.y -= t * 60;
+                mesh.rotateY(0.01);
+                if (mesh.position.y < -150) {
+                    mesh.position.y = 150;
+                }
+            })
+            renderer.render(scene, camera);
+            requestAnimationFrame(render);
+        }
+        render();
+        // controls.removeEventListener('change', handleChange);
+        //设置了渲染循环,相机控件OrbitControls就不用再通过事件change执行renderer.render(scene, camera);，毕竟渲染循环一直在执行renderer.render(scene, camera);。
+
+    </script>
+</body>
+
+</html>

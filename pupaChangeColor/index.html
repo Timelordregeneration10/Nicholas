@@ -21,7 +21,21 @@
         a{
             text-decoration: none;
             color:white;
+            text-shadow: 2px 2px 1px violet, -2px -2px 1px #91bef0;
             font-size: 6vw;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         a:hover{
