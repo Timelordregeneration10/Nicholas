@@ -87,6 +87,11 @@
         <input type="text" value="请输入" id="text-input">
     </div>
     <script>
+        if(window.location.search){
+            document.getElementById("text-input").value = decodeURI(window.location.search).split("=")[1];
+            document.getElementById("text-up").innerHTML = document.getElementById("text-input").value;
+            document.getElementById("text-down").innerHTML = document.getElementById("text-input").value;
+        }
         document.getElementById("text-input").onchange = function () {
             document.getElementById("text-up").innerHTML = document.getElementById("text-input").value;
             document.getElementById("text-down").innerHTML = document.getElementById("text-input").value;
