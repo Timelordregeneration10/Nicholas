@@ -1,0 +1,49 @@
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  /* overflow: hidden; */
+}
+
+.RemArea{
+  position: absolute;
+  top:10vh;
+  left:10vw;
+  width: 80vw;
+  height:80vh;
+  background-color: #91bef0;
+}
+
+.timer{
+  position: absolute;
+  left:1vw;
+  top:2vh;
+  font-family: YouYuan;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 10px #000;
+}
+
+#timer{
+  color:red;
+}
+
+.rest{
+  position: absolute;
+  right:1vw;
+  top:2vh;
+  font-family: YouYuan;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 10px #000;
+}
+
+#rest{
+  color:#91bef0;
+  text-shadow: 0 0 10px violet;
+}

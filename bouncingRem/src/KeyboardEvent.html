@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyboardEvent</title>
+    <style>
+        .fx {
+            -webkit-display: flex;
+            display: flex;
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+
+        .fx>div {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .fx>div:first-child {
+            width: 30%;
+        }
+
+        .flex {
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+        #test-target {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fx">
+        <div>
+            <textarea rows="5" name="test-target" id="test-target"></textarea>
+            <button type="button" name="btn-reset" id="btn-reset">Reset</button>
+        </div>
+        <div class="flex">
+            <pre id="console-log"></pre>
+        </div>
+    </div>
+
+</body>
+<script>
+    let textarea = document.getElementById("test-target"),
+        consoleLog = document.getElementById("console-log"),
+        btnReset = document.getElementById("btn-reset");
+
+    function logMessage(message) {
+        consoleLog.innerHTML += `${message}<br>`;
+        //<br>可以把一条条语句分开，让consoleLog有很多child
+    }
+
+    textarea.addEventListener("keydown", (e) => {
+        if (!e.repeat) {
+            logMessage(`e.key: "${e.key}" 键，e.code: ${e.code} [事件：keydown]`);
+        } else {
+            logMessage(`e.key: "${e.key}" 键，e.code: ${e.code} [事件：keydown]`);
+        }
+    });
+    // e.key: "q" 键，e.code: KeyQ [事件：keydown]
+    // e.key: "1" 键，e.code: Digit1 [事件：keydown]
+    // e.key: "a" 键，e.code: KeyA [事件：keydown]
+    // e.key: "2" 键，e.code: Digit2 [事件：keydown]
+    // e.key: "Shift" 键，e.code: ShiftLeft [事件：keydown]
+    // e.key: "@" 键，e.code: Digit2 [事件：keydown]
+
+
+    // textarea.addEventListener("beforeinput", (e) => {
+    //     logMessage(`即将输入 "${e.data}" 键 [事件：beforeinput]`);
+    // });
+
+    // textarea.addEventListener("input", (e) => {
+    //     logMessage(`输入 "${e.data}" 键 [事件：input]`);
+    // });
+
+    // textarea.addEventListener("keyup", (e) => {
+    //     logMessage(`释放 "${e.key}" 键 [事件：keyup]`);
+    // });
+
+    btnReset.addEventListener("click", (e) => {
+        let child = consoleLog.firstChild;
+        while (child) {
+            // console.log(child);
+            consoleLog.removeChild(child);
+            child = consoleLog.firstChild;
+        }
+        textarea.value = "";
+    });
+
+</script>
+
+</html>
