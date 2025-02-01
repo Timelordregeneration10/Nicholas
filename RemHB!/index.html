@@ -4,29 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemHB!</title>
     <link rel="icon" href="./fav.ico" type="image/x-icon">
-    <title>RemSukiDanmu</title>
-    <link rel="stylesheet" href="./css/bilibilitop.css">
-    <link rel="stylesheet" href="./css/RemSukiDanmu.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            margin-top: 10vh;
+            margin-left: 10vw;
+            height: 80vh;
+            width: 50vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: start;
+            font-size: 2.5vmax;
+            font-weight: bold;
+            color:white;
+        }
+
+        ul li a{
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 2px 2px 2px #000;
+        }
+
+        .bg {
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            ul{
+                font-size: 5vh;
+            }
+        }
+        
+    </style>
 </head>
 
 <body>
-    <img src="./image/hb/avatar.png" alt="rmt" style="position: absolute;top:0;right:0;width: 8vw;height:8vw;z-index: 5;">
-    <div class="box-bilibilitop">
-        <img class="absolute transition" id="heroin" src="./image/heroins.png" alt="rmt">
-        <img class="absolute transition" id="cake" src="./image/cake.png" alt="rmt">
-        <img class="absolute transition" id="chip" src="./image/chip.png" alt="rmt">
-        <img class="absolute transition" id="flower" src="./image/flower.png" alt="rmt">
-        <img class="absolute transition" id="kami" src="./image/hb/kami.png" alt="rmt">
-        <img class="absolute transition" id="oyishi" src="./image/hb/oyishi.png" alt="rmt">
-        <img class="absolute transition" id="zixin" src="./image/hb/zixin.png" alt="rmt">
-    </div>
-    <div class="box-danmu">
-        <input type="text" id="danmuInput">
-        <button id="danmuSubmit">send</button>
-    </div>
+    <img class="bg" src="./img/bg.jpg" alt="RemHB bg">
+    <ul>
+        <li>
+            <a href="./2025" target="_blank">2025</a>
+        </li>
+        <li>
+            <a href="./2024" target="_blank">2024</a>
+        </li>
+    </ul>
 </body>
-<script src="./js/bilibilitop.js"></script>
-<script src="./js/RemSukiDanmu.js"></script>
 
 </html>

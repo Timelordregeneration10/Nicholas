@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  /* 字体名称随意起 */
+  font-family: kawayii;
+  /*你下载字体所在的位置*/
+  src: url("../../font/xingyelangmanyuzhouwenrou.ttf");
+}
+
+body {
+  font-family: kawayii;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  /* background-color: #91bef0; */
+  position: relative;
+}
+
+.aiyiRemWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate3d(1, 1, 0, 45deg);
+  width: 150vw;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: 1s;
+  transition-timing-function: cubic-bezier(0.25, 0.75, 0.85, 1);
+}
+
+.aiyiRem {
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.1;
+  transition: 1s;
+  transition-timing-function: cubic-bezier(0.25, 0.75, 0.85, 1);
+}
+
+.bless {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(../../aiyiRemPublic/1.webp);
+  background-size: 100%;
+  /* background-size: 150vw; */
+  background-position: 50% 50%;
+  background-clip: text;
+  color: #91bef022;
+  font-size: 16vw;
+  font-weight: 1000;
+}

@@ -7,7 +7,7 @@
     /* 字体名称随意起 */
     font-family: kawayii;
     /*你下载字体所在的位置*/
-    src: url('../font/xingyelangmanyuzhouwenrou.ttf');
+    src: url('../../font/xingyelangmanyuzhouwenrou.ttf');
 }
 
 body {
