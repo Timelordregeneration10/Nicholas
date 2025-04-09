@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>girlsGroup</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        perspective: 100px;
+        transform-style: preserve-3d;
+        overflow: hidden;
+      }
+      .border-frame {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+      }
+      .border-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transform: translateZ(-200px) rotate(0deg);
+        animation: frontier 10s linear infinite;
+      }
+      @keyframes frontier {
+        0% {
+          transform: translateZ(-200px) rotate(0deg);
+        }
+        100% {
+          transform: translateZ(100px) rotate(180deg);
+        }
+      }
+      .animateDelay1 {
+        animation-delay: 0s;
+      }
+      .animateDelay2 {
+        animation-delay: 0.5s;
+      }
+      .animateDelay3 {
+        animation-delay: 1s;
+      }
+      .animateDelay4 {
+        animation-delay: 1.5s;
+      }
+      .animateDelay5 {
+        animation-delay: 2s;
+      }
+      .animateDelay6 {
+        animation-delay: 2.5s;
+      }
+      .animateDelay7 {
+        animation-delay: 3s;
+      }
+      .animateDelay8 {
+        animation-delay: 3.5s;
+      }
+      .animateDelay9 {
+        animation-delay: 4s;
+      }
+      .animateDelay10 {
+        animation-delay: 4.5s;
+      }
+      .animateDelay11 {
+        animation-delay: 5s;
+      }
+      .animateDelay12 {
+        animation-delay: 5.5s;
+      }
+      .animateDelay13 {
+        animation-delay: 6s;
+      }
+      .animateDelay14 {
+        animation-delay: 6.5s;
+      }
+      .animateDelay15 {
+        animation-delay: 7s;
+      }
+      .animateDelay16 {
+        animation-delay: 7.5s;
+      }
+      .animateDelay17 {
+        animation-delay: 8s;
+      }
+      .animateDelay18 {
+        animation-delay: 8.5s;
+      }
+      .animateDelay19 {
+        animation-delay: 9s;
+      }
+      .animateDelay20 {
+        animation-delay: 9.5s;
+      }
+      .animateDelay21 {
+        animation-delay: 10s;
+      }
+      .animateDelay22 {
+        animation-delay: 10.5s;
+      }
+      .animateDelay23 {
+        animation-delay: 11s;
+      }
+      .animateDelay24 {
+        animation-delay: 11.5s;
+      }
+      .animateDelay25 {
+        animation-delay: 12s;
+      }
+      .animateDelay26 {
+        animation-delay: 12.5s;
+      }
+      .animateDelay27 {
+        animation-delay: 13s;
+      }
+      .animateDelay28 {
+        animation-delay: 13.5s;
+      }
+      .animateDelay29 {
+        animation-delay: 14s;
+      }
+      .animateDelay30 {
+        animation-delay: 14.5s;
+      }
+
+      .border-side {
+        position: absolute;
+        background-color: violet;
+        box-shadow: 0px 0px 10px violet;
+      }
+      .border-top {
+        top: 0;
+        left: 0;
+        width: calc(100% - 5px);
+        height: 10px;
+      }
+      .border-right {
+        top: 0;
+        right: 0;
+        width: 10px;
+        height: calc(100% - 5px);
+      }
+      .border-bottom {
+        bottom: 0;
+        right: 0;
+        width: calc(100% - 5px);
+        height: 10px;
+      }
+      .border-left {
+        bottom: 0;
+        left: 0;
+        width: 10px;
+        height: calc(100% - 5px);
+      }
+      .loading-content {
+        width: 100px;
+        height: 100px;
+        font-size: 16px;
+        color: #fff;
+        background-color: violet;
+        /* background-image: radial-gradient(transparent 0%, violet 66%); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="border-frame">
+        <div class="loading-content"></div>
+        <div class="border-item animateDelay1">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay2">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay3">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay4">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay5">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay6">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay7">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay8">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay9">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay10">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay11">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay12">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay13">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay14">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay15">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay16">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay17">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay18">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay19">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay20">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay21">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay22">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay23">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay24">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay25">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay26">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay27">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay28">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay29">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+        <div class="border-item animateDelay30">
+          <div class="border-side border-top"></div>
+          <div class="border-side border-right"></div>
+          <div class="border-side border-bottom"></div>
+          <div class="border-side border-left"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
