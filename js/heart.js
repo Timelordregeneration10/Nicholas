@@ -5,8 +5,8 @@ document.addEventListener("click", function (event) {
     heart.className = "personwebheart";
     // heart.setAttribute("style",`top:${event.screenY}px;left:${event.screenX}px;`);
     // heart.style = `top:${event.screenY - 70}px;left:${event.screenX}px;`;
-    heart.style.top = String(event.screenY - 70) + "px";
-    heart.style.left = String(event.screenX) + "px";
+    heart.style.top = String(event.pageY - 20) + "px";
+    heart.style.left = String(event.pageX - 20) + "px";
     document.getElementsByTagName("html")[0].appendChild(heart);
     // alert( event.screenY);
 })
