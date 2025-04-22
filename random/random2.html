@@ -1,112 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weight</title>
+    <style>
+      body {
+        background-color: #91bef0;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>weight</title>
-  <style>
-    body {
-      background-color: #91bef0;
-    }
+      .itemboard {
+        background-color: white;
+        font-size: 3vw;
+        text-align: center;
+        position: absolute;
+        left: 8vw;
+        top: 15vw;
+        width: 55vw;
+        height: 36vw;
+        overflow: scroll;
+      }
 
-    .itemboard {
-      background-color: white;
-      font-size: 3vw;
-      text-align: center;
-      position: absolute;
-      left: 8vw;
-      top: 15vw;
-      width: 55vw;
-      height: 33vw;
-      overflow: scroll;
-    }
+      .item {
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 2vw;
+        height: 4vw;
+        width: 18vw;
+        border-radius: 0.4vw;
+        border: 1px solid #c8cccf;
+        color: #6a6f77;
+        outline: 0;
+        text-decoration: none;
+      }
 
+      .weight {
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 2vw;
+        height: 4vw;
+        width: 8vw;
+        border-radius: 0.4vw;
+        border: 1px solid #c8cccf;
+        color: #6a6f77;
+        outline: 0;
+        text-decoration: none;
+      }
 
-    .item {
-      box-sizing: border-box;
-      text-align: center;
-      font-size: 2vw;
-      height: 4vw;
-      width: 20vw;
-      border-radius: 0.4vw;
-      border: 1px solid #c8cccf;
-      color: #6a6f77;
-      outline: 0;
-      text-decoration: none;
-    }
+      input[type="text"]:focus {
+        border: 0.1vw solid #ff7496;
+      }
 
-    .weight {
-      box-sizing: border-box;
-      text-align: center;
-      font-size: 2vw;
-      height: 4vw;
-      width: 8vw;
-      border-radius: 0.4vw;
-      border: 1px solid #c8cccf;
-      color: #6a6f77;
-      outline: 0;
-      text-decoration: none;
-    }
+      #additems {
+        position: absolute;
+        top: 15vw;
+        right: 10vw;
+        font-size: 5vw;
+      }
 
-    input[type="text"]:focus {
-      border: 0.1vw solid #ff7496;
-    }
+      #generate {
+        position: absolute;
+        top: 25vw;
+        right: 10vw;
+        font-size: 5vw;
+      }
 
-    #additems {
-      position: absolute;
-      top: 23.5vw;
-      right: 10vw;
-      font-size: 5vw;
-    }
+      #save {
+        position: absolute;
+        top: 35vw;
+        right: 10vw;
+        font-size: 5vw;
+      }
 
-    #generate {
-      position: absolute;
-      top: 35vw;
-      right: 10vw;
-      font-size: 5vw;
-    }
+      #clear {
+        position: absolute;
+        top: 45vw;
+        right: 10vw;
+        font-size: 5vw;
+      }
 
-    #result {
-      text-shadow: 1vw 1vw violet;
-      font-size: 8vw;
-      text-align: center;
-    }
-  </style>
-</head>
+      #result {
+        text-shadow: 1vw 1vw violet;
+        font-size: 8vw;
+        text-align: center;
+      }
+    </style>
+  </head>
 
-<body>
-  <div class="itemboard">
-    <div id="div1">
-      &nbsp;item :&nbsp;
-      <input type="text" class="item" value="无神世界的神明活动" />
-      &nbsp;weight :&nbsp;
-      <input type="text" class="weight" value=6 />
+  <body>
+    <div class="itemboard">
+      <div id="div1">
+        &nbsp;item :&nbsp;
+        <input type="text" class="item" value="无神世界的神明活动" />
+        &nbsp;weight :&nbsp;
+        <input type="text" class="weight" value="6" />
+      </div>
     </div>
-  </div>
-  <button type="button" style="font-size:5vw" id="additems">additems</button>
-  <button type="button" style="font-size:5vw" id="generate">generate</button>
-  <div id="result">add->set->generate!</div>
-</body>
-
+    <button type="button" style="font-size: 5vw" id="additems">additems</button>
+    <button type="button" style="font-size: 5vw" id="generate">generate</button>
+    <button type="button" style="font-size: 5vw" id="save">savelocal</button>
+    <button type="button" style="font-size: 5vw" id="clear">clearall</button>
+    <div id="result">add->set->generate!</div>
+  </body>
 </html>
 
 <script>
-  var copydiv = document.getElementById("div1");
+  const itemboard = document.getElementsByClassName("itemboard")[0];
   var currentNodeNumber = 1;
   document.getElementById("additems").onclick = function () {
-    // let clonedNode = copydiv.cloneNode(true); // 克隆节点  
-    let clonedNode=document.createElement("div");
-    clonedNode.innerHTML=`
+    // let clonedNode = copydiv.cloneNode(true); // 克隆节点
+    let clonedNode = document.createElement("div");
+    clonedNode.innerHTML = `
       &nbsp;item :&nbsp;
       <input type="text" class="item" value="item${currentNodeNumber}" />
       &nbsp;weight :&nbsp;
       <input type="text" class="weight" value=1 />
     `;
     currentNodeNumber++;
-    clonedNode.setAttribute("id", "div" + currentNodeNumber); // 修改一下id 值，避免id 重复   
-    copydiv.parentNode.appendChild(clonedNode); // 在父节点插入克隆的节点   
-  }
+    clonedNode.setAttribute("id", "div" + currentNodeNumber); // 修改一下id 值，避免id 重复
+    itemboard.appendChild(clonedNode); // 在父节点插入克隆的节点
+  };
+
+  document.getElementById("save").onclick = function () {
+    let sum = [];
+    let items = [];
+    for (let i = 0; i < currentNodeNumber; i++) {
+      sum[i] = Number(document.getElementsByClassName("weight")[i].value);
+      items[i] = document.getElementsByClassName("item")[i].value;
+    }
+    const kilalaRandom = {
+      currentNodeNumber,
+      sum,
+      items,
+    };
+    localStorage.setItem("kilalaRandom", JSON.stringify(kilalaRandom));
+  };
+
+  document.getElementById("clear").onclick = () => {
+    itemboard.innerHTML = "";
+    currentNodeNumber = 0;
+  };
+
+  window.onload = () => {
+    let mode = "";
+    const kilalaRandom = localStorage.getItem("kilalaRandom");
+    if (window.location.search.includes("mode=lunch")) {
+      mode = "lunch";
+    } else if (window.location.search.includes("mode=dinner")) {
+      mode = "dinner";
+    } else if (kilalaRandom) {
+      mode = "local";
+    }
+    if (mode) {
+      let data;
+      if (mode === "lunch") {
+        data = {
+          currentNodeNumber: 5,
+          sum: [5, 1, 1, 1, 1],
+          items: ["自选两荤两素", "KFC", "麦当劳", "红烧牛肉面", "川香麻辣烫"],
+        };
+      } else if (mode === "dinner") {
+        data = {
+          currentNodeNumber: 3,
+          sum: [6, 3,1],
+          items: ["全家", "肉饼", "川香麻辣烫"],
+        };
+      } else if (mode === "local") {
+        data = JSON.parse(kilalaRandom);
+      }
+      itemboard.innerHTML = "";
+      currentNodeNumber = 0;
+      for (let i = 0; i < data.currentNodeNumber; i++) {
+        let clonedNode = document.createElement("div");
+        clonedNode.innerHTML = `
+            &nbsp;item :&nbsp;
+            <input type="text" class="item" value="${
+              data.items[i] || "item" + i
+            }" />
+            &nbsp;weight :&nbsp;
+            <input type="text" class="weight" value="${data.sum[i] || 1}" />
+        `;
+        currentNodeNumber++;
+        clonedNode.setAttribute("id", "div" + currentNodeNumber); // 修改一下id 值，避免id 重复
+        itemboard.appendChild(clonedNode); // 在父节点插入克隆的节点
+      }
+    }
+  };
 
   function generan() {
     let sum = [];
@@ -129,10 +208,16 @@
   var locked = false;
   var countdownTime = 6000;
   function generan2() {
-    if (locked) { return; }
+    if (locked) {
+      return;
+    }
     locked = true;
     document.getElementById("result").style.fontSize = "8vw";
-    for (let timeInterval = 10; timeInterval < countdownTime; timeInterval *= 1.1) {
+    for (
+      let timeInterval = 10;
+      timeInterval < countdownTime;
+      timeInterval *= 1.1
+    ) {
       setTimeout(() => {
         generan();
         // console.log(timeInterval);
