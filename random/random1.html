@@ -24,7 +24,7 @@
       text-align: center;
     }
 
-    input[type="text"] {
+    input[type="number"] {
       box-sizing: border-box;
       text-align: center;
       font-size: 5vw;
@@ -37,7 +37,7 @@
       text-decoration: none;
     }
 
-    input[type="text"]:focus {
+    input[type="number"]:focus {
       border: 0.1vw solid #ff7496;
     }
   </style>
@@ -73,9 +73,9 @@
 <body>
   <div class="gene">
     range :&nbsp;
-    <input type="text" id="rg1" value=1 />
+    <input type="number" id="rg1" value=1 onkeydown="if(event.keyCode==13){generan2();};return true;" />
     &nbsp;~&nbsp;
-    <input type="text" id="rg2" value=10 />
+    <input type="number" id="rg2" value=10 onkeydown="if(event.keyCode==13){generan2();};return true;" />
     &nbsp;
     <button type="button" style="font-size:5vw" onclick="generan2()">generate</button>
     <!-- 想直接生成就onclick为generan()，想要有倒数效果就onclick为generan2() -->
