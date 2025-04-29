@@ -144,10 +144,12 @@
   window.onload = () => {
     let mode = "";
     const kilalaRandom = localStorage.getItem("kilalaRandom");
-    if (window.location.search.includes("mode=lunch")) {
+    if (decodeURI(window.location.search).includes("mode=lunch")) {
       mode = "lunch";
-    } else if (window.location.search.includes("mode=dinner")) {
+    } else if (decodeURI(window.location.search).includes("mode=dinner")) {
       mode = "dinner";
+    } else if (decodeURI(window.location.search).includes("mode=今天突然想吃肉饼")) {
+      mode = "肉饼";
     } else if (kilalaRandom) {
       mode = "local";
     }
@@ -164,6 +166,12 @@
           currentNodeNumber: 3,
           sum: [6, 3,1],
           items: ["全家", "肉饼", "川香麻辣烫"],
+        };
+      } else if (mode === "肉饼") {
+        data = {
+          currentNodeNumber: 6,
+          sum: [666, 666, 666, 666, 666, 666],
+          items: ["肉饼", "好久没吃肉饼了", "那就吃肉饼吧", "没错得吃肉饼", "好想吃肉饼啊", "今天得吃肉饼"],
         };
       } else if (mode === "local") {
         data = JSON.parse(kilalaRandom);
