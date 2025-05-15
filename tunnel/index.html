@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tunnel</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        overflow: hidden;
+      }
+      .tunnel {
+        position: relative;
+        width: 50vmin;
+        height: 50vmin;
+        transform-style: preserve-3d;
+        transform: translateZ(700px) rotate(0deg);
+        /* transition: transform 1s linear; */
+      }
+      .wall {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        overflow: visible;
+        transform-style: preserve-3d;
+      }
+
+      .wall-left {
+        transform: rotateY(90deg) translateZ(-25vmin);
+      }
+
+      .wall-top {
+        transform: rotateX(-90deg) translateZ(-25vmin);
+      }
+
+      .wall-right {
+        transform: rotateY(-90deg) translateZ(-25vmin);
+      }
+
+      .wall-bottom {
+        transform: rotateX(90deg) translateZ(-25vmin);
+      }
+
+      .wall-content {
+        position: absolute;
+      }
+
+      .wall-content-left {
+        top: 0;
+        left: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .wall-content-left > img {
+        transform: translateX(0vmin);
+        animation: wall-left-img-translate 3s linear infinite;
+      }
+
+      @keyframes wall-left-img-translate {
+        from {
+          transform: translateX(0vmin);
+        }
+        to {
+          transform: translateX(-50vmin);
+        }
+      }
+
+      .wall-content-top {
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .wall-content-top > img {
+        transform: translateX(0vmin);
+        animation: wall-top-img-translate 3s linear infinite;
+      }
+
+      @keyframes wall-top-img-translate {
+        from {
+          transform: translateY(0vmin);
+        }
+        to {
+          transform: translateY(-50vmin);
+        }
+      }
+
+      .wall-content-right {
+        top: 0;
+        right: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+      .wall-content-right > img {
+        transform: translateX(0vmin);
+        animation: wall-right-img-translate 3s linear infinite;
+      }
+
+      @keyframes wall-right-img-translate {
+        from {
+          transform: translateX(0vmin);
+        }
+        to {
+          transform: translateX(50vmin);
+        }
+      }
+
+      .wall-content-bottom {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      .wall-content-bottom > img {
+        transform: translateX(0vmin);
+        animation: wall-bottom-img-translate 3s linear infinite;
+      }
+
+      @keyframes wall-bottom-img-translate {
+        from {
+          transform: translateY(0vmin);
+        }
+        to {
+          transform: translateY(50vmin);
+        }
+      }
+
+      .wall-left-right-img {
+        height: 100%;
+        object-fit: contain;
+        transition: transform 1s linear;
+      }
+
+      .wall-top-bottom-img {
+        width: 100%;
+        object-fit: contain;
+        transition: transform 1s linear;
+      }
+
+      .fix-img {
+        position: fixed;
+        z-index: 10000;
+        top: 15vh;
+        left: 15vw;
+        width: 70vw;
+        height: 70vh;
+        object-fit: contain;
+        opacity: 1;
+        /* box-shadow: 0px 0px 100px violet; */
+      }
+
+    </style>
+  </head>
+  <body>
+    <img src="./AvatarRem.jpg" alt="AvatarRem" class="fix-img" />
+    <div class="container">
+      <div class="tunnel" id="tunnel">
+        <div class="wall wall-left">
+          <div class="wall-content wall-content-left">
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+          </div>
+        </div>
+        <div class="wall wall-top">
+          <div class="wall-content wall-content-top">
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+          </div>
+        </div>
+        <div class="wall wall-right">
+          <div class="wall-content wall-content-right">
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-left-right-img"
+            />
+          </div>
+        </div>
+        <div class="wall wall-bottom">
+          <div class="wall-content wall-content-bottom">
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+            <img
+              src="./AvatarRem.jpg"
+              alt="AvatarRem"
+              class="wall-top-bottom-img"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // const tunnel = document.getElementById("tunnel");
+      // const wallContentLeft =
+      //   document.getElementsByClassName("wall-content-left")[0];
+      // const wallContentTop =
+      //   document.getElementsByClassName("wall-content-top")[0];
+      // const wallContentRight =
+      //   document.getElementsByClassName("wall-content-right")[0];
+      // const wallContentBottom = document.getElementsByClassName(
+      //   "wall-content-bottom"
+      // )[0];
+
+      // const initialTranslateZ = 600;
+      // const frameIncreasement = 100;
+      // let currentTranslateZ = initialTranslateZ;
+      // const animationLoop = () => {
+      //   currentTranslateZ += frameIncreasement;
+      //   tunnel.style.transform = `translateZ(${currentTranslateZ}px)`;
+      //   requestAnimationFrame(animationLoop);
+      // };
+      // animationLoop();
+      // setInterval(()=>{
+      //   currentTranslateZ += frameIncreasement;
+      //   tunnel.style.transform = `translateZ(${currentTranslateZ}px)`;
+      // },1000);
+
+      // const generateImg = () => {
+      //   const newImg = document.createElement("img");
+      //   newImg.src = "./AvatarRem.jpg";
+      //   newImg.alt = "AvatarRem";
+      //   return newImg;
+      // };
+      // const appendImg = () => {
+      //   const newLeftImg = generateImg();
+      //   newLeftImg.classList.add("wall-left-right-img");
+      //   wallContentLeft.appendChild(newLeftImg);
+      //   const newTopImg = generateImg();
+      //   newTopImg.classList.add("wall-left-right-img");
+      //   wallContentTop.appendChild(newTopImg);
+      //   const newRightImg = generateImg();
+      //   newRightImg.classList.add("wall-left-right-img");
+      //   wallContentRight.appendChild(newRightImg);
+      //   const newBottomImg = generateImg();
+      //   newBottomImg.classList.add("wall-left-right-img");
+      //   wallContentBottom.appendChild(newBottomImg);
+      // };
+      // const removeImg = () => {
+      //   wallContentLeft.removeChild(wallContentLeft.firstChild);
+      //   wallContentTop.removeChild(wallContentTop.firstChild);
+      //   wallContentRight.removeChild(wallContentRight.firstChild);
+      //   wallContentBottom.removeChild(wallContentBottom.firstChild);
+      // };
+
+      // setTimeout(() => {
+      //   setInterval(() => {
+      //     appendImg();
+      //     removeImg();
+      //   }, 2000);
+      // }, 5000);
+
+      // for (let i = 0; i < 10; i++) {
+      //   appendImg();
+      // }
+    </script>
+  </body>
+</html>
