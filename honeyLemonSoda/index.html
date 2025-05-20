@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>honeyLemonSoda</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      .toRightBottom {
+        width: fit-content;
+        height: fit-content;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+
+      .appear {
+        width: fit-content;
+        height: fit-content;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .rotateLittle {
+        width: fit-content;
+        height: fit-content;
+      }
+
+      .stripe-circle {
+        width: 92px;
+        height: 92px;
+        background-image: linear-gradient(
+          to bottom,
+          #ff6699 3px,
+          transparent 2px
+        );
+        background-size: 10px 10px;
+        border-radius: 50%;
+      }
+
+      .ring-circle {
+        width: 92px;
+        height: 92px;
+        border: 3px solid #ff6699;
+        border-radius: 50%;
+      }
+
+      .square {
+        width: 80px;
+        height: 80px;
+        background-color: #ff6699;
+        opacity: 0.7;
+      }
+
+      .star {
+        width: 100px;
+        height: 100px;
+        background-color: #ff6699;
+        opacity: 0.7;
+        clip-path: polygon(
+          50% 0%,
+          71% 25%,
+          98% 35%,
+          77% 61%,
+          79% 91%,
+          52% 79%,
+          21% 91%,
+          24% 62%,
+          2% 35%,
+          30% 26%
+        );
+      }
+
+      .lightenImg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      .lightenMask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffd6e3;
+        mix-blend-mode: lighten;
+        z-index: 2;
+      }
+
+      .honeyLemonSoda {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: clip-path 0.2s cubic-bezier(0.33, 1, 0.33, 1);
+        z-index: 3;
+      }
+
+      .imgBorder {
+        position: fixed;
+        top: -20px;
+        left: -20px;
+        border: solid 20px #ff98ba;
+        transition: transform 0.2s cubic-bezier(0.33, 1, 0.33, 1);
+        z-index: 4;
+      }
+
+      p {
+        position: fixed;
+        top: 10vh;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: #ff4684 0px 0px 0.5vw;
+        font-size: 3vmax;
+        padding: 2vmax;
+        margin: 0;
+        z-index: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <p>inspired from 《蜂蜜柠檬碳酸水》第11集8:10 and 15:59</p>
+    <img class="lightenImg" src="./honeyLemonSoda.webp" alt="honeyLemonSoda" />
+    <div class="lightenMask"></div>
+    <img
+      class="honeyLemonSoda"
+      src="./honeyLemonSoda.webp"
+      alt="honeyLemonSoda"
+    />
+    <div class="imgBorder"></div>
+  </body>
+  <script>
+    const clipWidth = 600;
+    const clipHeight = 400;
+    const imgBorder = document.querySelector(".imgBorder");
+    imgBorder.style.width = `${clipWidth}px`;
+    imgBorder.style.height = `${clipHeight}px`;
+    const controlClipPath = (x, y) => {
+      const clipX = x - clipWidth / 2;
+      const clipY = y - clipHeight / 2;
+      const clipPath = `polygon(${clipX}px ${clipY}px, ${
+        clipX + clipWidth
+      }px ${clipY}px, ${clipX + clipWidth}px ${
+        clipY + clipHeight
+      }px, ${clipX}px ${clipY + clipHeight}px)`;
+      document.querySelector(".honeyLemonSoda").style.clipPath = clipPath;
+      document.querySelector(
+        ".imgBorder"
+      ).style.transform = `translate(${clipX}px, ${clipY}px)`;
+    };
+    controlClipPath(window.innerWidth / 2, window.innerHeight / 2);
+    if (window.innerWidth > 600) {
+      window.addEventListener("mousemove", (e) => {
+        controlClipPath(e.clientX, e.clientY);
+      });
+    } else {
+      window.addEventListener("touchmove", (e) => {
+        controlClipPath(e.touches[0].clientX, e.touches[0].clientY);
+      });
+    }
+
+    const generateGeometry = () => {
+      const toRightBottom = document.createElement("div");
+      toRightBottom.classList.add("toRightBottom");
+      const appear = document.createElement("div");
+      appear.classList.add("appear");
+      const rotateLittle = document.createElement("div");
+      rotateLittle.classList.add("rotateLittle");
+      let geometry;
+      const typeList = ["stripe-circle", "ring-circle", "square", "star"];
+      const type =
+        Math.random() < 0.1
+          ? "star"
+          : typeList[Math.floor(Math.random() * (typeList.length - 1))];
+      switch (type) {
+        case "stripe-circle":
+          geometry = document.createElement("div");
+          geometry.classList.add("stripe-circle");
+          break;
+        case "ring-circle":
+          geometry = document.createElement("div");
+          geometry.classList.add("ring-circle");
+          break;
+        case "square":
+          geometry = document.createElement("div");
+          geometry.classList.add("square");
+          break;
+        case "star":
+          geometry = document.createElement("div");
+          geometry.classList.add("star");
+          break;
+        default:
+          geometry = document.createElement("div");
+          geometry.classList.add("stripe-circle");
+          break;
+      }
+      const initialClientX = (Math.random() * 0.9 + 0.05) * window.innerWidth;
+      const initialClientY = (Math.random() * 0.9 + 0.05) * window.innerHeight;
+      const finalClientX = Math.random() > 0.5 ? window.innerWidth : -100;
+      const finalClientY = Math.random() > 0.5 ? window.innerHeight : -100;
+      const initialRotate = 0;
+      const finalRotate =
+        (Math.random() * 90 + 90) * (Math.random() > 0.5 ? 1 : -1);
+      const Scale = Math.random() * 0.4 + 0.6;
+      const Rotate = Math.random() * 90 - 45;
+      const Opacity = Math.random() * 0.5 + 0.5;
+      const toRightBottomDuration = Math.random() * 10 + 20;
+      const rotateLittleDuration = Math.random() * 10 + 20;
+      const color = `rgb(${Math.floor(Math.random() * 85 + 170)}, ${Math.floor(
+        Math.random() * 85 + 170
+      )}, ${Math.floor(Math.random() * 85 + 170)})`;
+      toRightBottom.style.transform = `translate(${initialClientX}px, ${initialClientY}px)`;
+      toRightBottom.style.transition = `transform ${toRightBottomDuration}s linear`;
+      rotateLittle.style.transform = `rotate(${initialRotate}deg)`;
+      rotateLittle.style.transition = `transform ${rotateLittleDuration}s linear`;
+      geometry.style.transform = `scale(${Scale}) rotate(${Rotate}deg)`;
+      geometry.style.opacity = Opacity;
+      switch (type) {
+        case "stripe-circle":
+          geometry.style.backgroundImage = `linear-gradient(to bottom, ${color} 3px, transparent 2px)`;
+          break;
+        case "ring-circle":
+          geometry.style.border = `3px solid ${color}`;
+          break;
+        case "star":
+        case "square":
+          geometry.style.backgroundColor = color;
+          break;
+        default:
+          geometry.style.backgroundImage = `linear-gradient(to bottom, ${color} 3px, transparent 2px)`;
+          break;
+      }
+      rotateLittle.appendChild(geometry);
+      appear.appendChild(rotateLittle);
+      toRightBottom.appendChild(appear);
+      document.body.appendChild(toRightBottom);
+      setTimeout(() => {
+        toRightBottom.style.transform = `translate(${finalClientX}px, ${finalClientY}px)`;
+        rotateLittle.style.transform = `rotate(${finalRotate}deg)`;
+        appear.style.opacity = 1;
+      }, 100);
+      setTimeout(() => {
+        appear.style.opacity = 0;
+      }, (toRightBottomDuration > rotateLittleDuration ? toRightBottomDuration : rotateLittleDuration) * 1000 - 1000);
+      setTimeout(() => {
+        toRightBottom.remove();
+      }, (toRightBottomDuration > rotateLittleDuration ? toRightBottomDuration : rotateLittleDuration) * 1000);
+    };
+    setInterval(() => {
+      generateGeometry();
+    }, 300);
+    for (let i = 0; i < 20; i++) {
+      generateGeometry();
+    }
+  </script>
+</html>
