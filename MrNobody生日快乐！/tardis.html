@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TARDIS 3D Model - Doctor Who</title>
+    <link rel="stylesheet" href="./css/tardis.css" />
+  </head>
+  <body>
+    <div id="tardis-container">
+      <div id="loading">
+        <div>正在加载 TARDIS 模型...</div>
+        <div class="loading-spinner"></div>
+      </div>
+
+      <div id="error">
+        <h3>加载错误</h3>
+        <p>无法加载 TARDIS 模型文件，请检查文件路径是否正确。</p>
+      </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
+
+    <script src="./js/tardis.js"></script>
+  </body>
+</html>
