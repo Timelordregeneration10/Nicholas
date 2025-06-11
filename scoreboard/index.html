@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>记分板</title>
+    <link
+      rel="icon"
+      href="../icon/fav.ico"
+      type="image/x-icon"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Microsoft YaHei", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .title {
+        color: #333;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .add-player-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        border: 2px dashed #dee2e6;
+      }
+
+      .add-player-form {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .input-group label {
+        font-weight: bold;
+        color: #495057;
+        font-size: 0.9em;
+      }
+
+      .input-group input {
+        padding: 10px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+      .input-group input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .file-input-wrapper input[type="file"] {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .file-input-label {
+        padding: 10px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 16px;
+        background: white;
+        cursor: pointer;
+        transition: border-color 0.3s;
+        display: block;
+        text-align: center;
+        min-width: 200px;
+      }
+
+      .file-input-label:hover {
+        border-color: #667eea;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-danger {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        color: white;
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+      }
+
+      .btn-success {
+        background: linear-gradient(45deg, #51cf66, #40c057);
+        color: white;
+      }
+
+      .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(81, 207, 102, 0.4);
+      }
+
+      .players-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .player-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border: 3px solid transparent;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        max-width: 360px;
+      }
+
+      .player-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      .player-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .player-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .player-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #dee2e6;
+        transition: transform 0.3s;
+      }
+
+      .player-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .player-info h3 {
+        color: #333;
+        font-size: 1.3em;
+        margin-bottom: 5px;
+      }
+
+      .player-score {
+        font-size: 2em;
+        font-weight: bold;
+        color: #667eea;
+        text-align: center;
+        margin: 15px 0;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 10px;
+      }
+
+      .score-positive {
+        color: #51cf66;
+      }
+
+      .score-negative {
+        color: #ff6b6b;
+      }
+
+      .player-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        justify-content: center;
+      }
+
+      .score-input {
+        flex: 1;
+        padding: 8px;
+        border: 2px solid #e9ecef;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .score-btn {
+        padding: 8px 8px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+      }      .remove-player {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .avatar-controls {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(222, 226, 230, 0.5);
+      }
+
+      .avatar-upload-wrapper {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .btn-small {
+        padding: 6px 12px;
+        font-size: 12px;
+        flex: 1;
+      }
+
+      .stats {
+        text-align: center;
+        margin-top: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 15px;
+      }
+
+      .stats h3 {
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .game-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .title {
+          font-size: 2em;
+        }
+
+        .add-player-form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .players-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="title">🃏 斗地主记分板 🃏</h1>
+        <p>记录朋友们的战绩，见证谁是真正的斗地主王者！</p>
+      </div>
+
+      <div class="add-player-section">
+        <div class="add-player-form">
+          <div class="input-group">
+            <label for="playerName">昵称</label>
+            <input
+              type="text"
+              id="playerName"
+              placeholder="输入玩家昵称"
+              maxlength="10"
+            />
+          </div>
+          <div class="input-group">
+            <label for="playerAvatar">头像链接</label>
+            <input
+              type="url"
+              id="playerAvatar"
+              placeholder="头像图片链接（可选）"
+            />
+          </div>
+          <div class="input-group">
+            <label>头像上传</label>
+            <div class="file-input-wrapper">
+              <input type="file" id="playerAvatarFile" accept="image/*" />
+              <label for="playerAvatarFile" class="file-input-label">
+                📁 选择头像图片（可选）
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="addPlayer()">
+            ➕ 添加玩家
+          </button>
+          <button class="btn btn-success" onclick="addDefaultPlayers()">
+            🎮 添加默认玩家
+          </button>
+        </div>
+      </div>
+
+      <div class="players-grid" id="playersGrid">
+        <!-- 玩家卡片将在这里动态生成 -->
+      </div>
+
+      <div class="stats" id="gameStats">
+        <h3>📊 游戏统计</h3>
+        <p>当前玩家数量: <span id="playerCount">0</span></p>
+        <p>最高分玩家: <span id="topPlayer">暂无</span></p>
+        <p>总游戏轮数: <span id="gameRounds">0</span></p>
+        <div class="game-actions">
+          <button class="btn btn-success" onclick="newRound()">
+            🔄 新一轮游戏
+          </button>
+          <button class="btn btn-danger" onclick="resetAll()">
+            🗑️ 重置所有
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let players = [];
+      let gameRounds = 0;
+
+      // 默认头像
+      const defaultAvatar =
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiM2NjdlZWEiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIyNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNSA0NUMxNSAzOC4zNzI2IDIxLjM3MjYgMzMgMjggMzNIMzJDMzguNjI3NCAzMyA0NSAzOC4zNzI2IDQ1IDQ1VjQ1SDE1VjQ1WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+";
+
+      // 预设的默认玩家
+      const defaultPlayers = [
+        {
+          name: "Nicholas",
+          avatar:
+            "./tjc.jpg",
+        },
+        {
+          name: "HandsomeLiu",
+          avatar:
+            "./lzx.jpg",
+        },
+        {
+          name: "🦌揩聘",
+          avatar:
+            "./lkc.jpg",
+        },
+      ];
+
+      // 处理文件上传为 Base64
+      function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+      }
+      async function addPlayer() {
+        const nameInput = document.getElementById("playerName");
+        const avatarInput = document.getElementById("playerAvatar");
+        const avatarFileInput = document.getElementById("playerAvatarFile");
+
+        const name = nameInput.value.trim();
+        if (!name) {
+          alert("请输入玩家昵称！");
+          return;
+        }
+
+        if (players.find((p) => p.name === name)) {
+          alert("该昵称已存在，请使用其他昵称！");
+          return;
+        }
+
+        let avatar = defaultAvatar;
+
+        // 优先使用上传的图片作为头像
+        if (avatarFileInput.files.length > 0) {
+          try {
+            avatar = await fileToBase64(avatarFileInput.files[0]);
+          } catch (error) {
+            alert("头像图片处理失败，将使用链接头像或默认头像");
+            avatar = avatarInput.value.trim() || defaultAvatar;
+          }
+        } else if (avatarInput.value.trim()) {
+          // 如果没有上传文件，则使用链接
+          avatar = avatarInput.value.trim();
+        }
+
+        const player = {
+          id: Date.now(),
+          name: name,
+          avatar: avatar,
+          score: 0,
+          history: [],
+        };
+
+        players.push(player);
+        nameInput.value = "";
+        avatarInput.value = "";
+        avatarFileInput.value = "";
+        renderPlayers();
+        updateStats();
+      }
+
+      function addDefaultPlayers() {
+        if (players.length > 0) {
+          if (!confirm("当前已有玩家，是否继续添加默认玩家？")) {
+            return;
+          }
+        }
+
+        let addedCount = 0;
+        defaultPlayers.forEach((defaultPlayer) => {
+          // 检查是否已经存在同名玩家
+          if (!players.find((p) => p.name === defaultPlayer.name)) {
+            const player = {
+              id: Date.now() + addedCount, // 确保ID唯一
+              name: defaultPlayer.name,
+              avatar: defaultPlayer.avatar,
+              score: 0,
+              history: [],
+            };
+            players.push(player);
+            addedCount++;
+          }
+        });
+
+        if (addedCount > 0) {
+          alert(`成功添加了 ${addedCount} 个默认玩家！`);
+          renderPlayers();
+          updateStats();
+        } else {
+          alert("所有默认玩家都已存在，无需重复添加！");
+        }
+      }
+
+      function removePlayer(playerId) {
+        if (confirm("确定要移除这个玩家吗？")) {
+          players = players.filter((p) => p.id !== playerId);
+          renderPlayers();
+          updateStats();
+        }
+      }
+
+      function updateScore(playerId, change) {
+        const player = players.find((p) => p.id === playerId);
+        if (player) {
+          player.score += change;
+          player.history.push({
+            change: change,
+            timestamp: new Date(),
+            newScore: player.score,
+          });
+          renderPlayers();
+          updateStats();
+        }
+      }
+
+      function customScoreChange(playerId) {
+        const input = document.getElementById(`scoreInput-${playerId}`);
+        const change = parseInt(input.value);
+
+        if (isNaN(change) || change === 0) {
+          alert("请输入有效的分数变化！");
+          return;
+        }        updateScore(playerId, change);
+        input.value = "";
+      }
+
+      // 更新玩家头像
+      async function updatePlayerAvatar(playerId, useLink = false) {
+        const player = players.find(p => p.id === playerId);
+        if (!player) return;
+
+        if (useLink) {
+          const newAvatarUrl = prompt('请输入新的头像链接:', player.avatar);
+          if (newAvatarUrl !== null && newAvatarUrl.trim() !== '') {
+            player.avatar = newAvatarUrl.trim();
+            renderPlayers();
+          }
+        } else {
+          const input = document.getElementById(`avatarInput-${playerId}`);
+          if (input.files.length > 0) {
+            try {
+              const newAvatar = await fileToBase64(input.files[0]);
+              player.avatar = newAvatar;
+              renderPlayers();
+            } catch (error) {
+              alert('头像图片处理失败');
+            }
+          }
+        }
+      }
+
+      function renderPlayers() {
+        const grid = document.getElementById("playersGrid");
+        grid.innerHTML = "";
+
+        players.forEach((player) => {
+          const playerCard = document.createElement("div");
+          playerCard.className = "player-card";
+
+          const scoreClass =
+            player.score > 0
+              ? "score-positive"
+              : player.score < 0
+              ? "score-negative"
+              : "";
+
+          playerCard.innerHTML = `
+                    <div class="player-header">
+                        <img src="${player.avatar}" alt="${
+            player.name
+          }" class="player-avatar" 
+                             onerror="this.src='${defaultAvatar}'">
+                        <div class="player-info">
+                            <h3>${player.name}</h3>
+                            <small>玩家ID: ${player.id}</small>
+                        </div>
+                    </div>
+                    
+                    <div class="player-score ${scoreClass}">
+                        ${player.score > 0 ? "+" : ""}${player.score}
+                    </div>
+                    
+                    <div class="player-controls">
+                        <input type="number" id="scoreInput-${
+                          player.id
+                        }" class="score-input" 
+                               placeholder="输入分数变化" min="-999" max="999">
+                        <button class="score-btn btn-success" onclick="customScoreChange(${
+                          player.id
+                        })">
+                            确定
+                        </button>
+                    </div>
+                      <div class="player-controls">
+                        <button class="score-btn btn-success" onclick="updateScore(${
+                          player.id
+                        }, 10)">+10</button>
+                        <button class="score-btn btn-success" onclick="updateScore(${
+                          player.id
+                        }, 5)">+5</button>
+                        <button class="score-btn btn-success" onclick="updateScore(${
+                          player.id
+                        }, 1)">+1</button>
+                        <button class="score-btn btn-danger" onclick="updateScore(${
+                          player.id
+                        }, -1)">-1</button>
+                        <button class="score-btn btn-danger" onclick="updateScore(${
+                          player.id
+                        }, -5)">-5</button>
+                        <button class="score-btn btn-danger" onclick="updateScore(${
+                          player.id
+                        }, -10)">-10</button>
+                    </div>
+                    
+                    <div class="avatar-controls">
+                        <div class="avatar-upload-wrapper">
+                            <input type="file" id="avatarInput-${player.id}" accept="image/*" 
+                                   style="display: none;" onchange="updatePlayerAvatar(${player.id})">
+                            <button class="btn btn-primary btn-small" onclick="document.getElementById('avatarInput-${player.id}').click()">
+                                📁 上传头像
+                            </button>
+                            <button class="btn btn-success btn-small" onclick="updatePlayerAvatar(${player.id}, true)">
+                                🔗 链接头像
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-danger remove-player" onclick="removePlayer(${
+                      player.id
+                    })">
+                        🗑️ 移除玩家
+                    </button>
+                `;
+
+          grid.appendChild(playerCard);
+        });
+      }
+
+      function updateStats() {
+        document.getElementById("playerCount").textContent = players.length;
+
+        if (players.length > 0) {
+          const topPlayer = players.reduce((max, player) =>
+            player.score > max.score ? player : max
+          );
+          document.getElementById(
+            "topPlayer"
+          ).textContent = `${topPlayer.name} (${topPlayer.score}分)`;
+        } else {
+          document.getElementById("topPlayer").textContent = "暂无";
+        }
+
+        document.getElementById("gameRounds").textContent = gameRounds;
+      }
+
+      function newRound() {
+        if (players.length === 0) {
+          alert("请先添加玩家！");
+          return;
+        }
+
+        gameRounds++;
+        alert(`开始第 ${gameRounds} 轮游戏！祝大家好运！🍀`);
+        updateStats();
+      }
+
+      function resetAll() {
+        if (confirm("确定要重置所有数据吗？这将清除所有玩家和分数记录！")) {
+          players = [];
+          gameRounds = 0;
+          renderPlayers();
+          updateStats();
+          alert("所有数据已重置！");
+        }
+      }
+
+      // 键盘快捷键支持
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && e.target.id === "playerName") {
+          addPlayer();
+        }
+      });
+
+      // 初始化统计
+      updateStats();
+    </script>
+  </body>
+</html>
