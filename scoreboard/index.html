@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>记分板</title>
-    <link
-      rel="icon"
-      href="../icon/fav.ico"
-      type="image/x-icon"
-    />
+    <link rel="icon" href="../icon/fav.ico" type="image/x-icon" />
     <style>
       * {
         margin: 0;
@@ -18,7 +14,7 @@
 
       body {
         font-family: "Microsoft YaHei", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* background: linear-gradient(135deg, #95a9ff 0%, #dab5ff 100%); */
         min-height: 100vh;
         padding: 20px;
       }
@@ -125,7 +121,7 @@
       }
 
       .btn-primary {
-        background: linear-gradient(45deg, #667eea, #764ba2);
+        background: linear-gradient(45deg, #95a9ff 0%, #dab5ff 100%);
         color: white;
       }
 
@@ -135,7 +131,7 @@
       }
 
       .btn-danger {
-        background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        background: linear-gradient(45deg, #ffafaf, #ff6a62);
         color: white;
       }
 
@@ -145,7 +141,7 @@
       }
 
       .btn-success {
-        background: linear-gradient(45deg, #51cf66, #40c057);
+        background: linear-gradient(45deg, #11ff78, #8affa0);
         color: white;
       }
 
@@ -256,7 +252,8 @@
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s;
-      }      .remove-player {
+      }
+      .remove-player {
         width: 100%;
         margin-top: 10px;
       }
@@ -318,9 +315,132 @@
           grid-template-columns: 1fr;
         }
       }
+
+      @keyframes bluradd {
+        0% {
+          filter: blur(30px);
+        }
+
+        100% {
+          filter: blur(300px);
+        }
+      }
+
+      .color-wrapper {
+        position: fixed;
+        top: 0vw;
+        left: 0vw;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0.6;
+        z-index: -1;
+        /* filter: blur(100px); */
+        animation: bluradd 11s linear alternate infinite;
+      }
+
+      .color {
+        width: 100%;
+        height: 100%;
+      }
+
+      #pink {
+        animation: pinkspread 11s linear alternate infinite;
+      }
+
+      @keyframes pinkspread {
+        0% {
+          clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%);
+          background-color: rgb(179, 103, 255);
+        }
+
+        25% {
+          clip-path: polygon(0 0, 30% 0, 60% 0, 40% 40%, 0 60%, 0 30%);
+          background-color: rgb(249, 67, 255);
+        }
+
+        50% {
+          clip-path: polygon(0 0, 100% 0, 100% 0, 40% 40%, 0 100%, 0 100%);
+          background-color: rgb(255, 67, 189);
+        }
+
+        75% {
+          clip-path: polygon(0 0, 100% 0, 100% 30%, 70% 70%, 30% 100%, 0 100%);
+          background-color: rgb(255, 104, 129);
+        }
+
+        100% {
+          clip-path: polygon(
+            0 0,
+            100% 0,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            0 100%
+          );
+          background-color: rgb(255, 138, 112);
+        }
+      }
+
+      #blue {
+        animation: bluespread 11s linear alternate infinite;
+      }
+
+      @keyframes bluespread {
+        0% {
+          clip-path: polygon(0 0, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+          background-color: rgb(121, 97, 255);
+        }
+
+        25% {
+          clip-path: polygon(40% 40%, 60% 0, 100% 0, 100% 100%, 0 100%, 0 60%);
+          background-color: rgb(143, 171, 255);
+        }
+
+        50% {
+          clip-path: polygon(
+            40% 40%,
+            100% 0,
+            100% 0,
+            100% 100%,
+            0 100%,
+            0 100%
+          );
+          background-color: rgb(0, 162, 255);
+        }
+
+        75% {
+          clip-path: polygon(
+            70% 70%,
+            100% 30%,
+            100% 65%,
+            100% 100%,
+            65% 100%,
+            30% 100%
+          );
+          background-color: rgb(0, 255, 255);
+        }
+
+        100% {
+          clip-path: polygon(
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%
+          );
+          background-color: rgb(23, 158, 255);
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="color-wrapper">
+      <div id="pink" class="color"></div>
+    </div>
+    <div class="color-wrapper">
+      <div id="blue" class="color"></div>
+    </div>
     <div class="container">
       <div class="header">
         <h1 class="title">🃏 斗地主记分板 🃏</h1>
@@ -395,18 +515,15 @@
       const defaultPlayers = [
         {
           name: "Nicholas",
-          avatar:
-            "./tjc.jpg",
+          avatar: "./tjc.jpg",
         },
         {
           name: "HandsomeLiu",
-          avatar:
-            "./lzx.jpg",
+          avatar: "./lzx.jpg",
         },
         {
           name: "🦌揩聘",
-          avatar:
-            "./lkc.jpg",
+          avatar: "./lkc.jpg",
         },
       ];
 
@@ -527,18 +644,19 @@
         if (isNaN(change) || change === 0) {
           alert("请输入有效的分数变化！");
           return;
-        }        updateScore(playerId, change);
+        }
+        updateScore(playerId, change);
         input.value = "";
       }
 
       // 更新玩家头像
       async function updatePlayerAvatar(playerId, useLink = false) {
-        const player = players.find(p => p.id === playerId);
+        const player = players.find((p) => p.id === playerId);
         if (!player) return;
 
         if (useLink) {
-          const newAvatarUrl = prompt('请输入新的头像链接:', player.avatar);
-          if (newAvatarUrl !== null && newAvatarUrl.trim() !== '') {
+          const newAvatarUrl = prompt("请输入新的头像链接:", player.avatar);
+          if (newAvatarUrl !== null && newAvatarUrl.trim() !== "") {
             player.avatar = newAvatarUrl.trim();
             renderPlayers();
           }
@@ -550,7 +668,7 @@
               player.avatar = newAvatar;
               renderPlayers();
             } catch (error) {
-              alert('头像图片处理失败');
+              alert("头像图片处理失败");
             }
           }
         }
@@ -621,12 +739,20 @@
                     
                     <div class="avatar-controls">
                         <div class="avatar-upload-wrapper">
-                            <input type="file" id="avatarInput-${player.id}" accept="image/*" 
-                                   style="display: none;" onchange="updatePlayerAvatar(${player.id})">
-                            <button class="btn btn-primary btn-small" onclick="document.getElementById('avatarInput-${player.id}').click()">
+                            <input type="file" id="avatarInput-${
+                              player.id
+                            }" accept="image/*" 
+                                   style="display: none;" onchange="updatePlayerAvatar(${
+                                     player.id
+                                   })">
+                            <button class="btn btn-primary btn-small" onclick="document.getElementById('avatarInput-${
+                              player.id
+                            }').click()">
                                 📁 上传头像
                             </button>
-                            <button class="btn btn-success btn-small" onclick="updatePlayerAvatar(${player.id}, true)">
+                            <button class="btn btn-success btn-small" onclick="updatePlayerAvatar(${
+                              player.id
+                            }, true)">
                                 🔗 链接头像
                             </button>
                         </div>
