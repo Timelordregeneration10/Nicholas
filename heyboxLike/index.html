@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小黑盒剑星点赞特效</title>
+    <link rel="icon" href="../icon/fav.ico" />
+    <style>
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        color: white;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(45deg, #fff, #e0e0e0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .demo-section,
+      .interactive-section,
+      .features-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .demo-section h2,
+      .interactive-section h2,
+      .features-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #5a67d8;
+        text-align: center;
+      }
+
+      .video-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .video-container video {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        max-height: 400px;
+      }
+
+      .video-desc {
+        color: #666;
+        font-style: italic;
+        text-align: center;
+      }
+
+      .demo-area {
+        text-align: center;
+      }
+
+      .demo-tip {
+        font-size: 1.1rem;
+        color: #5a67d8;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .interaction-zone {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 15px;
+        padding: 60px 40px;
+        margin: 20px auto;
+        max-width: 600px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .interaction-zone::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transform: rotate(45deg);
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(45deg);
+        }
+      }
+
+      .interaction-zone:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .zone-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+      }
+
+      .zone-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+      }
+
+      .zone-content p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 10px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .feature-card {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 30px 20px;
+        border-radius: 15px;
+        text-align: center;
+        color: white;
+        transition: transform 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .feature-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+
+      .feature-card p {
+        opacity: 0.9;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .demo-section,
+        .interactive-section,
+        .features-section {
+          padding: 20px;
+        }
+
+        .interaction-zone {
+          padding: 40px 20px;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* 原有的特效样式 */
+
+      .clickEffect {
+        position: fixed;
+        z-index: 2147483647;
+        pointer-events: none;
+        opacity: 0;
+        animation: appear 0.2s forwards;
+      }
+
+      @keyframes appear {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .firstCircle {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        border: solid rgba(143, 143, 143, 1);
+        transition: border-width 0.2s cubic-bezier(0, 0.8, 0.9, 1),
+          width 0.2s cubic-bezier(0, 0.8, 0.9, 1),
+          height 0.2s cubic-bezier(0, 0.8, 0.9, 1);
+        animation: firstCircleAnimation 0.2s cubic-bezier(0, 0, 0.4, 1) forwards;
+        clip-path: circle(10%);
+      }
+
+      @keyframes firstCircleAnimation {
+        0% {
+          clip-path: circle(10%);
+        }
+        100% {
+          clip-path: circle(50%);
+        }
+      }
+
+      .centerImg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        animation: centerImgAnimation 0.7s forwards;
+        animation-delay: 0.3s;
+        transition: clip-path 0.4s;
+      }
+
+      @keyframes centerImgAnimation {
+        0% {
+          transform: translate(-50%, -50%) translateY(0%) rotate(0deg);
+        }
+        10% {
+          transform: translate(-50%, -50%) translateY(-20%) rotate(0deg);
+        }
+        20% {
+          transform: translate(-50%, -50%) translateY(-20%) rotate(5deg);
+        }
+        40% {
+          transform: translate(-50%, -50%) translateY(-20%) rotate(-5deg);
+        }
+        60% {
+          transform: translate(-50%, -50%) translateY(-20%) rotate(5deg);
+        }
+        80% {
+          transform: translate(-50%, -50%) translateY(-20%) rotate(-5deg);
+        }
+        90% {
+          transform: translate(-50%, -50%) translateY(-20%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) translateY(0%) rotate(0deg);
+        }
+      }
+
+      .points {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .point {
+        position: absolute;
+        border-radius: 50%;
+        width: 0px;
+        height: 0px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        background-color: rgb(143, 143, 143);
+        transition: transform 1s cubic-bezier(0, 0.8, 0.9, 1),
+          width 1s cubic-bezier(0, 0, 0.4, 1),
+          height 1s cubic-bezier(0, 0, 0.4, 1);
+        animation: pointAnimation 0.4s forwards;
+        animation-delay: 1s;
+        clip-path: circle(50%);
+      }
+
+      @keyframes pointAnimation {
+        0% {
+          clip-path: circle(50%);
+        }
+        100% {
+          clip-path: circle(0%);
+        }
+      }
+
+      .aroundDiv {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .aroundImg {
+        position: absolute;
+        object-fit: cover;
+        width: 0px;
+        height: 0px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        transition: transform 1s, width 1s cubic-bezier(0, 0, 0.4, 1),
+          height 1s cubic-bezier(0, 0, 0.4, 1);
+      }
+
+      .clouds {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .cloud {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+      }
+
+      .cloudImg {
+        object-fit: cover;
+        transition: transform 0.5s;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>小黑盒剑星点赞特效</h1>
+        <p class="subtitle">高仿小黑盒APP中剑星点赞的炫酷特效</p>
+      </header>
+
+      <section class="demo-section">
+        <h2>原版效果展示</h2>
+        <div class="video-container">
+          <video src="./img/source.mp4" controls loop muted autoplay></video>
+          <p class="video-desc">小黑盒APP原版剑星点赞特效</p>
+        </div>
+      </section>      <section class="interactive-section">
+        <h2>交互体验区</h2>
+        <div class="demo-area">
+          <p class="demo-tip">🎉 点击页面任意位置体验特效！</p>
+          <div class="interaction-zone">
+            <div class="zone-content">
+              <p>点击、滑动、移动鼠标都能触发炫酷特效</p>
+              <p>快来试试剑星点赞的魅力吧～</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features-section">
+        <h2>特效特性</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>高度还原</h3>
+            <p>完美复刻小黑盒APP的剑星点赞动画效果</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>流畅动画</h3>
+            <p>使用CSS3动画和JavaScript实现丝滑的视觉体验</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>细节丰富</h3>
+            <p>包含中心图标、环形波纹、散射点和云朵消散效果</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- <div class="clickEffect">
+      <img src="./img/center.png" class="centerImg" alt="center image" />
+      <div class="firstCircle"></div>
+      <div class="points">
+        <div class="point"></div>
+      </div>
+      <div class="aroundDiv">
+        <img src="./img/around.png" class="aroundImg" alt="around image" />
+        <div class="clouds">
+          <div class="cloud">
+            <img class="cloudImg" src="./img/cloud.png" alt="cloud img" />
+            <img class="cloudImg" src="./img/cloud.png" alt="cloud img" />
+            <img class="cloudImg" src="./img/cloud.png" alt="cloud img" />
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </body>
+  <script>
+    const clickSize = 70; // 点击效果的大小
+    const pointCount = 6; // 点的数量
+    const aroundImgCount = 3; // 周围图片的数量
+    // 确保x，y在指定的范围内
+    const confirmFinalRange = (startRange, endRange) => {
+      let x = clickSize * endRange * (Math.random() - 0.5);
+      let y = clickSize * endRange * (Math.random() - 0.5);
+      while (
+        x * x + y * y <
+          ((clickSize * startRange) / 2) * ((clickSize * startRange) / 2) ||
+        x * x + y * y >
+          ((clickSize * endRange) / 2) * ((clickSize * endRange) / 2)
+      ) {
+        x = clickSize * endRange * (Math.random() - 0.5);
+        y = clickSize * endRange * (Math.random() - 0.5);
+      }
+      return { x, y };
+    };    const handleClick = (e) => {
+      const clickEffect = document.createElement("div");
+      clickEffect.className = "clickEffect";
+      clickEffect.style.left = e.clientX - clickSize / 2 + "px";
+      clickEffect.style.top = e.clientY - clickSize / 2 + "px";
+      clickEffect.style.width = clickSize + "px";
+      clickEffect.style.height = clickSize + "px";
+      setTimeout(() => {
+        clickEffect.style.opacity = "1";
+      }, 10);
+
+      // center image
+      const centerImg = document.createElement("img");
+      centerImg.src = "./img/center.png";
+      centerImg.className = "centerImg";
+      centerImg.style.clipPath = "circle(100%)";
+      setTimeout(() => {
+        centerImg.style.clipPath = "circle(0%)";
+      }, 1000);
+      clickEffect.appendChild(centerImg);
+
+      // first circle
+      const firstCircle = document.createElement("div");
+      firstCircle.className = "firstCircle";
+      firstCircle.style.borderWidth = clickSize / 2 + "px";
+      setTimeout(() => {
+        firstCircle.style.width = clickSize + "px";
+        firstCircle.style.height = clickSize + "px";
+        firstCircle.style.borderWidth = "0px";
+      }, 200);
+      clickEffect.appendChild(firstCircle);
+
+      // points
+      const points = document.createElement("div");
+      points.className = "points";
+      for (let i = 0; i < pointCount; i++) {
+        const point = document.createElement("div");
+        point.className = "point";
+        const finalSize = Math.floor(Math.random() * 6 + 6);
+        const { x: finalTranslateX, y: finalTranslateY } = confirmFinalRange(
+          1.1,
+          1.5
+        );
+        setTimeout(() => {
+          point.style.width = finalSize + "px";
+          point.style.height = finalSize + "px";
+          point.style.transform = `translate(${finalTranslateX}px, ${finalTranslateY}px)`;
+        }, 10);
+        points.appendChild(point);
+      }
+      clickEffect.appendChild(points);
+
+      // around div
+      const aroundDiv = document.createElement("div");
+      aroundDiv.className = "aroundDiv";
+      const aroundImgArray = [];
+      for (let i = 0; i < aroundImgCount; i++) {
+        const aroundImg = document.createElement("img");
+        aroundImg.src = "./img/around.png";
+        aroundImg.className = "aroundImg";
+        aroundImg.style.animationDelay = i * 0.1 + "s";
+        const finalSize = Math.floor(Math.random() * 30 + 35);
+        const { x: finalTranslateX, y: finalTranslateY } = confirmFinalRange(
+          1.2,
+          1.8
+        );
+        aroundImgArray.push({
+          finalTranslateX,
+          finalTranslateY,
+          finalSize,
+        });
+        const finalRotate = Math.random() * 900 - 450;
+        setTimeout(() => {
+          aroundImg.style.width = finalSize + "px";
+          aroundImg.style.height = finalSize + "px";
+          aroundImg.style.transform = `translate(${finalTranslateX * 1.2}px, ${
+            finalTranslateY * 1.2
+          }px) rotate(${finalRotate}deg)`;
+          setTimeout(() => {
+            aroundImg.style.transition =
+              "transform 1s ,width 1s cubic-bezier(0, 0, 0.4, 1),height 1s cubic-bezier(0, 0, 0.4, 1)";
+            aroundImg.style.transform = `translate(${finalTranslateX}px, ${finalTranslateY}px) rotate(${
+              finalRotate * 0.05
+            }deg)`;
+          }, 500);
+        }, 10 + 100 * i);
+        setTimeout(() => {
+          aroundImg.style.opacity = "0";
+        }, 1000 + i * 100);
+        aroundDiv.appendChild(aroundImg);
+      }
+      clickEffect.appendChild(aroundDiv);
+
+      // clouds
+      const clouds = document.createElement("div");
+      clouds.className = "clouds";
+      for (let i = 0; i < aroundImgCount; i++) {
+        const cloud = document.createElement("div");
+        cloud.className = "cloud";
+        const cloudImgCount = 3;
+        for (let j = 0; j < cloudImgCount; j++) {
+          const cloudImg = document.createElement("img");
+          cloudImg.className = "cloudImg";
+          cloudImg.src = "./img/cloud.png";
+          cloudImg.style.width = Math.floor(Math.random() * 60 + 60) + "%";
+          cloudImg.style.height = Math.floor(Math.random() * 40 + 40) + "%";
+          switch (j) {
+            case 0:
+              cloudImg.style.left = "50%";
+              cloudImg.style.top = "0%";
+              cloudImg.style.transform = `translate(-50%, 0%) scale(1)`;
+              setTimeout(() => {
+                cloudImg.style.transform = `translate(${
+                  Math.random() * 100 - 50
+                }%, -50%) scale(0)`;
+              }, 1010 + i * 100);
+              break;
+            case 1:
+              cloudImg.style.left = "0%";
+              cloudImg.style.bottom = "0%";
+              cloudImg.style.transform = `translate(0%, 0%) scale(1)`;
+              setTimeout(() => {
+                cloudImg.style.transform = `translate(${
+                  Math.random() * -100
+                }%, 50%) scale(0)`;
+              }, 1010 + i * 100);
+              break;
+            case 2:
+              cloudImg.style.right = "0%";
+              cloudImg.style.bottom = "0%";
+              cloudImg.style.transform = `translate(0%, 0%) scale(1)`;
+              setTimeout(() => {
+                cloudImg.style.transform = `translate(${
+                  Math.random() * 100
+                }%, 50%) scale(0)`;
+              }, 1010 + i * 100);
+              break;
+          }
+          cloud.appendChild(cloudImg);
+        }
+        const initialTranslateX = aroundImgArray[i].finalTranslateX;
+        const initialTranslateY = aroundImgArray[i].finalTranslateY;
+        cloud.style.width = aroundImgArray[i].finalSize + "px";
+        cloud.style.height = aroundImgArray[i].finalSize + "px";
+        cloud.style.transform = `translate(${initialTranslateX}px, ${initialTranslateY}px)`;
+        setTimeout(() => {
+          cloud.style.opacity = "1";
+        }, 1000 + i * 100);
+        clouds.appendChild(cloud);
+      }
+      clickEffect.appendChild(clouds);
+
+      // append to body
+      document.body.appendChild(clickEffect);
+      setTimeout(() => {
+        clickEffect.remove();
+      }, 1500 + 100 * aroundImgCount);    };
+    window.addEventListener("click", handleClick);
+  </script>
+</html>
