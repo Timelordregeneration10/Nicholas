@@ -144,34 +144,18 @@
   window.onload = () => {
     let mode = "";
     const kilalaRandom = localStorage.getItem("kilalaRandom");
-    if (decodeURI(window.location.search).includes("mode=lunch")) {
-      mode = "lunch";
-    } else if (decodeURI(window.location.search).includes("mode=dinner")) {
-      mode = "dinner";
-    } else if (decodeURI(window.location.search).includes("mode=今天突然想吃肉饼")) {
-      mode = "肉饼";
+    if (decodeURI(window.location.search).includes("mode=tuhu")) {
+      mode = "tuhu";
     } else if (kilalaRandom) {
       mode = "local";
     }
     if (mode) {
       let data;
-      if (mode === "lunch") {
+      if (mode === "tuhu") {
         data = {
-          currentNodeNumber: 6,
-          sum: [5, 1, 1, 1, 1, 3],
-          items: ["自选两荤两素", "KFC", "麦当劳", "红烧牛肉面", "川香麻辣烫", "寻找新的地方"],
-        };
-      } else if (mode === "dinner") {
-        data = {
-          currentNodeNumber: 3,
-          sum: [6, 3,1],
-          items: ["全家", "肉饼", "川香麻辣烫"],
-        };
-      } else if (mode === "肉饼") {
-        data = {
-          currentNodeNumber: 6,
-          sum: [666, 666, 666, 666, 666, 666],
-          items: ["肉饼", "好久没吃肉饼了", "那就吃肉饼吧", "没错得吃肉饼", "好想吃肉饼啊", "今天得吃肉饼"],
+          currentNodeNumber: 7,
+          sum: [3, 1, 1, 1, 1, 1, 2],
+          items: ["自选两荤两素", "KFC", "麦当劳", "红烧牛肉面", "川香麻辣烫", "冒菜", "寻找新的地方"],
         };
       } else if (mode === "local") {
         data = JSON.parse(kilalaRandom);
