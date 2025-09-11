@@ -170,7 +170,7 @@
               data.items[i] || "item" + i
             }" />
             &nbsp;weight :&nbsp;
-            <input type="text" class="weight" value="${data.sum[i] || 1}" />
+            <input type="text" class="weight" value="${data.sum[i]}" />
         `;
         currentNodeNumber++;
         clonedNode.setAttribute("id", "div" + currentNodeNumber); // 修改一下id 值，避免id 重复
