@@ -154,7 +154,7 @@
       if (mode === "tuhu") {
         data = {
           currentNodeNumber: 7,
-          sum: [2, 1, 1, 4, 2, 2, 2],
+          sum: [2, 0, 0, 6, 2, 4, 1],
           items: ["浓汤牛肉面", "KFC", "麦当劳", "红烧牛肉面", "杭州小笼包", "川香麻辣烫", "寻找新的地方"],
         };
       } else if (mode === "local") {
@@ -187,6 +187,12 @@
       sum[i] = Number(document.getElementsByClassName("weight")[i].value);
       total += sum[i];
       items[i] = document.getElementsByClassName("item")[i].value;
+    }
+    for (let i = currentNodeNumber - 1; i >= 0; i--) {
+      if (sum[i]===0){
+        sum.splice(i,1);
+        items.splice(i,1);
+      }
     }
     let choice = Number(Math.floor(Math.random() * total)) + 1;
     let i = 0;
