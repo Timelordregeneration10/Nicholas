@@ -1,166 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>star ring</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>star ring upload</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+      }
 
-        .frame {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background-color: #000;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 300vmax;
-            transform-style: preserve-3d;
-        }
+      .frame {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        /* background-color: #000; */
+        /* overflow: hidden; */
+        perspective: 300vmax;
+        transform-style: preserve-3d;
+      }
 
-        .star-ring-source-origin {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            transform: rotateY(10deg) rotateX(0deg);
-            transform-style: preserve-3d;
-            animation: originRotate 120s linear infinite;
-        }
+      .star-ring-fragment {
+        position: absolute;
+        top: calc(50vh - 20px);
+        left: calc(50vw - 20px);
+        width: 40px;
+        height: 40px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 16px #91bef0;
+        transform-style: preserve-3d;
+      }
 
-        @keyframes originRotate {
-            0% {
-                transform: rotateY(10deg) rotateX(0deg);
-            }
-            100% {
-                transform: rotateY(10deg) rotateX(360deg);
-            }
-        }
-
-        .star-ring-fragment {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            /* background-color: #ffffff; */
-            box-shadow: 0px 0px 16px #91bef0;
-        }
-
-        .origin-stable {
-            position: absolute;
-            top: -400%;
-            left: -400%;
-            width: 900%;
-            height: 900%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0px 0px 40px #91bef0;
-            animation: againstOriginRotate 120s linear infinite;
-        }
-
-        .upload {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: rgba(255, 195, 255, 0.443);
-            font-size: 4.5vmax;
-            font-weight: bold;
-            font-family: fantasy;
-        }
-
-        @keyframes againstOriginRotate {
-            0% {
-                transform: rotateX(360deg);
-            }
-            100% {
-                transform: rotateX(0deg);
-            }
-        }
-
-        .star-ring-source-inner1 {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            transform: rotateX(10deg) rotateY(0deg);
-            transform-style: preserve-3d;
-            animation: inner1Rotate 120s linear infinite;
-        }
-
-        @keyframes inner1Rotate {
-            0% {
-                transform: rotateX(10deg) rotateY(0deg);
-            }
-            100% {
-                transform: rotateX(10deg) rotateY(360deg);
-            }
-        }
+      .origin-stable {
+        position: absolute;
+        top: calc(50vh - 180px);
+        left: calc(50vw - 180px);
+        width: 360px;
+        height: 360px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        background-color: #ffffff;
+        border-radius: 50%;
+        box-shadow: 0px 0px 40px #91bef0;
+        cursor: pointer;
+        color: rgba(255, 195, 255, 0.443);
+        font-size: 4.5vmax;
+        font-weight: bold;
+        font-family: fantasy;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="frame">
-        <div class="star-ring-source-origin">
-            <!-- <div class="star-ring-fragment"></div> -->
-            <div class="origin-stable">
-                <div class="upload" onclick="upload()">upload</div>
-                <div class="star-ring-source-inner1">
-                    <!-- <div class="star-ring-fragment"></div> -->
-                </div>
-            </div>
-        </div>
+      <div class="origin-stable" onclick="upload()">uplaod</div>
     </div>
-</body>
-<script>
-    const origin = document.getElementsByClassName("star-ring-source-origin")[0];
-    const inner1 = document.getElementsByClassName("star-ring-source-inner1")[0];
+  </body>
+  <script>
+    const frame = document.getElementsByClassName("frame")[0];
     const edge = 36;
-    for (let i = 0; i < edge; i++) {
-        const fragment = document.createElement("div");
-        fragment.className = "star-ring-fragment";
-        fragment.style.transform = `rotateX(${(360 / edge) * i}deg) translateZ(300px)`;
-        origin.appendChild(fragment);
-    }
-    for (let i = 0; i < edge; i++) {
-        const fragment = document.createElement("div");
-        fragment.className = "star-ring-fragment";
-        fragment.style.transform = `rotateY(${(360 / edge) * i}deg) translateZ(300px)`;
-        inner1.appendChild(fragment);
-    }
-    function upload() {
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "image/*";
-        input.onchange = (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const imgsrc = e.target.result;
-                    const fragments = document.getElementsByClassName("star-ring-fragment");
-                    for (let i = 0; i < fragments.length; i++) {
-                        fragments[i].style.backgroundImage = `url(${imgsrc})`;
-                        fragments[i].style.backgroundSize = "cover";
-                    }
-                };
-                reader.readAsDataURL(file);     
+    const durationSec = 120;
+
+    function addKeyframes() {
+      const styleDom = document.createElement("style");
+      styleDom.type = "text/css";
+      let innerHTMLs = ``;
+      for (let i = 0; i < edge; i++) {
+        innerHTMLs += `
+          @keyframes star-ring-fragment-rotate-${i} {
+            0% {
+              transform: rotateY(10deg) rotateX(${
+                (360 / edge) * i
+              }deg) translateZ(300px);
             }
-        };
-        input.click();
+            100% {
+              transform: rotateY(10deg) rotateX(${
+                (360 / edge) * i + 360
+              }deg) translateZ(300px);
+            }
+          }
+        `;
+      }
+      for (let i = 0; i < edge; i++) {
+        innerHTMLs += `
+          @keyframes star-ring-fragment-rotate2-${i} {
+            0% {
+              transform: rotateX(10deg) rotateY(${
+                (360 / edge) * i
+              }deg) translateZ(300px);
+            }
+            100% {
+              transform: rotateX(10deg) rotateY(${
+                (360 / edge) * i + 360
+              }deg) translateZ(300px);
+            }
+          }
+        `;
+      }
+      styleDom.innerHTML = innerHTMLs;
+      document.head.appendChild(styleDom);
     }
-</script>
+    addKeyframes();
+
+    function addStarRingFragment() {
+      for (let i = 0; i < edge; i++) {
+        const fragment = document.createElement("div");
+        fragment.className = "star-ring-fragment";
+        fragment.style.transform = `rotateY(10deg) rotateX(${
+          (360 / edge) * i
+        }deg) translateZ(300px)`;
+        fragment.style.animation = `star-ring-fragment-rotate-${i} ${durationSec}s linear infinite`;
+        frame.appendChild(fragment);
+      }
+      for (let i = 0; i < edge; i++) {
+        const fragment = document.createElement("div");
+        fragment.className = "star-ring-fragment";
+        fragment.style.transform = `rotateX(10deg) rotateY(${
+          (360 / edge) * i
+        }deg) translateZ(300px)`;
+        fragment.style.animation = `star-ring-fragment-rotate2-${i} ${durationSec}s linear infinite`;
+        frame.appendChild(fragment);
+      }
+    }
+    addStarRingFragment();
+
+    function upload() {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.onchange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imgsrc = e.target.result;
+            const fragments =
+              document.getElementsByClassName("star-ring-fragment");
+            for (let i = 0; i < fragments.length; i++) {
+              fragments[i].style.backgroundImage = `url(${imgsrc})`;
+              fragments[i].style.backgroundSize = "cover";
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    }
+  </script>
 </html>
