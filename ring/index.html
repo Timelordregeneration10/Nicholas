@@ -17,8 +17,9 @@
         height: 100vh;
         /* background-color: #000; */
         /* overflow: hidden; */
-        perspective: 500vmax;
+        /* perspective: 500vmax; */
         transform-style: preserve-3d;
+        transform: rotateY(80deg) rotateX(80deg);
       }
 
       .star-ring-fragment {
@@ -45,7 +46,7 @@
         background-color: #ffffff;
         border-radius: 50%;
         box-shadow: 0px 0px 40px #91bef0;
-        /* transform: translateZ(0px); */
+        transform: rotateX(-80deg) rotateY(-80deg);
       }
     </style>
   </head>
@@ -118,10 +119,17 @@
     }
 
     function init(){
-      const edge = 36;
+      const edge = 72;
       const durationSec = 120;
-      createStarRing(edge, false, 10, 300, durationSec, "ring1", 40);
-      createStarRing(edge, true, 10, 300, durationSec, "ring2", 40);
+      createStarRing(36, false, 20, 300, durationSec, "ring1", 40);
+      createStarRing(36, false, 80, 300, durationSec, "ring2", 40);
+      createStarRing(36, false, 140, 300, durationSec, "ring3", 40);
+      createStarRing(edge, false, 0, 400, durationSec, "ring11", 20);
+      createStarRing(edge, false, 36, 400, durationSec, "ring22", 20);
+      createStarRing(edge, false, 72, 400, durationSec, "ring33", 20);
+      createStarRing(edge, false, 108, 400, durationSec, "ring44", 20);
+      createStarRing(edge, false, 144, 400, durationSec, "ring55", 20);
+      // createStarRing(edge, true, 10, 300, durationSec, "ring2", 40);
     }
     init();
   </script>
