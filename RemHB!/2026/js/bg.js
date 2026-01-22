@@ -3,7 +3,7 @@ const bg = document.getElementsByClassName("bg")[0];
 const aiyiRemUrls = Array.from({ length: 9 }, (_, index) => `../aiyiRemPublic/${index + 1}.webp`);
 
 const createColumn3D = () => {
-    const edge = 36;
+    const edge = 20;
     const row = 3;
     const standardHeight = 150 / row;
     const radio = 9 / 16;
