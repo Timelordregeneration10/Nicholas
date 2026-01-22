@@ -22,85 +22,278 @@
         transform: rotateY(80deg) rotateX(80deg);
       }
 
-        .star-ring-fragment {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            background-color: #ffffff;
-            box-shadow: 0px 0px 16px #91bef0;
-        }
+      .star-ring-fragment {
+        position: absolute;
+        top: calc(50vh - 20px);
+        left: calc(50vw - 20px);
+        width: 40px;
+        height: 40px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 16px #91bef0;
+        transform-style: preserve-3d;
+      }
 
-        .stable {
-            border-radius: 50%;
-            box-shadow: 0px 0px 40px #91bef0;
-            top: -400%;
-            left: -400%;
-            width: 900%;
-            height: 900%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: againstLoop 120s linear infinite;
-        }
-
-        @keyframes againstLoop {
-            0% {
-                transform: rotateX(360deg);
-            }
-            100% {
-                transform: rotateX(0deg);
-            }
-        }
-
-        .star-ring-inner {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            transform: rotateX(10deg) rotateY(0deg);
-            transform-style: preserve-3d;
-            animation: loop2 120s linear infinite;
-        }
-
-        @keyframes loop2 {
-            0% {
-                transform: rotateX(10deg) rotateY(0deg);
-            }
-            100% {
-                transform: rotateX(10deg) rotateY(360deg);
-            }
-        }
+      .origin-stable {
+        position: absolute;
+        top: calc(50vh - 180px);
+        left: calc(50vw - 180px);
+        width: 360px;
+        height: 360px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        background-color: #ffffff;
+        border-radius: 50%;
+        box-shadow: 0px 0px 40px #91bef0;
+        transform: rotateX(-80deg) rotateY(-80deg);
+      }
     </style>
-</head>
-<body>
-    <div class="frame">
-        <div class="star-ring-origin">
-            <!-- <div class="star-ring-fragment"></div> -->
-            <div class="star-ring-fragment stable">
-                <div class="star-ring-inner">
-                    <!-- <div class="star-ring-fragment"></div> -->
-                </div>
-            </div>
-        </div>
+  </head>
+  <body>
+    <div class="galaxy">
+      <div class="origin-stable" onclick="upload()"></div>
     </div>
-</body>
-<script>
-    const origin = document.getElementsByClassName("star-ring-origin")[0];
-    const inner = document.getElementsByClassName("star-ring-inner")[0];
-    const edge = 36;
-    for (let i = 0; i < edge; i++) {
-        const fragment = document.createElement("div");
-        fragment.className = "star-ring-fragment";
-        fragment.style.transform = `rotateX(${(360 / edge) * i}deg) translateZ(300px)`;
-        origin.appendChild(fragment);
+    <select name="patterns" id="patterns" style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+    </select>
+  </body>
+  <script>
+
+    function addKeyframes(KFconfig){
+      const {edge, isRotateX, rotateXorYDeg, translateZpx, addStyleId} = KFconfig;
+      const styleDom = document.createElement("style");
+      styleDom.type = "text/css";
+      let innerHTMLs = ``;
+      if (isRotateX) {
+        for (let i = 0; i < edge; i++) {
+          innerHTMLs += `
+            @keyframes star-ring-fragment-rotate-${addStyleId}-${i} {
+              0% {
+                transform: rotateY(${rotateXorYDeg}deg) rotateX(${(360 / edge) * i}deg) translateZ(${translateZpx}px);
+              }
+              100% {
+                transform: rotateY(${rotateXorYDeg}deg) rotateX(${(360 / edge) * i + 360}deg) translateZ(${translateZpx}px);
+              }
+            }
+          `;
+        }
+      } else {
+        for (let i = 0; i < edge; i++) {
+          innerHTMLs += `
+            @keyframes star-ring-fragment-rotate-${addStyleId}-${i} {
+              0% {
+                transform: rotateX(${rotateXorYDeg}deg) rotateY(${(360 / edge) * i}deg) translateZ(${translateZpx}px);
+              }
+              100% {
+                transform: rotateX(${rotateXorYDeg}deg) rotateY(${(360 / edge) * i + 360}deg) translateZ(${translateZpx}px);
+              }
+            }
+          `;
+        }
+      }
+      
+      styleDom.innerHTML = innerHTMLs;
+      document.head.appendChild(styleDom);
     }
-    for (let i = 0; i < edge; i++) {
+
+    function addStarRingFragment(SRFconfig){
+      const {edge, isRotateX, rotateXorYDeg, translateZpx, durationSec, addStyleId, size} = SRFconfig;
+      const galaxy = document.getElementsByClassName("galaxy")[0];
+      for (let i = 0; i < edge; i++) {
         const fragment = document.createElement("div");
         fragment.className = "star-ring-fragment";
-        fragment.style.transform = `rotateY(${(360 / edge) * i}deg) translateZ(300px)`;
-        inner.appendChild(fragment);
+        fragment.style.width = `${size}px`;
+        fragment.style.height = `${size}px`;
+        fragment.style.top = `calc(50vh - ${size / 2}px)`;
+        fragment.style.left = `calc(50vw - ${size / 2}px)`;
+        if (isRotateX) {
+          fragment.style.transform = `rotateY(${rotateXorYDeg}deg) rotateX(${(360 / edge) * i}deg) translateZ(${translateZpx}px)`;
+          fragment.style.animation = `star-ring-fragment-rotate-${addStyleId}-${i} ${durationSec}s linear infinite`;
+        } else {
+          fragment.style.transform = `rotateX(${rotateXorYDeg}deg) rotateY(${(360 / edge) * i}deg) translateZ(${translateZpx}px)`;
+          fragment.style.animation = `star-ring-fragment-rotate-${addStyleId}-${i} ${durationSec}s linear infinite`;
+        }
+        galaxy.appendChild(fragment);
+      }
+    }
+
+    function createStarRing(config) {
+      addKeyframes(config);
+      addStarRingFragment(config);
+    }
+
+    function createGalaxy(pattern) {
+      const {ringConfigs, galaxyConfig = {rotateX:80,rotateY:80}} = pattern;
+      console.log(galaxyConfig);
+      const galaxy = document.getElementsByClassName("galaxy")[0];
+      // 注意这里先Y后X
+      galaxy.style.transform = `rotateY(${galaxyConfig.rotateY}deg) rotateX(${galaxyConfig.rotateX}deg)`;
+      const originStable = document.getElementsByClassName("origin-stable")[0];
+      // against的话需要反一下，先负的X再负的Y
+      originStable.style.transform = `rotateX(${-galaxyConfig.rotateX}deg) rotateY(${-galaxyConfig.rotateY}deg)`;
+
+      ringConfigs.forEach((config) => {
+        createStarRing(config);
+      });
+    }
+
+    document.getElementById("patterns").addEventListener("change", (e) => {
+      // remove existing star ring fragments
+      const existingFragments = document.getElementsByClassName("star-ring-fragment");
+      for (let i = existingFragments.length - 1; i >= 0; i--) {
+        existingFragments[i].remove();
+      }
+      const selectedPatternIndex = e.target.value;
+      const selectedPattern = patterns[selectedPatternIndex];
+      createGalaxy(selectedPattern);
+    });
+
+    const patterns = [];
+    function init(){
+      const createPattern_SIMPLE = () => {
+        const patternX = {
+          ringConfigs: []
+        };
+        for (let i = 0; i < 1; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 45,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-simple-1-${i}`,
+            size: 40
+          });
+        }
+        for (let i = 0; i < 1; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: true,
+            rotateXorYDeg: i * 45 + 90,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-simple-2-${i}`,
+            size: 40
+          });
+        }
+        return patternX;
+      };
+      const createPattern_COMPLEX1 = () => {
+        const patternX = {
+          ringConfigs: []
+        };
+        for (let i = 0; i < 3; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 60 + 20,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-complex1-1-${i}`,
+            size: 40
+          });
+        }
+        for (let i = 0; i < 5; i++) {
+          patternX.ringConfigs.push({
+            edge: 72,
+            isRotateX: false,
+            rotateXorYDeg: i * 36,
+            translateZpx: 400,
+            durationSec: 120,
+            addStyleId: `ring-complex1-2-${i}`,
+            size: 20
+          });
+        }
+        return patternX;
+      };
+      const createPattern_COMPLEX2 = () => {
+        const patternX = {
+          ringConfigs: []
+        };
+        for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 45 + 20,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-complex2-1-${i}`,
+            size: 40
+          });
+        }
+        for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 54,
+            isRotateX: false,
+            rotateXorYDeg: i * 45,
+            translateZpx: 400,
+            durationSec: 120,
+            addStyleId: `ring-complex2-2-${i}`,
+            size: 30
+          });
+        }
+        return patternX;
+      };
+      const createPattern_SAME_HEART = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 70,
+            rotateY: 70
+          }
+        };
+        for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 10 * i * i + 18,
+            isRotateX: false,
+            rotateXorYDeg:  90,
+            translateZpx: 200 + i * 90,
+            durationSec: 30 + i * i * 30,
+            addStyleId: `ring-sameheart-1-${i}`,
+            size: 40 - i * 10
+          });
+        }
+        return patternX;
+      };
+      patterns.push(createPattern_SAME_HEART());
+      patterns.push(createPattern_SIMPLE());
+      patterns.push(createPattern_COMPLEX1());
+      patterns.push(createPattern_COMPLEX2());
+      const selectDom = document.getElementById("patterns");
+      patterns.forEach((pattern, index) => {
+        const optionDom = document.createElement("option");
+        optionDom.value = index;
+        optionDom.innerText = `pattern ${index + 1}`;
+        selectDom.appendChild(optionDom);
+        if (index === 0) {
+          // initialize with the first pattern
+          createGalaxy(pattern);
+        }
+      });
+    }
+    init();
+
+    function upload() {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.onchange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imgsrc = e.target.result;
+            const fragments =
+              document.getElementsByClassName("star-ring-fragment");
+            for (let i = 0; i < fragments.length; i++) {
+              fragments[i].style.backgroundImage = `url(${imgsrc})`;
+              fragments[i].style.backgroundSize = "cover";
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
     }
   </script>
 </html>
