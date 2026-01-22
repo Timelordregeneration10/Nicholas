@@ -23,21 +23,21 @@
             transform-style: preserve-3d;
         }
 
-        .star-ring-origin {
+        .star-ring-source-origin {
             position: relative;
-            width: 20px;
-            height: 20px;
-            transform: rotateY(0deg) rotateX(0deg);
+            width: 40px;
+            height: 40px;
+            transform: rotateY(10deg) rotateX(0deg);
             transform-style: preserve-3d;
-            animation: loop 12s linear infinite;
+            animation: originRotate 120s linear infinite;
         }
 
-        @keyframes loop {
+        @keyframes originRotate {
             0% {
-                transform: rotateY(0deg) rotateX(0deg);
+                transform: rotateY(10deg) rotateX(0deg);
             }
             100% {
-                transform: rotateY(360deg) rotateX(360deg);
+                transform: rotateY(10deg) rotateX(360deg);
             }
         }
 
@@ -52,10 +52,8 @@
             box-shadow: 0px 0px 16px #91bef0;
         }
 
-        .stable {
-            border-radius: 50%;
-            box-shadow: none;
-            background-color: transparent;
+        .origin-stable {
+            position: absolute;
             top: -400%;
             left: -400%;
             width: 900%;
@@ -63,43 +61,47 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: againstLoop 12s linear infinite;
-        }
-
-        @keyframes againstLoop {
-            0% {
-                transform: rotateY(-45deg) rotateX(360deg);
-            }
-            100% {
-                transform: rotateY(-45deg) rotateX(0deg);
-            }
-        }
-
-        .star-ring-origin2 {
-            position: relative;
-            width: 20px;
-            height: 20px;
-            transform: rotateX(45deg) rotateY(0deg);
             transform-style: preserve-3d;
-            animation: loop2 12s linear infinite;
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0px 0px 40px #91bef0;
+            animation: againstOriginRotate 120s linear infinite;
         }
 
-        @keyframes loop2 {
+        @keyframes againstOriginRotate {
             0% {
-                transform: rotateX(45deg) rotateY(0deg);
+                transform: rotateX(360deg);
             }
             100% {
-                transform: rotateX(45deg) rotateY(360deg);
+                transform: rotateX(0deg);
+            }
+        }
+
+        .star-ring-source-inner1 {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            transform: rotateX(10deg) rotateY(0deg);
+            transform-style: preserve-3d;
+            animation: inner1Rotate 120s linear infinite;
+        }
+
+        @keyframes inner1Rotate {
+            0% {
+                transform: rotateX(10deg) rotateY(0deg);
+            }
+            100% {
+                transform: rotateX(10deg) rotateY(360deg);
             }
         }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="star-ring-origin">
+        <div class="star-ring-source-origin">
             <!-- <div class="star-ring-fragment"></div> -->
-            <div class="star-ring-fragment stable">
-                <div class="star-ring-origin2">
+            <div class="origin-stable">
+                <div class="star-ring-source-inner1">
                     <!-- <div class="star-ring-fragment"></div> -->
                 </div>
             </div>
@@ -107,9 +109,9 @@
     </div>
 </body>
 <script>
-    const origin = document.getElementsByClassName("star-ring-origin")[0];
-    const origin2 = document.getElementsByClassName("star-ring-origin2")[0];
-    const edge = 72;
+    const origin = document.getElementsByClassName("star-ring-source-origin")[0];
+    const inner1 = document.getElementsByClassName("star-ring-source-inner1")[0];
+    const edge = 36;
     for (let i = 0; i < edge; i++) {
         const fragment = document.createElement("div");
         fragment.className = "star-ring-fragment";
@@ -120,7 +122,7 @@
         const fragment = document.createElement("div");
         fragment.className = "star-ring-fragment";
         fragment.style.transform = `rotateY(${(360 / edge) * i}deg) translateZ(300px)`;
-        origin2.appendChild(fragment);
+        inner1.appendChild(fragment);
     }
 </script>
 </html>
