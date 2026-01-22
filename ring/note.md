@@ -1,8 +1,8 @@
 + 上传图片功能
-- 考虑封装成一个函数，批量得到不同ring
-    - init里调frame的rotateXY角度，记得改stable的against
-        - stable或许也可以改？大小之类的
-    - 好看的模式记录下来，到时候下拉框或者下一个按钮可以切
++ 考虑封装成一个函数，批量得到不同ring
+    + init里调frame的rotateXY角度，记得改stable的against
+    + 好看的模式记录下来，到时候下拉框或者下一个按钮可以切
+- preserve-3d融入内容页，中间stable部分放文字？
 + 探索新的dom结构，使得一部分stable，但是仍然处在3d空间中有zindex关系，或许可以让每个fragment动，而不是整个动
     * 使用transition控制每个fragment的运动，而不是用外层的整个动
         + 需要注意的是不能overflow hidden，否则看不到3d效果

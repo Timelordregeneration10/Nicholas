@@ -11,7 +11,7 @@
         background-color: black;
       }
 
-      .frame {
+      .galaxy {
         position: relative;
         width: 100vw;
         height: 100vh;
@@ -51,13 +51,16 @@
     </style>
   </head>
   <body>
-    <div class="frame">
-      <div class="origin-stable"></div>
+    <div class="galaxy">
+      <div class="origin-stable" onclick="upload()"></div>
     </div>
+    <select name="patterns" id="patterns" style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+    </select>
   </body>
   <script>
 
-    function addKeyframes(edge, isRotateX, rotateXorYDeg, translateZpx, addStyleId){
+    function addKeyframes(KFconfig){
+      const {edge, isRotateX, rotateXorYDeg, translateZpx, addStyleId} = KFconfig;
       const styleDom = document.createElement("style");
       styleDom.type = "text/css";
       let innerHTMLs = ``;
@@ -93,8 +96,9 @@
       document.head.appendChild(styleDom);
     }
 
-    function addStarRingFragment(edge, isRotateX, rotateXorYDeg, translateZpx, durationSec, addStyleId, size){
-      const frame = document.getElementsByClassName("frame")[0];
+    function addStarRingFragment(SRFconfig){
+      const {edge, isRotateX, rotateXorYDeg, translateZpx, durationSec, addStyleId, size} = SRFconfig;
+      const galaxy = document.getElementsByClassName("galaxy")[0];
       for (let i = 0; i < edge; i++) {
         const fragment = document.createElement("div");
         fragment.className = "star-ring-fragment";
@@ -109,28 +113,187 @@
           fragment.style.transform = `rotateX(${rotateXorYDeg}deg) rotateY(${(360 / edge) * i}deg) translateZ(${translateZpx}px)`;
           fragment.style.animation = `star-ring-fragment-rotate-${addStyleId}-${i} ${durationSec}s linear infinite`;
         }
-        frame.appendChild(fragment);
+        galaxy.appendChild(fragment);
       }
     }
 
-    function createStarRing(edge, isRotateX, rotateXorYDeg, translateZpx, durationSec, addStyleId, size) {
-      addKeyframes(edge, isRotateX, rotateXorYDeg, translateZpx, addStyleId);
-      addStarRingFragment(edge, isRotateX, rotateXorYDeg, translateZpx, durationSec, addStyleId, size);
+    function createStarRing(config) {
+      addKeyframes(config);
+      addStarRingFragment(config);
     }
 
+    function createGalaxy(pattern) {
+      const {ringConfigs, galaxyConfig = {rotateX:80,rotateY:80}} = pattern;
+      console.log(galaxyConfig);
+      const galaxy = document.getElementsByClassName("galaxy")[0];
+      // 注意这里先Y后X
+      galaxy.style.transform = `rotateY(${galaxyConfig.rotateX}deg) rotateX(${galaxyConfig.rotateY}deg)`;
+      const originStable = document.getElementsByClassName("origin-stable")[0];
+      // against的话需要反一下，先负的X再负的Y
+      originStable.style.transform = `rotateX(${-galaxyConfig.rotateX}deg) rotateY(${-galaxyConfig.rotateY}deg)`;
+
+      ringConfigs.forEach((config) => {
+        createStarRing(config);
+      });
+    }
+
+    document.getElementById("patterns").addEventListener("change", (e) => {
+      // remove existing star ring fragments
+      const existingFragments = document.getElementsByClassName("star-ring-fragment");
+      for (let i = existingFragments.length - 1; i >= 0; i--) {
+        existingFragments[i].remove();
+      }
+      const selectedPatternIndex = e.target.value;
+      const selectedPattern = patterns[selectedPatternIndex];
+      createGalaxy(selectedPattern);
+    });
+
+    const patterns = [];
     function init(){
-      const edge = 72;
-      const durationSec = 120;
-      createStarRing(36, false, 20, 300, durationSec, "ring1", 40);
-      createStarRing(36, false, 80, 300, durationSec, "ring2", 40);
-      createStarRing(36, false, 140, 300, durationSec, "ring3", 40);
-      createStarRing(edge, false, 0, 400, durationSec, "ring11", 20);
-      createStarRing(edge, false, 36, 400, durationSec, "ring22", 20);
-      createStarRing(edge, false, 72, 400, durationSec, "ring33", 20);
-      createStarRing(edge, false, 108, 400, durationSec, "ring44", 20);
-      createStarRing(edge, false, 144, 400, durationSec, "ring55", 20);
-      // createStarRing(edge, true, 10, 300, durationSec, "ring2", 40);
+      const createPattern_SIMPLE = () => {
+        const patternX = {
+          ringConfigs: []
+        };
+        for (let i = 0; i < 1; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 45,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-simple-1-${i}`,
+            size: 40
+          });
+        }
+        for (let i = 0; i < 1; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: true,
+            rotateXorYDeg: i * 45 + 90,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-simple-2-${i}`,
+            size: 40
+          });
+        }
+        return patternX;
+      };
+      const createPattern_COMPLEX1 = () => {
+        const patternX = {
+          ringConfigs: []
+        };
+        for (let i = 0; i < 3; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 60 + 20,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-complex1-1-${i}`,
+            size: 40
+          });
+        }
+        for (let i = 0; i < 5; i++) {
+          patternX.ringConfigs.push({
+            edge: 72,
+            isRotateX: false,
+            rotateXorYDeg: i * 36,
+            translateZpx: 400,
+            durationSec: 120,
+            addStyleId: `ring-complex1-2-${i}`,
+            size: 20
+          });
+        }
+        return patternX;
+      };
+      const createPattern_COMPLEX2 = () => {
+        const patternX = {
+          ringConfigs: []
+        };
+        for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 45 + 20,
+            translateZpx: 300,
+            durationSec: 120,
+            addStyleId: `ring-complex2-1-${i}`,
+            size: 40
+          });
+        }
+        for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 54,
+            isRotateX: false,
+            rotateXorYDeg: i * 45,
+            translateZpx: 400,
+            durationSec: 120,
+            addStyleId: `ring-complex2-2-${i}`,
+            size: 30
+          });
+        }
+        return patternX;
+      };
+      const createPattern_SAME_HEART = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 70,
+            rotateY: 70
+          }
+        };
+        for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 10 * i * i + 18,
+            isRotateX: false,
+            rotateXorYDeg:  90,
+            translateZpx: 200 + i * 90,
+            durationSec: 30 + i * i * 30,
+            addStyleId: `ring-sameheart-1-${i}`,
+            size: 40 - i * 10
+          });
+        }
+        return patternX;
+      };
+      patterns.push(createPattern_SAME_HEART());
+      patterns.push(createPattern_SIMPLE());
+      patterns.push(createPattern_COMPLEX1());
+      patterns.push(createPattern_COMPLEX2());
+      const selectDom = document.getElementById("patterns");
+      patterns.forEach((pattern, index) => {
+        const optionDom = document.createElement("option");
+        optionDom.value = index;
+        optionDom.innerText = `pattern ${index + 1}`;
+        selectDom.appendChild(optionDom);
+        if (index === 0) {
+          // initialize with the first pattern
+          createGalaxy(pattern);
+        }
+      });
     }
     init();
+
+    function upload() {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.onchange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imgsrc = e.target.result;
+            const fragments =
+              document.getElementsByClassName("star-ring-fragment");
+            for (let i = 0; i < fragments.length; i++) {
+              fragments[i].style.backgroundImage = `url(${imgsrc})`;
+              fragments[i].style.backgroundSize = "cover";
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    }
   </script>
 </html>
