@@ -12,8 +12,12 @@ const rollSpeed = 0.8;
 const initScroll = () => {
     document.body.style.height = content.scrollHeight / scrollSpeed + "px";
 
-    const handleScroll = function () {
-        const realScrollTop = (document.documentElement.scrollTop || document.body.scrollTop);
+    /** genAI_main_start */
+    let ticking = false;
+    let lastScrollTop = 0;
+
+    const updateScrollAnimation = () => {
+        const realScrollTop = lastScrollTop;
         // 处理content的滚动
         content.style.transform = `translateY(-${realScrollTop * scrollSpeed}px)`;
         // 处理aiyiRemAlbums的transform
@@ -53,8 +57,19 @@ const initScroll = () => {
                 }
             }
         }
+        ticking = false;
     };
-    handleScroll();
+
+    const handleScroll = function () {
+        lastScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (!ticking) {
+            requestAnimationFrame(updateScrollAnimation);
+            ticking = true;
+        }
+    };
+    /** genAI_main_end */
+
+    updateScrollAnimation();
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -116,10 +131,22 @@ const initAiyiRemAlbums = () => {
 window.onload = function () {
     let destoryAiyiRemAlbums = initAiyiRemAlbums();
     let destoryScroll = initScroll();
-    window.onresize = function () {
+    /** genAI_main_start */
+    let resizeTicking = false;
+
+    const handleResize = () => {
         destoryAiyiRemAlbums();
         destoryAiyiRemAlbums = initAiyiRemAlbums();
         destoryScroll();
         destoryScroll = initScroll();
+        resizeTicking = false;
     };
+
+    window.onresize = function () {
+        if (!resizeTicking) {
+            requestAnimationFrame(handleResize);
+            resizeTicking = true;
+        }
+    };
+    /** genAI_main_end */
 };

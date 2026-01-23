@@ -39,6 +39,10 @@ function addKeyframes(KFconfig) {
 function addStarRingFragment(SRFconfig) {
     const { edge, isRotateX, rotateXorYDeg, translateZpx, durationSec, addStyleId, size } = SRFconfig;
     const galaxy = document.getElementsByClassName("galaxy")[0];
+    /** genAI_main_start */
+    // 使用 DocumentFragment 批量插入 DOM,减少重排重绘
+    const fragment_container = document.createDocumentFragment();
+    /** genAI_main_end */
     for (let i = 0; i < edge; i++) {
         const fragment = document.createElement("div");
         fragment.className = "star-ring-fragment";
@@ -58,8 +62,14 @@ function addStarRingFragment(SRFconfig) {
         text.style.animationDelay = `${(i % 5) * 0.1}s`;
         text.innerText = REMHB[i % REMHB.length];
         fragment.appendChild(text);
-        galaxy.appendChild(fragment);
+        /** genAI_main_start */
+        fragment_container.appendChild(fragment);
+        /** genAI_main_end */
     }
+    /** genAI_main_start */
+    // 一次性插入所有元素,减少重排重绘次数
+    galaxy.appendChild(fragment_container);
+    /** genAI_main_end */
 }
 
 function createStarRing(config) {
