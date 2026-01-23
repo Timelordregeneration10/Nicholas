@@ -81,7 +81,7 @@ function createGalaxy(pattern) {
     });
 }
 
-function init() {
+function initUniverse() {
     const createPattern_SIMPLE = () => {
         const patternX = {
             ringConfigs: [],
@@ -113,4 +113,4 @@ function init() {
     };
     createGalaxy(createPattern_SIMPLE());
 }
-init();
+initUniverse();
