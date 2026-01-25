@@ -124,3 +124,20 @@ function initUniverse() {
     createGalaxy(createPattern_SIMPLE());
 }
 initUniverse();
+
+function handleMouseMove(event) {
+    const galaxy = document.getElementsByClassName("galaxy")[0];
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const initialRotateYDeg = 60;
+    const initialRotateXDeg = 90;
+    const rotateYDeg = ((mouseX / windowWidth) - 0.5) * 30 + initialRotateYDeg;
+    const rotateXDeg = -((mouseY / windowHeight) - 0.5) * 30 + initialRotateXDeg;
+    galaxy.style.transform = `translateY(100px) rotateY(${rotateYDeg}deg) rotateX(${rotateXDeg}deg)`;
+    const originStable = document.getElementsByClassName("origin-stable")[0];
+    originStable.style.transform = `rotateX(${-rotateXDeg}deg) rotateY(${-rotateYDeg}deg) translateY(-100px)`;
+}
+
+document.addEventListener("mousemove", handleMouseMove);

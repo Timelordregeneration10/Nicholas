@@ -14,7 +14,7 @@
     position: absolute;
     border: 10px solid #91bef0;
     transform-style: preserve-3d;
-    background-color: rgba(255, 24, 124, 0.405);
+    background-color: rgba(217, 241, 255, 0.405);
     transition: transform 0.5s cubic-bezier(0.33, 1, 0.33, 1);
     will-change: transform;
 }
