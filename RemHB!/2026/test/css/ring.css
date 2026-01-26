@@ -1,0 +1,46 @@
+
+
+.galaxy {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* perspective: 500vmax; */
+    transform-style: preserve-3d;
+    transform: rotateY(80deg) rotateX(80deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.star-ring-fragment {
+    position: absolute;
+    top: calc(50vh - 20px);
+    left: calc(50vw - 20px);
+    width: 40px;
+    height: 40px;
+    /* box-shadow: 0px 0px 16px #91bef0; */
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 16px #91bef0;
+}
+
+.origin-stable {
+    position: absolute;
+    top: calc(50vh - 180px);
+    left: calc(50vw - 180px);
+    width: 360px;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0px 0px 40px #91bef0;
+    transform: rotateX(-80deg) rotateY(-80deg);
+}

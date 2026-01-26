@@ -1,4 +1,3 @@
-const REMHB = "HAPPY BIRTHDAY TO REM! ";
 
 function addKeyframes(KFconfig) {
     const { edge, isRotateX, rotateXorYDeg, translateZpx, addStyleId } = KFconfig;
@@ -57,11 +56,6 @@ function addStarRingFragment(SRFconfig) {
             fragment.style.transform = `rotateX(${rotateXorYDeg}deg) rotateY(${(360 / edge) * i}deg) translateZ(${translateZpx}px)`;
             fragment.style.animation = `star-ring-fragment-rotate-${addStyleId}-${i} ${durationSec}s linear infinite`;
         }
-        const text = document.createElement("div");
-        text.className = "star-ring-fragment-text";
-        text.style.animationDelay = `${(i % 5) * 0.1}s`;
-        text.innerText = REMHB[i % REMHB.length];
-        fragment.appendChild(text);
         /** genAI_main_start */
         fragment_container.appendChild(fragment);
         /** genAI_main_end */
@@ -113,7 +107,7 @@ function initUniverse() {
     const createPattern_SIMPLE = () => {
         const patternX = {
             ringConfigs: [],
-            galaxyConfig: { rotateX: 90, rotateY: 60, translateY: 100 }
+            galaxyConfig: { rotateX: 90, rotateY: 60, translateY: 0 }
         };
         // for (let i = 0; i < 1; i++) {
         //     patternX.ringConfigs.push({
@@ -134,7 +128,7 @@ function initUniverse() {
                 translateZpx: 400,
                 durationSec: 120,
                 addStyleId: `ring-simple-2-${i}`,
-                size: 50
+                size: 30
             });
         }
         return patternX;

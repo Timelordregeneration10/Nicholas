@@ -1,0 +1,31 @@
+
+
+.roller-space {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d;
+    perspective: 100px;
+}
+
+.aiyiRemAlbum {
+    position: absolute;
+    transform-style: preserve-3d;
+    /* background-color: rgb(142, 214, 255); */
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.33, 1);
+    will-change: transform;
+    font-size: 100px;
+    font-weight: 900;
+    color: #8fe3ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 100vw;
+    height: 1000vh;
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.33, 1);
+}

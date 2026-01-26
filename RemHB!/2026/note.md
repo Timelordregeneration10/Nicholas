@@ -18,6 +18,8 @@
     - 要实现滚筒效果完全可以不全靠ring，可以自己translate3d！css3d自己本来就提供了所有的3d能力，你不用被困在ring里面！
     - 滚动效果做好了试试无限滚动作为背景，以鼠标滚动作为触发
 
-- 或许loading可以用滚筒+timelord的全屏loading+swayleaf效果？
+- 或许loading可以用滚筒+timelord的全屏loading+swayleaf效果
+    - 图片太卡了，文字还可以，参考 https://timelord.cn/RemHB!/test
 
 - 对了晚上回去的时候手机看到的pattern1的部分全屏想不到还挺适合的
+    - 新的首页也许会比较适合，配合其他的css3d，每种都加上鼠标移动的交互
