@@ -29,7 +29,7 @@
         width: 40px;
         height: 40px;
         background-color: #ffffff;
-        box-shadow: 0px 0px 16px #91bef0;
+        box-shadow: 0px 0px 2px #91bef0;
         transform-style: preserve-3d;
         will-change: transform;
       }
@@ -124,14 +124,17 @@
     }
 
     function createGalaxy(pattern) {
-      const {ringConfigs, galaxyConfig = {rotateX:80,rotateY:80}} = pattern;
-      console.log(galaxyConfig);
+      const {ringConfigs, galaxyConfig = {rotateX:80,rotateY:80}, stableSize = 360} = pattern;
       const galaxy = document.getElementsByClassName("galaxy")[0];
       // 注意这里先Y后X
       galaxy.style.transform = `rotateY(${galaxyConfig.rotateY}deg) rotateX(${galaxyConfig.rotateX}deg)`;
       const originStable = document.getElementsByClassName("origin-stable")[0];
       // against的话需要反一下，先负的X再负的Y
       originStable.style.transform = `rotateX(${-galaxyConfig.rotateX}deg) rotateY(${-galaxyConfig.rotateY}deg)`;
+      originStable.style.width = `${stableSize}px`;
+      originStable.style.height = `${stableSize}px`;
+      originStable.style.top = `calc(50vh - ${stableSize / 2}px)`;
+      originStable.style.left = `calc(50vw - ${stableSize / 2}px)`;
 
       ringConfigs.forEach((config) => {
         createStarRing(config);
@@ -344,6 +347,38 @@
             durationSec: 60 + i * 20,
             addStyleId: `ring-spiral-expand-3-${i}`,
             size: 19 - i * 0.5
+          });
+        }
+        return patternX;
+      };
+      // 螺旋星系 - 多层螺旋交错 - 双向
+      const createPattern_SPIRAL_GALAXY_DOUBLE = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 80,
+            rotateY: 80
+          }
+        };
+        // 创建多层螺旋效果
+        for (let i = 0; i < 5; i++) {
+          patternX.ringConfigs.push({
+            edge: 24 + i * 6,
+            isRotateX: false,
+            rotateXorYDeg: 15 * (i + 1),
+            translateZpx: 200 + i * 60,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-spiral-double-${i}`,
+            size: 5 + i * 8
+          });
+          patternX.ringConfigs.push({
+            edge: 24 + i * 6,
+            isRotateX: false,
+            rotateXorYDeg: 15 * (11-i),
+            translateZpx: 200 + i * 60,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-spiral-double-2-${i}`,
+            size: 5 + i * 8
           });
         }
         return patternX;
@@ -813,6 +848,82 @@
         }
         return patternX;
       };
+      // final pattern
+      const createPattern_FINAL_PATTERN = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 80,
+            rotateY: 80
+          },
+          stableSize: 150
+        };
+        // 创建多层螺旋效果
+        const share = 4;
+        for (let i = 0; i < share - 1; i++) {
+          patternX.ringConfigs.push({
+            edge: i%2===1?(16 + i * 4):(30+i*4),
+            isRotateX: false,
+            rotateXorYDeg: (90 / share) * (i + 1),
+            translateZpx: 100 + i * 30,
+            durationSec: i%2===1?0 + i * 20:120 + i * 20,
+            addStyleId: `ring-final-${i}`,
+            size: 6 + i * 4
+          });
+          patternX.ringConfigs.push({
+            edge: i%2===1?(16 + i * 4):(30+i*4),
+            isRotateX: false,
+            rotateXorYDeg: (90 / share) * (share * 2 - 1 - i),
+            translateZpx: 100 + i * 30,
+            durationSec: i%2===1?0 + i * 20:60 + i * 20,
+            addStyleId: `ring-final-2-${i}`,
+            size: 6 + i * 4
+          });
+        }
+        patternX.ringConfigs.push({
+          edge: 16,
+          isRotateX: false,
+          rotateXorYDeg: (90 / share) * (share * 2 - 1 - 3),
+          translateZpx: 100 + 3 * 30,
+          durationSec: 40,
+          addStyleId: `ring-final-3-${3}`,
+          size: 6 + 3 * 4
+        });
+        patternX.ringConfigs.push({
+          edge: 16,
+          isRotateX: false,
+          rotateXorYDeg: (90 / share) * (share * 2),
+          translateZpx: 100 + 3 * 30,
+          durationSec: 40,
+          addStyleId: `ring-final-4-${3}`,
+          size: 6 + 3 * 4
+        });
+        const share2 = 5;
+        for (let i = 0; i < share2; i++) {
+          patternX.ringConfigs.push({
+            edge: 60,
+            isRotateX: false,
+            rotateXorYDeg: (180 / share2) * i,
+            translateZpx: 400,
+            durationSec: 500,
+            addStyleId: `ring-final-5-${i}`,
+            size: 2
+          });
+        }
+        // const share3 = 3;
+        // for (let i = 0; i < share3; i++) {
+        //   patternX.ringConfigs.push({
+        //     edge: 30,
+        //     isRotateX: false,
+        //     rotateXorYDeg: (180 / share3) * i,
+        //     translateZpx: 300,
+        //     durationSec: 800,
+        //     addStyleId: `ring-final-6-${i}`,
+        //     size: 2
+        //   });
+        // }
+        return patternX;
+      };
       /** genAI_main_start */
       const patternNames = [
         "行星环 Ring",
@@ -823,6 +934,7 @@
         "螺旋星系 - 扩展 Spiral Galaxy - Expand",
         "螺旋星系 - 扩展 - 2 Spiral Galaxy - Expand - 2",
         "螺旋星系 - 扩展 - 3 Spiral Galaxy - Expand - 3",
+        "螺旋星系 - 双向 Spiral Galaxy - Double",
         "蚰蜒(虫恐慎点) Worm",
         "恒星 Star",
         "双子星 Twin Stars",
@@ -838,7 +950,8 @@
         "巨石阵 Stonehenge",
         "巨石阵 - 扩展 Stonehenge - Expand",
         "心跳节奏 Heartbeat",
-        "粒子爆发 Particle Burst"
+        "粒子爆发 Particle Burst",
+        "最终 Final Pattern"
       ];
       /** genAI_main_end */
       patterns.push(createPattern_SAME_HEART());
@@ -849,6 +962,7 @@
       patterns.push(createPattern_SPIRAL_GALAXY_EXPAND());
       patterns.push(createPattern_SPIRAL_GALAXY_EXPAND_2());
       patterns.push(createPattern_SPIRAL_GALAXY_EXPAND_3());
+      patterns.push(createPattern_SPIRAL_GALAXY_DOUBLE());
       patterns.push(createPattern_WORM_GALAXY());
       patterns.push(createPattern_STAR_GALAXY());
       patterns.push(createPattern_TWIN_STARS());
@@ -865,6 +979,7 @@
       patterns.push(createPattern_STONEHENGE_EXPAND());
       patterns.push(createPattern_HEARTBEAT());
       patterns.push(createPattern_PARTICLE_BURST());
+      patterns.push(createPattern_FINAL_PATTERN());
       const selectDom = document.getElementById("patterns");
       patterns.forEach((pattern, index) => {
         const optionDom = document.createElement("option");
