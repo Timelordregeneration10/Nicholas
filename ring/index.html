@@ -279,14 +279,129 @@
         }
         return patternX;
       };
+      // 螺旋星系 - 多层螺旋交错 - 扩展
+      const createPattern_SPIRAL_GALAXY_EXPAND = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 75,
+            rotateY: 60
+          }
+        };
+        // 创建多层螺旋效果
+        for (let i = 0; i < 22; i++) {
+          patternX.ringConfigs.push({
+            edge: 24 + i * 6,
+            isRotateX: false,
+            rotateXorYDeg: 15 * i,
+            translateZpx: 200 + i * 60,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-spiral-expand-${i}`,
+            size: 35 - i * 3
+          });
+        }
+        return patternX;
+      };
+      // 螺旋星系 - 多层螺旋交错 - 扩展 - 2
+      const createPattern_SPIRAL_GALAXY_EXPAND_2 = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 75,
+            rotateY: 60
+          }
+        };
+        // 创建多层螺旋效果
+        for (let i = 0; i < 24; i++) {
+          patternX.ringConfigs.push({
+            edge: 24 + i * 6,
+            isRotateX: false,
+            rotateXorYDeg: 8 * i,
+            translateZpx: 200 + i * 60,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-spiral-expand-2-${i}`,
+            size: 37 - i * 1.5
+          });
+        }
+        return patternX;
+      };
+      // 螺旋星系 - 多层螺旋交错 - 扩展 - 3
+      const createPattern_SPIRAL_GALAXY_EXPAND_3 = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 75,
+            rotateY: 60
+          }
+        };
+        // 创建多层螺旋效果
+        for (let i = 0; i < 36; i++) {
+          patternX.ringConfigs.push({
+            edge: 24 + i * 6,
+            isRotateX: false,
+            rotateXorYDeg: 8 * i,
+            translateZpx: 200 + i * 40,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-spiral-expand-3-${i}`,
+            size: 19 - i * 0.5
+          });
+        }
+        return patternX;
+      };
+      // 蚰蜒
+      const createPattern_WORM_GALAXY = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 75,
+            rotateY: 60
+          }
+        };
+        // 创建多层螺旋效果
+        for (let i = 0; i < 36; i++) {
+          patternX.ringConfigs.push({
+            edge: 24 + Math.pow(i, 1) * 6,
+            isRotateX: false,
+            rotateXorYDeg: 90,
+            translateZpx: 200 + i * 40,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-worm-${i}`,
+            size: 5 - i * 0.1
+          });
+        }
+        return patternX;
+      };
+      // 恒星
+      const createPattern_STAR_GALAXY = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 75,
+            rotateY: 60
+          }
+        };
+        // 创建多层螺旋效果
+        for (let i = 0; i < 12; i++) {
+          patternX.ringConfigs.push({
+            edge: 24 + i * i * 6,
+            isRotateX: false,
+            rotateXorYDeg: 90,
+            translateZpx: 300 + i * 20,
+            durationSec: 60 + i * 20,
+            addStyleId: `ring-star-${i}`,
+            size: 2 - i * 0.1
+          });
+        }
+        return patternX;
+      };
       
       // 双子星 - 两组对称旋转的星环
       const createPattern_TWIN_STARS = () => {
         const patternX = {
           ringConfigs: [],
           galaxyConfig: {
-            rotateX: 60,
-            rotateY: 80
+            rotateX: 80,
+            rotateY: 0
           }
         };
         // 第一组 - X轴旋转
@@ -321,12 +436,12 @@
         const patternX = {
           ringConfigs: [],
           galaxyConfig: {
-            rotateX: 85,
-            rotateY: 45
+            rotateX: 80,
+            rotateY: 80
           }
         };
-        // 创建8片"花瓣"
-        for (let i = 0; i < 8; i++) {
+        // 创建16片"花瓣"
+        for (let i = 0; i < 16; i++) {
           patternX.ringConfigs.push({
             edge: 18,
             isRotateX: false,
@@ -345,18 +460,18 @@
         const patternX = {
           ringConfigs: [],
           galaxyConfig: {
-            rotateX: 80,
+            rotateX: 0,
             rotateY: 50
           }
         };
         // 创建隧道效果
-        for (let i = 0; i < 8; i++) {
+        for (let i = 2; i < 16; i++) {
           patternX.ringConfigs.push({
             edge: 48,
             isRotateX: false,
             rotateXorYDeg: 90,
             translateZpx: 150 + i * 50,
-            durationSec: 40 + i * 10,
+            durationSec: 20 + i * 20,
             addStyleId: `ring-tunnel-${i}`,
             size: 25 + i * 2
           });
@@ -373,8 +488,8 @@
             rotateY: 65
           }
         };
-        const angles = [15, 37, 58, 82, 103, 127, 145, 168];
-        for (let i = 0; i < 8; i++) {
+        const angles = [15, 37, 58, 82, 103, 127, 145, 168, 180, 202, 223, 247, 268, 292, 313, 337];
+        for (let i = 0; i < 16; i++) {
           patternX.ringConfigs.push({
             edge: 24 + (i % 3) * 6,
             isRotateX: i % 2 === 0,
@@ -460,6 +575,66 @@
         return patternX;
       };
       
+      // 脉冲波 - 极速小粒子与超慢大粒子对比 - 扩展
+      const createPattern_PULSE_WAVE_EXPAND = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 80,
+            rotateY: 60
+          }
+        };
+        // 内层极速小粒子
+        for (let i = 0; i < 3; i++) {
+          patternX.ringConfigs.push({
+            edge: 48,
+            isRotateX: false,
+            rotateXorYDeg: i * 60,
+            translateZpx: 200,
+            durationSec: 10, // 极速
+            addStyleId: `ring-pulse-fast-${i}`,
+            size: 8 // 极小
+          });
+        }
+        // 中层中速中粒子
+        for (let i = 0; i < 3; i++) {
+          patternX.ringConfigs.push({
+            edge: 36,
+            isRotateX: false,
+            rotateXorYDeg: i * 60 + 30,
+            translateZpx: 300,
+            durationSec: 60, // 中速
+            addStyleId: `ring-pulse-mid-${i}`,
+            size: 30 // 中等
+          });
+        }
+        // 外层超慢大粒子
+        for (let i = 0; i < 3; i++) {
+          patternX.ringConfigs.push({
+            edge: 24,
+            isRotateX: false,
+            rotateXorYDeg: i * 60,
+            translateZpx: 400,
+            durationSec: 240, // 超慢
+            addStyleId: `ring-pulse-slow-${i}`,
+            size: 60 // 超大
+          });
+        }
+        // 外层超慢大粒子 - 扩展
+        for (let i = 0; i < 3; i++) {
+          patternX.ringConfigs.push({
+            edge: 18,
+            isRotateX: false,
+            rotateXorYDeg: i * 60,
+            translateZpx: 600,
+            durationSec: 480, // 超慢
+            addStyleId: `ring-pulse-slow-expand-${i}`,
+            size: 120 // 超大
+          });
+        }
+        return patternX;
+      };
+      
       // 量子涟漪 - 大小交替,速度波动
       const createPattern_QUANTUM_RIPPLE = () => {
         const patternX = {
@@ -490,7 +665,7 @@
         const patternX = {
           ringConfigs: [],
           galaxyConfig: {
-            rotateX: 75,
+            rotateX: 0,
             rotateY: 75
           }
         };
@@ -528,15 +703,15 @@
           }
         };
         // 创建多层微小粒子
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
           patternX.ringConfigs.push({
             edge: 60 + i * 12, // 粒子数量递增
             isRotateX: i % 2 === 0,
             rotateXorYDeg: i * 18,
             translateZpx: 200 + i * 30,
-            durationSec: 15 + i * 5, // 快速旋转
+            durationSec: 150 + i * 50, // 快速旋转
             addStyleId: `ring-micro-${i}`,
-            size: 5 + i // 微小粒子: 5px -> 15px
+            size: Math.floor(Math.random() * 2) + 2 // 微小粒子: 5px -> 15px
           });
         }
         return patternX;
@@ -553,6 +728,30 @@
         };
         // 创建少量巨大的"石块"
         for (let i = 0; i < 4; i++) {
+          patternX.ringConfigs.push({
+            edge: 8 + i * 2, // 粒子数量少
+            isRotateX: false,
+            rotateXorYDeg: i * 45,
+            translateZpx: 250 + i * 60,
+            durationSec: 300 + i * 100, // 极慢: 300s -> 600s
+            addStyleId: `ring-stone-${i}`,
+            size: 70 + i * 10 // 巨大: 70px -> 100px
+          });
+        }
+        return patternX;
+      };
+      
+      // 巨石阵 - 少量巨大粒子缓慢移动 - 扩展
+      const createPattern_STONEHENGE_EXPAND = () => {
+        const patternX = {
+          ringConfigs: [],
+          galaxyConfig: {
+            rotateX: 70,
+            rotateY: 55
+          }
+        };
+        // 创建少量巨大的"石块"
+        for (let i = 0; i < 8; i++) {
           patternX.ringConfigs.push({
             edge: 8 + i * 2, // 粒子数量少
             isRotateX: false,
@@ -601,36 +800,43 @@
             rotateY: 65
           }
         };
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 16; i++) {
           patternX.ringConfigs.push({
             edge: 24 + i * 6,
             isRotateX: i % 3 === 0,
             rotateXorYDeg: i * 22.5,
             translateZpx: 180 + i * 35,
-            durationSec: 120 - i * 12, // 速度递增: 120s -> 36s
+            durationSec: 120 - i * 6, // 速度递增: 120s -> 36s
             addStyleId: `ring-burst-${i}`,
-            size: 55 - i * 5 // 大小递减: 55px -> 15px
+            size: 55 - i * 2.5 // 大小递减: 55px -> 15px
           });
         }
         return patternX;
       };
       /** genAI_main_start */
       const patternNames = [
-        "同心圆 Same Heart",
+        "行星环 Ring",
         "简约双环 Simple",
         "复杂星系1 Complex Galaxy I",
         "复杂星系2 Complex Galaxy II",
         "螺旋星系 Spiral Galaxy",
+        "螺旋星系 - 扩展 Spiral Galaxy - Expand",
+        "螺旋星系 - 扩展 - 2 Spiral Galaxy - Expand - 2",
+        "螺旋星系 - 扩展 - 3 Spiral Galaxy - Expand - 3",
+        "蚰蜒(虫恐慎点) Worm",
+        "恒星 Star",
         "双子星 Twin Stars",
         "花瓣星云 Petal Nebula",
         "时空隧道 Time Tunnel",
         "混沌之球 Chaos Sphere",
         "呼吸星云 Breathing Nebula",
         "脉冲波 Pulse Wave",
+        "脉冲波 - 扩展 Pulse Wave - Expand",
         "量子涟漪 Quantum Ripple",
-        "时间沙漏 Time Hourglass",
+        "西瓜 Time Hourglass",
         "微观宇宙 Micro Universe",
         "巨石阵 Stonehenge",
+        "巨石阵 - 扩展 Stonehenge - Expand",
         "心跳节奏 Heartbeat",
         "粒子爆发 Particle Burst"
       ];
@@ -640,16 +846,23 @@
       patterns.push(createPattern_COMPLEX1());
       patterns.push(createPattern_COMPLEX2());
       patterns.push(createPattern_SPIRAL_GALAXY());
+      patterns.push(createPattern_SPIRAL_GALAXY_EXPAND());
+      patterns.push(createPattern_SPIRAL_GALAXY_EXPAND_2());
+      patterns.push(createPattern_SPIRAL_GALAXY_EXPAND_3());
+      patterns.push(createPattern_WORM_GALAXY());
+      patterns.push(createPattern_STAR_GALAXY());
       patterns.push(createPattern_TWIN_STARS());
       patterns.push(createPattern_PETAL_NEBULA());
       patterns.push(createPattern_TIME_TUNNEL());
       patterns.push(createPattern_CHAOS_SPHERE());
       patterns.push(createPattern_BREATHING_NEBULA());
       patterns.push(createPattern_PULSE_WAVE());
+      patterns.push(createPattern_PULSE_WAVE_EXPAND());
       patterns.push(createPattern_QUANTUM_RIPPLE());
       patterns.push(createPattern_TIME_HOURGLASS());
       patterns.push(createPattern_MICRO_UNIVERSE());
       patterns.push(createPattern_STONEHENGE());
+      patterns.push(createPattern_STONEHENGE_EXPAND());
       patterns.push(createPattern_HEARTBEAT());
       patterns.push(createPattern_PARTICLE_BURST());
       const selectDom = document.getElementById("patterns");
