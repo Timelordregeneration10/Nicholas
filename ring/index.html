@@ -1048,6 +1048,13 @@
             for (let i = 0; i < fragments.length; i++) {
               fragments[i].style.backgroundImage = `url(${imgsrc})`;
               fragments[i].style.backgroundSize = "cover";
+              fragments[i].style.backgroundPosition = "center";
+            }
+            if (window.location.search.includes("manba")){
+              const originStable = document.getElementsByClassName("origin-stable")[0];
+              originStable.style.backgroundImage = `url(${imgsrc})`;
+              originStable.style.backgroundSize = "cover";
+              originStable.style.backgroundPosition = "center";
             }
           };
           reader.readAsDataURL(file);
