@@ -20,6 +20,7 @@
         /* perspective: 500vmax; */
         transform-style: preserve-3d;
         transform: rotateY(80deg) rotateX(80deg);
+        transition: transform 1s cubic-bezier(0.33, 1, 0.33, 1);
       }
 
       .star-ring-fragment {
@@ -48,6 +49,7 @@
         border-radius: 50%;
         box-shadow: 0px 0px 40px #91bef0;
         transform: rotateX(-80deg) rotateY(-80deg);
+        transition: transform 1s cubic-bezier(0.33, 1, 0.33, 1);
       }
     </style>
   </head>
@@ -123,14 +125,49 @@
       addStarRingFragment(config);
     }
 
+    const currentGalaxyRotate = {
+      rotateX: 80,
+      rotateY: 80
+    };
+    function updateGalaxyRotate(rotateX, rotateY) {
+      console.log(rotateX, rotateY);
+      currentGalaxyRotate.rotateX = rotateX;
+      currentGalaxyRotate.rotateY = rotateY;
+      const galaxy = document.getElementsByClassName("galaxy")[0];
+      galaxy.style.transform = `rotateY(${currentGalaxyRotate.rotateY}deg) rotateX(${currentGalaxyRotate.rotateX}deg)`;
+      const originStable = document.getElementsByClassName("origin-stable")[0];
+      originStable.style.transform = `rotateX(${-currentGalaxyRotate.rotateX}deg) rotateY(${-currentGalaxyRotate.rotateY}deg)`;
+    }
+    let isMouseDown = false;
+    const currentMousePosition = {
+      x: 0,
+      y: 0
+    };
+    document.addEventListener("mousedown", (e) => {
+      isMouseDown = true;
+      currentMousePosition.x = e.clientX;
+      currentMousePosition.y = e.clientY;
+    });
+    document.addEventListener("mouseup", (e) => {
+      isMouseDown = false;
+      currentMousePosition.x = 0;
+      currentMousePosition.y = 0;
+    });
+    document.addEventListener("mousemove", (e) => {
+      if (!isMouseDown){
+        return;
+      }
+      const mouseXDelta = e.clientX - currentMousePosition.x;
+      const mouseYDelta = e.clientY - currentMousePosition.y;
+      // 注意这里先DeltaY后DeltaX
+      updateGalaxyRotate(currentGalaxyRotate.rotateX + mouseYDelta, currentGalaxyRotate.rotateY + mouseXDelta);
+      currentMousePosition.x = e.clientX;
+      currentMousePosition.y = e.clientY;
+    });
     function createGalaxy(pattern) {
       const {ringConfigs, galaxyConfig = {rotateX:80,rotateY:80}, stableSize = 360} = pattern;
-      const galaxy = document.getElementsByClassName("galaxy")[0];
-      // 注意这里先Y后X
-      galaxy.style.transform = `rotateY(${galaxyConfig.rotateY}deg) rotateX(${galaxyConfig.rotateX}deg)`;
+      updateGalaxyRotate(galaxyConfig.rotateX, galaxyConfig.rotateY);
       const originStable = document.getElementsByClassName("origin-stable")[0];
-      // against的话需要反一下，先负的X再负的Y
-      originStable.style.transform = `rotateX(${-galaxyConfig.rotateX}deg) rotateY(${-galaxyConfig.rotateY}deg)`;
       originStable.style.width = `${stableSize}px`;
       originStable.style.height = `${stableSize}px`;
       originStable.style.top = `calc(50vh - ${stableSize / 2}px)`;
