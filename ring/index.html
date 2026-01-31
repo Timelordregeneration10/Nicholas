@@ -164,6 +164,27 @@
       currentMousePosition.x = e.clientX;
       currentMousePosition.y = e.clientY;
     });
+    document.addEventListener("touchstart", (e) => {
+      isMouseDown = true;
+      currentMousePosition.x = e.touches[0].clientX;
+      currentMousePosition.y = e.touches[0].clientY;
+    });
+    document.addEventListener("touchend", (e) => {
+      isMouseDown = false;
+      currentMousePosition.x = 0;
+      currentMousePosition.y = 0;
+    });
+    document.addEventListener("touchmove", (e) => {
+      if (!isMouseDown){
+        return;
+      }
+      const mouseXDelta = e.touches[0].clientX - currentMousePosition.x;
+      const mouseYDelta = e.touches[0].clientY - currentMousePosition.y;
+      // 注意这里先DeltaY后DeltaX
+      updateGalaxyRotate(currentGalaxyRotate.rotateX + mouseYDelta, currentGalaxyRotate.rotateY + mouseXDelta);
+      currentMousePosition.x = e.touches[0].clientX;
+      currentMousePosition.y = e.touches[0].clientY;
+    });
     function createGalaxy(pattern) {
       const {ringConfigs, galaxyConfig = {rotateX:80,rotateY:80}, stableSize = 360} = pattern;
       updateGalaxyRotate(galaxyConfig.rotateX, galaxyConfig.rotateY);
