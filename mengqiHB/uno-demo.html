@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO牌生成器 - 使用示例</title>
+    <!-- genAI_main_start -->
+    <link rel="stylesheet" href="uno-card.css">
+    <style>
+        body {
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .control-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-group label {
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 100px;
+        }
+
+        .control-group input[type="number"] {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 120px;
+        }
+
+        .control-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .card-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            min-height: 200px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .type-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .type-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .type-card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .type-card .cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .info-panel {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+
+        .info-panel h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .info-panel pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .info-panel code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .info-panel ul {
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .color-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <!-- genAI_main_end -->
+</head>
+<body>
+    <!-- genAI_main_start -->
+    <div class="demo-container">
+        <h1>🎴 UNO牌生成器</h1>
+        <p class="subtitle">支持数字牌、功能牌和万能牌,共54种牌型</p>
+        
+        <!-- 颜色图例 -->
+        <div class="color-legend">
+            <div class="color-item">
+                <div class="color-box" style="background: #e74c3c;"></div>
+                <span>红色</span>
+            </div>
+            <div class="color-item">
+                <div class="color-box" style="background: #f1c40f;"></div>
+                <span>黄色</span>
+            </div>
+            <div class="color-item">
+                <div class="color-box" style="background: #27ae60;"></div>
+                <span>绿色</span>
+            </div>
+            <div class="color-item">
+                <div class="color-box" style="background: #3498db;"></div>
+                <span>蓝色</span>
+            </div>
+            <div class="color-item">
+                <div class="color-box" style="background: linear-gradient(135deg, #e74c3c 0%, #f1c40f 25%, #27ae60 50%, #3498db 100%);"></div>
+                <span>万能牌</span>
+            </div>
+        </div>
+        
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="control-group">
+                <label for="cardWidth">宽度(px):</label>
+                <input type="number" id="cardWidth" value="100" min="60" max="200">
+                
+                <label for="cardHeight">高度(px):</label>
+                <input type="number" id="cardHeight" value="150" min="90" max="300">
+            </div>
+            
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="includeWild" checked>
+                    包含万能牌
+                </label>
+            </div>
+            
+            <div class="control-group">
+                <button class="btn btn-primary" onclick="generateSingleCard()">生成一张牌</button>
+                <button class="btn btn-success" onclick="generateHandCards()">生成手牌(7张)</button>
+                <button class="btn btn-secondary" onclick="clearCards()">清空</button>
+            </div>
+        </div>
+
+        <!-- UNO牌展示区 -->
+        <div class="card-display" id="cardDisplay">
+            <p style="color: #7f8c8d; width: 100%; text-align: center;">点击按钮生成UNO牌</p>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalCount">0</div>
+                <div class="stat-label">总牌数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="redCount">0</div>
+                <div class="stat-label">红色</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="yellowCount">0</div>
+                <div class="stat-label">黄色</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="greenCount">0</div>
+                <div class="stat-label">绿色</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="blueCount">0</div>
+                <div class="stat-label">蓝色</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="wildCount">0</div>
+                <div class="stat-label">万能牌</div>
+            </div>
+        </div>
+
+        <!-- UNO牌类型展示 -->
+        <h2 class="section-title">📚 UNO牌类型展示</h2>
+        <div class="type-showcase">
+            <div class="type-card">
+                <h3>红色牌</h3>
+                <div class="cards-row" id="redRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>黄色牌</h3>
+                <div class="cards-row" id="yellowRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>绿色牌</h3>
+                <div class="cards-row" id="greenRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>蓝色牌</h3>
+                <div class="cards-row" id="blueRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>万能牌</h3>
+                <div class="cards-row" id="wildRow"></div>
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="info-panel">
+            <h3>📖 使用说明</h3>
+            <p><strong>基础用法:</strong></p>
+            <pre><code>// 引入CSS样式
+&lt;link rel="stylesheet" href="uno-card.css"&gt;
+
+// 引入JS模块
+&lt;script src="uno-card.js"&gt;&lt;/script&gt;
+
+// 生成随机UNO牌(默认尺寸)
+const card = generateRandomUnoCard();
+document.body.appendChild(card);
+
+// 生成自定义尺寸的UNO牌
+const customCard = generateRandomUnoCard({
+  width: 120,
+  height: 180,
+  includeWild: true    // 包含万能牌
+});
+document.body.appendChild(customCard);
+
+// 生成指定颜色和值的UNO牌
+const specificCard = generateUnoCard('red', 5, {
+  width: 100,
+  height: 150
+});
+document.body.appendChild(specificCard);</code></pre>
+
+            <p><strong>UNO牌类型说明:</strong></p>
+            <ul>
+                <li><strong>数字牌:</strong> 每种颜色0-9,共40张</li>
+                <li><strong>功能牌:</strong> 
+                    <ul>
+                        <li>跳过(Skip): 跳过下一位玩家</li>
+                        <li>反转(Reverse): 改变出牌顺序</li>
+                        <li>+2: 下一位玩家抽两张牌</li>
+                    </ul>
+                </li>
+                <li><strong>万能牌:</strong>
+                    <ul>
+                        <li>变色(Wild): 可以改变当前颜色</li>
+                        <li>+4: 下一位玩家抽四张牌并改变颜色</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>功能特性:</strong></p>
+            <ul>
+                <li>✅ 支持所有标准UNO牌型(共54种)</li>
+                <li>✅ 支持自定义宽高尺寸</li>
+                <li>✅ 支持选择是否包含万能牌</li>
+                <li>✅ 完整的UNO牌配置和分类</li>
+                <li>✅ 精美的渐变色彩设计</li>
+                <li>✅ 丰富的动画和交互效果</li>
+                <li>✅ 高度模块化,易于扩展</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="uno-card.js"></script>
+    <script>
+        // 统计数据
+        let stats = {
+            total: 0,
+            red: 0,
+            yellow: 0,
+            green: 0,
+            blue: 0,
+            wild: 0
+        };
+
+        /**
+         * 更新统计信息
+         */
+        function updateStats() {
+            document.getElementById('totalCount').textContent = stats.total;
+            document.getElementById('redCount').textContent = stats.red;
+            document.getElementById('yellowCount').textContent = stats.yellow;
+            document.getElementById('greenCount').textContent = stats.green;
+            document.getElementById('blueCount').textContent = stats.blue;
+            document.getElementById('wildCount').textContent = stats.wild;
+        }
+
+        /**
+         * 添加牌到统计
+         */
+        function addToStats(color) {
+            stats.total++;
+            if (color === 'red') stats.red++;
+            else if (color === 'yellow') stats.yellow++;
+            else if (color === 'green') stats.green++;
+            else if (color === 'blue') stats.blue++;
+            else if (color === 'wild') stats.wild++;
+            updateStats();
+        }
+
+        /**
+         * 重置统计
+         */
+        function resetStats() {
+            stats = {
+                total: 0,
+                red: 0,
+                yellow: 0,
+                green: 0,
+                blue: 0,
+                wild: 0
+            };
+            updateStats();
+        }
+
+        /**
+         * 生成单张UNO牌
+         */
+        function generateSingleCard() {
+            const width = parseInt(document.getElementById('cardWidth').value);
+            const height = parseInt(document.getElementById('cardHeight').value);
+            const includeWild = document.getElementById('includeWild').checked;
+            
+            try {
+                const card = generateRandomUnoCard({ 
+                    width, 
+                    height, 
+                    includeWild 
+                });
+                card.classList.add('uno-card--animated');
+                
+                const display = document.getElementById('cardDisplay');
+                
+                // 清空提示文字
+                if (display.querySelector('p')) {
+                    display.innerHTML = '';
+                    resetStats();
+                }
+                
+                display.appendChild(card);
+                
+                // 更新统计
+                addToStats(card.dataset.color);
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            }
+        }
+
+        /**
+         * 生成手牌(7张)
+         */
+        function generateHandCards() {
+            const width = parseInt(document.getElementById('cardWidth').value);
+            const height = parseInt(document.getElementById('cardHeight').value);
+            const includeWild = document.getElementById('includeWild').checked;
+            
+            try {
+                const display = document.getElementById('cardDisplay');
+                
+                // 清空提示文字
+                if (display.querySelector('p')) {
+                    display.innerHTML = '';
+                    resetStats();
+                }
+                
+                // 生成7张牌
+                for (let i = 0; i < 7; i++) {
+                    setTimeout(() => {
+                        const card = generateRandomUnoCard({ 
+                            width, 
+                            height, 
+                            includeWild 
+                        });
+                        card.classList.add('uno-card--animated');
+                        display.appendChild(card);
+                        
+                        // 更新统计
+                        addToStats(card.dataset.color);
+                    }, i * 100);
+                }
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            }
+        }
+
+        /**
+         * 清空所有UNO牌
+         */
+        function clearCards() {
+            const display = document.getElementById('cardDisplay');
+            display.innerHTML = '<p style="color: #7f8c8d; width: 100%; text-align: center;">点击按钮生成UNO牌</p>';
+            resetStats();
+        }
+
+        /**
+         * 初始化类型展示
+         */
+        function initTypeShowcase() {
+            const cardSize = { width: 60, height: 90 };
+            const colors = ['red', 'yellow', 'green', 'blue'];
+            
+            // 生成彩色牌(数字0-9和功能牌)
+            colors.forEach(color => {
+                const row = document.getElementById(`${color}Row`);
+                
+                // 数字牌
+                for (let i = 0; i <= 9; i++) {
+                    const card = generateUnoCard(color, i, cardSize);
+                    row.appendChild(card);
+                }
+                
+                // 功能牌
+                ['skip', 'reverse', 'draw_two'].forEach(action => {
+                    const card = generateUnoCard(color, action, cardSize);
+                    row.appendChild(card);
+                });
+            });
+            
+            // 万能牌
+            const wildRow = document.getElementById('wildRow');
+            const wildCard = generateUnoCard('wild', 'wild', cardSize);
+            const wildDrawFourCard = generateUnoCard('wild', 'wild_draw_four', cardSize);
+            wildRow.appendChild(wildCard);
+            wildRow.appendChild(wildDrawFourCard);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            initTypeShowcase();
+            
+            // 生成一张示例牌
+            setTimeout(() => {
+                generateSingleCard();
+            }, 500);
+        });
+    </script>
+    <!-- genAI_main_end -->
+</body>
+</html>

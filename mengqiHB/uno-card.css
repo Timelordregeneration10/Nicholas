@@ -1,0 +1,578 @@
+/* genAI_main_start */
+/**
+ * UNO牌样式模块
+ * 提供UNO牌的完整视觉样式
+ */
+
+/* ==================== 基础样式 ==================== */
+
+.uno-card {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  font-family: 'Arial Black', 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+/* 悬停效果 */
+.uno-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* 激活效果 */
+.uno-card:active {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== 椭圆背景 ==================== */
+
+.uno-card__oval {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 75%;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 万能牌椭圆 */
+.uno-card__oval--wild {
+  width: 60%;
+  height: 65%;
+  z-index: 10;
+}
+
+/* ==================== 中心符号 ==================== */
+
+.uno-card__symbol {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+}
+
+/* 万能牌符号 */
+.uno-card__symbol--wild {
+  background: linear-gradient(135deg, #e74c3c 0%, #f1c40f 25%, #27ae60 50%, #3498db 75%, #e74c3c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3.5em;
+}
+
+/* ==================== 角标 ==================== */
+
+.uno-card__corner {
+  position: absolute;
+  font-size: 1.2em;
+  font-weight: bold;
+  z-index: 5;
+}
+
+/* 左上角 */
+.uno-card__corner--top {
+  top: 8px;
+  left: 8px;
+}
+
+/* 右下角(旋转180度) */
+.uno-card__corner--bottom {
+  bottom: 8px;
+  right: 8px;
+  transform: rotate(180deg);
+}
+
+/* ==================== 颜色主题 ==================== */
+
+/* 红色 */
+.uno-card--red {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+/* 黄色 */
+.uno-card--yellow {
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+}
+
+/* 绿色 */
+.uno-card--green {
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+}
+
+/* 蓝色 */
+.uno-card--blue {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+/* ==================== 万能牌四色背景 ==================== */
+
+.uno-card--wild {
+  background: #2c3e50;
+}
+
+.uno-card__quadrant {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+}
+
+/* 左上 - 红色 */
+.uno-card__quadrant--1 {
+  top: 0;
+  left: 0;
+  background: #e74c3c;
+  border-radius: 12px 0 0 0;
+}
+
+/* 右上 - 黄色 */
+.uno-card__quadrant--2 {
+  top: 0;
+  right: 0;
+  background: #f1c40f;
+  border-radius: 0 12px 0 0;
+}
+
+/* 左下 - 绿色 */
+.uno-card__quadrant--3 {
+  bottom: 0;
+  left: 0;
+  background: #27ae60;
+  border-radius: 0 0 0 12px;
+}
+
+/* 右下 - 蓝色 */
+.uno-card__quadrant--4 {
+  bottom: 0;
+  right: 0;
+  background: #3498db;
+  border-radius: 0 0 12px 0;
+}
+
+/* ==================== 尺寸变体 ==================== */
+
+/* genAI_main_start */
+/* 超小尺寸UNO牌 (40px) */
+.uno-card[style*="width: 40px"] {
+  border-radius: 6px;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__symbol {
+  font-size: 1.2em;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__symbol--wild {
+  font-size: 1.5em;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__corner--top {
+  font-size: 0.6em;
+  top: 3px;
+  left: 3px;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__corner--bottom {
+  font-size: 0.6em;
+  bottom: 3px;
+  right: 3px;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__oval {
+  width: 65%;
+  height: 70%;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__oval--wild {
+  width: 55%;
+  height: 60%;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__quadrant--1 {
+  border-radius: 6px 0 0 0;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__quadrant--2 {
+  border-radius: 0 6px 0 0;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__quadrant--3 {
+  border-radius: 0 0 0 6px;
+}
+
+.uno-card[style*="width: 40px"] .uno-card__quadrant--4 {
+  border-radius: 0 0 6px 0;
+}
+/* genAI_main_end */
+
+/* 小尺寸UNO牌 */
+.uno-card[style*="width: 60px"],
+.uno-card[style*="width: 70px"],
+.uno-card[style*="width: 80px"] {
+  border-radius: 8px;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__symbol,
+.uno-card[style*="width: 70px"] .uno-card__symbol,
+.uno-card[style*="width: 80px"] .uno-card__symbol {
+  font-size: 2em;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__symbol--wild,
+.uno-card[style*="width: 70px"] .uno-card__symbol--wild,
+.uno-card[style*="width: 80px"] .uno-card__symbol--wild {
+  font-size: 2.5em;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__corner,
+.uno-card[style*="width: 70px"] .uno-card__corner,
+.uno-card[style*="width: 80px"] .uno-card__corner {
+  font-size: 0.9em;
+  top: 5px;
+  left: 5px;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__corner--bottom,
+.uno-card[style*="width: 70px"] .uno-card__corner--bottom,
+.uno-card[style*="width: 80px"] .uno-card__corner--bottom {
+  bottom: 5px;
+  right: 5px;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__quadrant--1,
+.uno-card[style*="width: 70px"] .uno-card__quadrant--1,
+.uno-card[style*="width: 80px"] .uno-card__quadrant--1 {
+  border-radius: 8px 0 0 0;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__quadrant--2,
+.uno-card[style*="width: 70px"] .uno-card__quadrant--2,
+.uno-card[style*="width: 80px"] .uno-card__quadrant--2 {
+  border-radius: 0 8px 0 0;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__quadrant--3,
+.uno-card[style*="width: 70px"] .uno-card__quadrant--3,
+.uno-card[style*="width: 80px"] .uno-card__quadrant--3 {
+  border-radius: 0 0 0 8px;
+}
+
+.uno-card[style*="width: 60px"] .uno-card__quadrant--4,
+.uno-card[style*="width: 70px"] .uno-card__quadrant--4,
+.uno-card[style*="width: 80px"] .uno-card__quadrant--4 {
+  border-radius: 0 0 8px 0;
+}
+
+/* 大尺寸UNO牌 */
+.uno-card[style*="width: 150px"],
+.uno-card[style*="width: 160px"],
+.uno-card[style*="width: 180px"],
+.uno-card[style*="width: 200px"] {
+  border-radius: 16px;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__symbol,
+.uno-card[style*="width: 160px"] .uno-card__symbol,
+.uno-card[style*="width: 180px"] .uno-card__symbol,
+.uno-card[style*="width: 200px"] .uno-card__symbol {
+  font-size: 4em;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__symbol--wild,
+.uno-card[style*="width: 160px"] .uno-card__symbol--wild,
+.uno-card[style*="width: 180px"] .uno-card__symbol--wild,
+.uno-card[style*="width: 200px"] .uno-card__symbol--wild {
+  font-size: 5em;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__corner,
+.uno-card[style*="width: 160px"] .uno-card__corner,
+.uno-card[style*="width: 180px"] .uno-card__corner,
+.uno-card[style*="width: 200px"] .uno-card__corner {
+  font-size: 1.5em;
+  top: 12px;
+  left: 12px;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__corner--bottom,
+.uno-card[style*="width: 160px"] .uno-card__corner--bottom,
+.uno-card[style*="width: 180px"] .uno-card__corner--bottom,
+.uno-card[style*="width: 200px"] .uno-card__corner--bottom {
+  bottom: 12px;
+  right: 12px;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__quadrant--1,
+.uno-card[style*="width: 160px"] .uno-card__quadrant--1,
+.uno-card[style*="width: 180px"] .uno-card__quadrant--1,
+.uno-card[style*="width: 200px"] .uno-card__quadrant--1 {
+  border-radius: 16px 0 0 0;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__quadrant--2,
+.uno-card[style*="width: 160px"] .uno-card__quadrant--2,
+.uno-card[style*="width: 180px"] .uno-card__quadrant--2,
+.uno-card[style*="width: 200px"] .uno-card__quadrant--2 {
+  border-radius: 0 16px 0 0;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__quadrant--3,
+.uno-card[style*="width: 160px"] .uno-card__quadrant--3,
+.uno-card[style*="width: 180px"] .uno-card__quadrant--3,
+.uno-card[style*="width: 200px"] .uno-card__quadrant--3 {
+  border-radius: 0 0 0 16px;
+}
+
+.uno-card[style*="width: 150px"] .uno-card__quadrant--4,
+.uno-card[style*="width: 160px"] .uno-card__quadrant--4,
+.uno-card[style*="width: 180px"] .uno-card__quadrant--4,
+.uno-card[style*="width: 200px"] .uno-card__quadrant--4 {
+  border-radius: 0 0 16px 0;
+}
+
+/* ==================== 动画效果 ==================== */
+
+/* 入场动画 */
+@keyframes uno-card-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.uno-card--animated {
+  animation: uno-card-enter 0.5s ease-out;
+}
+
+/* 翻转动画 */
+@keyframes uno-card-flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+.uno-card--flip {
+  animation: uno-card-flip 0.6s ease-in-out;
+}
+
+/* 摇晃动画 */
+@keyframes uno-card-shake {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-8px) rotate(-5deg);
+  }
+  75% {
+    transform: translateX(8px) rotate(5deg);
+  }
+}
+
+.uno-card--shake {
+  animation: uno-card-shake 0.5s ease-in-out;
+}
+
+/* 发光动画 */
+@keyframes uno-card-glow {
+  0%, 100% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.uno-card--glow {
+  animation: uno-card-glow 1.5s ease-in-out infinite;
+}
+
+/* 脉冲动画 */
+@keyframes uno-card-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.uno-card--pulse {
+  animation: uno-card-pulse 1s ease-in-out infinite;
+}
+
+/* ==================== 特殊状态 ==================== */
+
+/* 选中状态 */
+.uno-card--selected {
+  transform: translateY(-15px);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.4),
+    0 0 0 4px #fff,
+    0 0 0 6px #3498db;
+}
+
+/* 禁用状态 */
+.uno-card--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
+.uno-card--disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 高亮状态 */
+.uno-card--highlight {
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.8);
+  animation: uno-card-pulse 1s ease-in-out infinite;
+}
+
+/* 播放状态(当前出牌) */
+.uno-card--playing {
+  transform: scale(1.2) translateY(-20px);
+  z-index: 100;
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* ==================== 组合排列样式 ==================== */
+
+/* UNO牌容器 */
+.uno-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* 手牌排列(扇形展开) */
+.uno-hand {
+  display: flex;
+  gap: -20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.uno-hand .uno-card {
+  margin: 0 -15px;
+  transition: all 0.3s ease;
+}
+
+.uno-hand .uno-card:hover {
+  transform: translateY(-20px) scale(1.1);
+  z-index: 10;
+}
+
+/* 牌堆(叠加效果) */
+.uno-pile {
+  position: relative;
+  width: 120px;
+  height: 180px;
+}
+
+.uno-pile .uno-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.uno-pile .uno-card:nth-child(n) {
+  transform: translate(calc(var(--index) * 2px), calc(var(--index) * 2px));
+}
+
+/* ==================== 响应式设计 ==================== */
+
+@media (max-width: 768px) {
+  .uno-card {
+    border-radius: 8px;
+  }
+  
+  .uno-cards-container {
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .uno-hand {
+    gap: -10px;
+  }
+  
+  .uno-hand .uno-card {
+    margin: 0 -10px;
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .uno-card {
+    box-shadow: none;
+    border: 2px solid #000;
+    page-break-inside: avoid;
+  }
+  
+  .uno-card:hover {
+    transform: none;
+  }
+}
+
+/* ==================== 辅助类 ==================== */
+
+/* 无边框样式 */
+.uno-card--borderless {
+  box-shadow: none;
+}
+
+/* 扁平样式 */
+.uno-card--flat {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 圆角增强 */
+.uno-card--rounded {
+  border-radius: 16px;
+}
+
+/* 阴影增强 */
+.uno-card--shadow-strong {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* 3D效果 */
+.uno-card--3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.uno-card--3d:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+}
+/* genAI_main_end */

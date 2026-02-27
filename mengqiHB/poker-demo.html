@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扑克牌生成器 - 使用示例</title>
+    <!-- genAI_main_start -->
+    <link rel="stylesheet" href="poker-card.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .control-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-group label {
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 80px;
+        }
+
+        .control-group input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 120px;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .card-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            min-height: 200px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+        }
+
+        .info-panel {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+
+        .info-panel h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .info-panel pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .info-panel code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+    </style>
+    <!-- genAI_main_end -->
+</head>
+<body>
+    <!-- genAI_main_start -->
+    <div class="demo-container">
+        <h1>🎴 扑克牌生成器</h1>
+        
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="control-group">
+                <label for="cardWidth">宽度(px):</label>
+                <input type="number" id="cardWidth" value="100" min="60" max="300">
+                
+                <label for="cardHeight">高度(px):</label>
+                <input type="number" id="cardHeight" value="140" min="80" max="400">
+            </div>
+            
+            <div class="control-group">
+                <button class="btn btn-primary" onclick="generateSingleCard()">生成一张牌</button>
+                <button class="btn btn-primary" onclick="generateMultipleCards()">生成5张牌</button>
+                <button class="btn btn-secondary" onclick="clearCards()">清空</button>
+            </div>
+        </div>
+
+        <!-- 卡牌展示区 -->
+        <div class="card-display" id="cardDisplay">
+            <p style="color: #7f8c8d; width: 100%; text-align: center;">点击按钮生成扑克牌</p>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="info-panel">
+            <h3>📖 使用说明</h3>
+            <p><strong>基础用法:</strong></p>
+            <pre><code>// 引入CSS样式
+&lt;link rel="stylesheet" href="poker-card.css"&gt;
+
+// 引入JS模块
+&lt;script src="poker-card.js"&gt;&lt;/script&gt;
+
+// 生成默认尺寸的扑克牌
+const card = generateRandomPokerCard();
+document.body.appendChild(card);
+
+// 生成自定义尺寸的扑克牌
+const customCard = generateRandomPokerCard({
+  width: 120,
+  height: 168
+});
+document.body.appendChild(customCard);</code></pre>
+
+            <p><strong>功能特性:</strong></p>
+            <ul>
+                <li>✅ 随机生成52张标准扑克牌(不含大小王)</li>
+                <li>✅ 支持自定义宽高尺寸</li>
+                <li>✅ 完整的花色和点数配置</li>
+                <li>✅ 响应式样式设计</li>
+                <li>✅ 悬停和点击动画效果</li>
+                <li>✅ 高度模块化,易于扩展</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="poker-card.js"></script>
+    <script>
+        /**
+         * 生成单张扑克牌
+         */
+        function generateSingleCard() {
+            const width = parseInt(document.getElementById('cardWidth').value);
+            const height = parseInt(document.getElementById('cardHeight').value);
+            
+            try {
+                const card = generateRandomPokerCard({ width, height });
+                card.classList.add('poker-card--animated');
+                
+                const display = document.getElementById('cardDisplay');
+                
+                // 清空提示文字
+                if (display.querySelector('p')) {
+                    display.innerHTML = '';
+                }
+                
+                display.appendChild(card);
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            }
+        }
+
+        /**
+         * 生成多张扑克牌
+         */
+        function generateMultipleCards() {
+            const width = parseInt(document.getElementById('cardWidth').value);
+            const height = parseInt(document.getElementById('cardHeight').value);
+            
+            try {
+                const display = document.getElementById('cardDisplay');
+                
+                // 清空提示文字
+                if (display.querySelector('p')) {
+                    display.innerHTML = '';
+                }
+                
+                // 生成5张牌
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const card = generateRandomPokerCard({ width, height });
+                        card.classList.add('poker-card--animated');
+                        display.appendChild(card);
+                    }, i * 100);
+                }
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            }
+        }
+
+        /**
+         * 清空所有扑克牌
+         */
+        function clearCards() {
+            const display = document.getElementById('cardDisplay');
+            display.innerHTML = '<p style="color: #7f8c8d; width: 100%; text-align: center;">点击按钮生成扑克牌</p>';
+        }
+
+        // 初始化:生成一张示例牌
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                generateSingleCard();
+            }, 500);
+        });
+    </script>
+    <!-- genAI_main_end -->
+</body>
+</html>

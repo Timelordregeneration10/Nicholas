@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": ".cursor/hooks/versionCheck.js"
+      },
+      {
+        "command": ".cursor/hooks/modelCheck.js"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/editReport.js"
+      }
+    ],
+    "afterTabFileEdit": [
+      {
+        "command": ".cursor/hooks/tabReport.js"
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": ".cursor/hooks/toolkitCheck.js"
+      }
+    ]
+  }
+}

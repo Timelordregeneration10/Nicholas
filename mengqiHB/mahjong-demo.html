@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻将牌生成器 - 使用示例</title>
+    <!-- genAI_main_start -->
+    <link rel="stylesheet" href="mahjong-tile.css">
+    <style>
+        body {
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .control-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-group label {
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 100px;
+        }
+
+        .control-group input[type="number"] {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 120px;
+        }
+
+        .control-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .card-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            min-height: 150px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .type-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .type-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .type-card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .type-card .tiles-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .info-panel {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+
+        .info-panel h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .info-panel pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .info-panel code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .info-panel ul {
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+    <!-- genAI_main_end -->
+</head>
+<body>
+    <!-- genAI_main_start -->
+    <div class="demo-container">
+        <h1>🀄 麻将牌生成器</h1>
+        <p class="subtitle">支持所有标准麻将牌型,包括万子、筒子、索子、字牌和花牌</p>
+        
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="control-group">
+                <label for="tileWidth">宽度(px):</label>
+                <input type="number" id="tileWidth" value="60" min="40" max="150">
+                
+                <label for="tileHeight">高度(px):</label>
+                <input type="number" id="tileHeight" value="80" min="50" max="200">
+            </div>
+            
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="includeFlowers" checked>
+                    包含花牌
+                </label>
+                
+                <label>
+                    <input type="checkbox" id="includeRedFives" checked>
+                    包含红五
+                </label>
+            </div>
+            
+            <div class="control-group">
+                <button class="btn btn-primary" onclick="generateSingleTile()">生成一张牌</button>
+                <button class="btn btn-success" onclick="generateHandTiles()">生成手牌(13张)</button>
+                <button class="btn btn-secondary" onclick="clearTiles()">清空</button>
+            </div>
+        </div>
+
+        <!-- 麻将牌展示区 -->
+        <div class="card-display" id="tileDisplay">
+            <p style="color: #7f8c8d; width: 100%; text-align: center;">点击按钮生成麻将牌</p>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalCount">0</div>
+                <div class="stat-label">总牌数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="characterCount">0</div>
+                <div class="stat-label">万子</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="dotCount">0</div>
+                <div class="stat-label">筒子</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="bambooCount">0</div>
+                <div class="stat-label">索子</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="honorCount">0</div>
+                <div class="stat-label">字牌</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="flowerCount">0</div>
+                <div class="stat-label">花牌</div>
+            </div>
+        </div>
+
+        <!-- 麻将牌类型展示 -->
+        <h2 class="section-title">📚 麻将牌类型展示</h2>
+        <div class="type-showcase">
+            <div class="type-card">
+                <h3>万子 (Characters)</h3>
+                <div class="tiles-row" id="charactersRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>筒子 (Dots)</h3>
+                <div class="tiles-row" id="dotsRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>索子 (Bamboos)</h3>
+                <div class="tiles-row" id="bamboosRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>字牌 (Honors)</h3>
+                <div class="tiles-row" id="honorsRow"></div>
+            </div>
+            <div class="type-card">
+                <h3>花牌 (Flowers)</h3>
+                <div class="tiles-row" id="flowersRow"></div>
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="info-panel">
+            <h3>📖 使用说明</h3>
+            <p><strong>基础用法:</strong></p>
+            <pre><code>// 引入CSS样式
+&lt;link rel="stylesheet" href="mahjong-tile.css"&gt;
+
+// 引入JS模块
+&lt;script src="mahjong-tile.js"&gt;&lt;/script&gt;
+
+// 生成随机麻将牌(默认尺寸)
+const tile = generateRandomMahjongTile();
+document.body.appendChild(tile);
+
+// 生成自定义尺寸的麻将牌
+const customTile = generateRandomMahjongTile({
+  width: 80,
+  height: 100,
+  includeFlowers: true,    // 包含花牌
+  includeRedFives: true    // 包含红五
+});
+document.body.appendChild(customTile);
+
+// 根据ID生成指定麻将牌
+const specificTile = generateMahjongTileById('1m', {
+  width: 60,
+  height: 80
+});
+document.body.appendChild(specificTile);</code></pre>
+
+            <p><strong>麻将牌ID规则:</strong></p>
+            <ul>
+                <li><strong>万子:</strong> 1m-9m (一万到九万), 0m (红五万)</li>
+                <li><strong>筒子:</strong> 1p-9p (一筒到九筒), 0p (红五筒)</li>
+                <li><strong>索子:</strong> 1s-9s (一索到九索), 0s (红五索)</li>
+                <li><strong>字牌:</strong> 1z-7z (东、南、西、北、白、发、中)</li>
+                <li><strong>花牌:</strong> chun(春)、xia(夏)、qiu(秋)、dong(冬)、mei(梅)、lan(兰)、ju(菊)、zu(竹)</li>
+            </ul>
+
+            <p><strong>功能特性:</strong></p>
+            <ul>
+                <li>✅ 支持所有标准麻将牌型(共45种)</li>
+                <li>✅ 支持自定义宽高尺寸</li>
+                <li>✅ 支持选择是否包含花牌和红五</li>
+                <li>✅ 完整的麻将牌配置和分类</li>
+                <li>✅ 响应式样式设计</li>
+                <li>✅ 丰富的动画和交互效果</li>
+                <li>✅ 高度模块化,易于扩展</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="mahjong-tile.js"></script>
+    <script>
+        // 统计数据
+        let stats = {
+            total: 0,
+            character: 0,
+            dot: 0,
+            bamboo: 0,
+            honor: 0,
+            flower: 0
+        };
+
+        /**
+         * 更新统计信息
+         */
+        function updateStats() {
+            document.getElementById('totalCount').textContent = stats.total;
+            document.getElementById('characterCount').textContent = stats.character;
+            document.getElementById('dotCount').textContent = stats.dot;
+            document.getElementById('bambooCount').textContent = stats.bamboo;
+            document.getElementById('honorCount').textContent = stats.honor;
+            document.getElementById('flowerCount').textContent = stats.flower;
+        }
+
+        /**
+         * 添加牌到统计
+         */
+        function addToStats(type) {
+            stats.total++;
+            if (type === 'character') stats.character++;
+            else if (type === 'dot') stats.dot++;
+            else if (type === 'bamboo') stats.bamboo++;
+            else if (type === 'honor') stats.honor++;
+            else if (type === 'flower') stats.flower++;
+            updateStats();
+        }
+
+        /**
+         * 重置统计
+         */
+        function resetStats() {
+            stats = {
+                total: 0,
+                character: 0,
+                dot: 0,
+                bamboo: 0,
+                honor: 0,
+                flower: 0
+            };
+            updateStats();
+        }
+
+        /**
+         * 生成单张麻将牌
+         */
+        function generateSingleTile() {
+            const width = parseInt(document.getElementById('tileWidth').value);
+            const height = parseInt(document.getElementById('tileHeight').value);
+            const includeFlowers = document.getElementById('includeFlowers').checked;
+            const includeRedFives = document.getElementById('includeRedFives').checked;
+            
+            try {
+                const tile = generateRandomMahjongTile({ 
+                    width, 
+                    height, 
+                    includeFlowers, 
+                    includeRedFives 
+                });
+                tile.classList.add('mahjong-tile--animated');
+                
+                const display = document.getElementById('tileDisplay');
+                
+                // 清空提示文字
+                if (display.querySelector('p')) {
+                    display.innerHTML = '';
+                    resetStats();
+                }
+                
+                display.appendChild(tile);
+                
+                // 更新统计
+                addToStats(tile.dataset.type);
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            }
+        }
+
+        /**
+         * 生成手牌(13张)
+         */
+        function generateHandTiles() {
+            const width = parseInt(document.getElementById('tileWidth').value);
+            const height = parseInt(document.getElementById('tileHeight').value);
+            const includeFlowers = document.getElementById('includeFlowers').checked;
+            const includeRedFives = document.getElementById('includeRedFives').checked;
+            
+            try {
+                const display = document.getElementById('tileDisplay');
+                
+                // 清空提示文字
+                if (display.querySelector('p')) {
+                    display.innerHTML = '';
+                    resetStats();
+                }
+                
+                // 生成13张牌
+                for (let i = 0; i < 13; i++) {
+                    setTimeout(() => {
+                        const tile = generateRandomMahjongTile({ 
+                            width, 
+                            height, 
+                            includeFlowers, 
+                            includeRedFives 
+                        });
+                        tile.classList.add('mahjong-tile--animated');
+                        display.appendChild(tile);
+                        
+                        // 更新统计
+                        addToStats(tile.dataset.type);
+                    }, i * 80);
+                }
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            }
+        }
+
+        /**
+         * 清空所有麻将牌
+         */
+        function clearTiles() {
+            const display = document.getElementById('tileDisplay');
+            display.innerHTML = '<p style="color: #7f8c8d; width: 100%; text-align: center;">点击按钮生成麻将牌</p>';
+            resetStats();
+        }
+
+        /**
+         * 初始化类型展示
+         */
+        function initTypeShowcase() {
+            const tileSize = { width: 45, height: 60 };
+            
+            // 万子
+            const charactersRow = document.getElementById('charactersRow');
+            ['1m', '2m', '3m', '4m', '5m', '0m', '6m', '7m', '8m', '9m'].forEach(id => {
+                const tile = generateMahjongTileById(id, tileSize);
+                if (tile) charactersRow.appendChild(tile);
+            });
+            
+            // 筒子
+            const dotsRow = document.getElementById('dotsRow');
+            ['1p', '2p', '3p', '4p', '5p', '0p', '6p', '7p', '8p', '9p'].forEach(id => {
+                const tile = generateMahjongTileById(id, tileSize);
+                if (tile) dotsRow.appendChild(tile);
+            });
+            
+            // 索子
+            const bamboosRow = document.getElementById('bamboosRow');
+            ['1s', '2s', '3s', '4s', '5s', '0s', '6s', '7s', '8s', '9s'].forEach(id => {
+                const tile = generateMahjongTileById(id, tileSize);
+                if (tile) bamboosRow.appendChild(tile);
+            });
+            
+            // 字牌
+            const honorsRow = document.getElementById('honorsRow');
+            ['1z', '2z', '3z', '4z', '5z', '6z', '7z'].forEach(id => {
+                const tile = generateMahjongTileById(id, tileSize);
+                if (tile) honorsRow.appendChild(tile);
+            });
+            
+            // 花牌
+            const flowersRow = document.getElementById('flowersRow');
+            ['chun', 'xia', 'qiu', 'dong', 'mei', 'lan', 'ju', 'zu'].forEach(id => {
+                const tile = generateMahjongTileById(id, tileSize);
+                if (tile) flowersRow.appendChild(tile);
+            });
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            initTypeShowcase();
+            
+            // 生成一张示例牌
+            setTimeout(() => {
+                generateSingleTile();
+            }, 500);
+        });
+    </script>
+    <!-- genAI_main_end -->
+</body>
+</html>

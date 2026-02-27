@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐 Mengqi! 🎉</title>
+    <!-- genAI_main_start -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+    <link rel="stylesheet" href="poker-card.css">
+    <link rel="stylesheet" href="mahjong-tile.css">
+    <link rel="stylesheet" href="uno-card.css">
+    <!-- genAI_main_end -->
+    <style>
+        /* genAI_main_start */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ade1ff 0%, #febcff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        .content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: slideUp 1s ease-out 1s forwards;
+        }
+
+        /* genAI_main_start */
+        @media (max-width: 768px) {
+            .content {
+                padding: 12px;
+            }
+        }
+        /* genAI_main_end */
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blessing-section {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            /* genAI_main_start */
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+            cursor: pointer;
+            border: 3px solid transparent;
+            /* genAI_main_end */
+        }
+
+        /* genAI_main_start */
+
+        .blessing-section:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .click-hint {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+        /* genAI_main_end */
+
+        /* genAI_main_start */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            min-height: 160px;
+        }
+
+        .blessing-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-card {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            animation: fallDown 1s ease-in forwards;
+        }
+
+        @keyframes fallDown {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(300px) rotate(20deg);
+            }
+        }
+
+        /* 全屏牌雨容器 */
+        .card-rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+            opacity: 0.5;
+        }
+
+        /* 牌雨动画 */
+        .rain-card {
+            position: absolute;
+            pointer-events: none;
+            animation: rainFall linear forwards;
+        }
+
+        @keyframes rainFall {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(-30deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(30deg);
+            }
+        }
+        /* genAI_main_end */
+
+        .blessing-section h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .blessing-section p {
+            color: #555;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .poker-section {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(44, 62, 80, 0.1));
+        }
+
+        .mahjong-section {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(139, 115, 85, 0.1));
+        }
+
+        .uno-section {
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(52, 152, 219, 0.1));
+        }
+
+        .ending {
+            margin-top: 30px;
+            padding: 20px;
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .blessing-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .blessing-section p {
+                font-size: 0.9rem;
+            }
+
+            .ending {
+                font-size: 0.9rem;
+            }
+        }
+        /* genAI_main_end */
+    </style>
+</head>
+<body>
+    <!-- genAI_main_start -->
+    <!-- 全屏牌雨容器 -->
+    <div class="card-rain-container" id="card-rain-container"></div>
+
+    <div class="container">
+        <h1>🎉 生日快乐 Mengqi! 🎉</h1>
+        
+        <div class="content">
+            <!-- 扑克祝福 -->
+            <!-- genAI_main_start -->
+            <div class="blessing-section poker-section" onclick="changePokerCard()" onmousemove="handlePokerMouseMove(event, this)" ontouchmove="handlePokerTouchMove(event, this)">
+                <h2>♠️♥️ 扑克祝福 ♦️♣️</h2>
+                <div class="card-container" id="poker-card-container"></div>
+                <p>愿你的人生如一副精巧的扑克牌，于方寸间铺展万千气象。</p>
+                <p>红桃似火，燃尽岁月深情，是心尖上跳动的赤诚；</p>
+                <p>黑桃如墨，沉淀智慧锋芒，是暗夜中不灭的灯塔；</p>
+                <p>方块若金，铸就成功阶梯，是征途上坚实的回响；</p>
+                <p>梅花如雪，在逆境中绽放，是命运里不期的馈赠。</p>
+                <p>每一张牌皆是命运的独笔，恰似你生命中不可复制的华章。</p>
+                <div class="click-hint">👆 点击切换牌面 🔄</div>
+            </div>
+            <!-- genAI_main_end -->
+
+            <!-- 麻将祝福 -->
+            <!-- genAI_main_start -->
+            <div class="blessing-section mahjong-section" onclick="changeMahjongTile()" onmousemove="handleMahjongMouseMove(event, this)" ontouchmove="handleMahjongTouchMove(event, this)">
+                <h2>🀄 麻将祝福 🀆</h2>
+                <div class="card-container" id="mahjong-card-container"></div>
+                <p>愿你的生活如一局精妙的麻将，在牌桌上流转出生命的韵律与欢愉。</p>
+                <p>东南西北，风起云涌间顺遂天时；</p>
+                <p>中发白，三元及第时文光射斗。</p>
+                <p>筒筒相生，似繁星缀满长空，精彩永不落幕；</p>
+                <p>条条大路，如江河奔涌向前，终汇通达之境。</p>
+                <p>胡牌声声，是命运轻叩的回响，好运如潮水般连绵不绝；</p>
+                <p>人生赢家，非独牌局之胜，更是岁月里从容的注脚。</p>
+                <div class="click-hint">👆 点击切换牌面 🔄</div>
+            </div>
+            <!-- genAI_main_end -->
+
+            <!-- UNO祝福 -->
+            <!-- genAI_main_start -->
+            <div class="blessing-section uno-section" onclick="changeUnoCard()" onmousemove="handleUnoMouseMove(event, this)" ontouchmove="handleUnoTouchMove(event, this)">
+                <h2>🎴 UNO祝福 🎴</h2>
+                <div class="card-container" id="uno-card-container"></div>
+                <p>愿你的未来若UNO之舞，在色彩的交响中谱写生命的诗篇。</p>
+                <p>赤诚如红，点燃心底的炽热，绘就无畏的激情；</p>
+                <p>湛蓝似天，铺展梦想的辽阔，书写远航的志向；</p>
+                <p>翠色若林，承载希望的萌芽，孕育新生的力量；</p>
+                <p>明黄如阳，漾开欢愉的涟漪，点亮每一寸时光。</p>
+                <p>反转卡轻旋，将烦忧化作倒流的星河，重归寂静；</p>
+                <p>跳过卡跃动，助你跨越险阻的山峦，抵达坦途。</p>
+                <p>变色卡随心流转，如四季更迭般自如，</p>
+                <p>在方寸牌桌间，铺展生命的华彩乐章——</p>
+                <div class="click-hint">👆 点击切换牌面 🔄</div>
+            </div>
+            <!-- genAI_main_end -->
+
+            <!-- 结尾 -->
+            <div class="ending">
+                <p>亲爱的妹妹 Mengqi，</p>
+                <p>愿你的每一日皆如游戏般绚烂多彩，</p>
+                <p>在时光的关卡里，步步生花，笑靥如花。</p>
+                <p>生日快乐，愿你的心田永远盛开着欢愉的花海，</p>
+                <p>岁岁年年，皆是人间好时节。🎊🎈</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- genAI_main_start -->
+    <script src="poker-card.js"></script>
+    <script src="mahjong-tile.js"></script>
+    <script src="uno-card.js"></script>
+    <script>
+        // 节流控制变量
+        let lastPokerTime = 0;
+        let lastMahjongTime = 0;
+        let lastUnoTime = 0;
+        const throttleDelay = 100;
+
+        // 初始化扑克牌
+        function initPokerCard() {
+            const container = document.getElementById('poker-card-container');
+            container.innerHTML = '';
+            const card = generateRandomPokerCard({ width: 100, height: 140 });
+            container.appendChild(card);
+        }
+
+        // 切换扑克牌
+        function changePokerCard() {
+            const container = document.getElementById('poker-card-container');
+            container.innerHTML = '';
+            const card = generateRandomPokerCard({ width: 100, height: 140 });
+            card.classList.add('poker-card--animated');
+            container.appendChild(card);
+        }
+
+        // 扑克牌鼠标移动事件处理
+        function handlePokerMouseMove(event, element) {
+            const now = Date.now();
+            if (now - lastPokerTime < throttleDelay) {
+                return;
+            }
+            lastPokerTime = now;
+
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            createFloatingPokerCard(element, x, y);
+        }
+
+        // 扑克牌触摸移动事件处理
+        function handlePokerTouchMove(event, element) {
+            
+            const now = Date.now();
+            if (now - lastPokerTime < throttleDelay) {
+                return;
+            }
+            lastPokerTime = now;
+
+            const touch = event.touches[0];
+            const rect = element.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            createFloatingPokerCard(element, x, y);
+        }
+
+        // 创建浮动扑克牌
+        function createFloatingPokerCard(element, x, y) {
+            const floatingCard = generateRandomPokerCard({ width: 40, height: 60 });
+            floatingCard.classList.add('floating-card');
+            floatingCard.style.left = `${x - 20}px`;
+            floatingCard.style.top = `${y - 30}px`;
+
+            element.appendChild(floatingCard);
+
+            setTimeout(() => {
+                if (floatingCard.parentNode) {
+                    floatingCard.parentNode.removeChild(floatingCard);
+                }
+            }, 1500);
+        }
+
+        // 初始化麻将牌
+        function initMahjongTile() {
+            const container = document.getElementById('mahjong-card-container');
+            container.innerHTML = '';
+            const tile = generateRandomMahjongTile({ width: 80, height: 110 });
+            container.appendChild(tile);
+        }
+
+        // 切换麻将牌
+        function changeMahjongTile() {
+            const container = document.getElementById('mahjong-card-container');
+            container.innerHTML = '';
+            const tile = generateRandomMahjongTile({ width: 80, height: 110 });
+            tile.classList.add('mahjong-tile--animated');
+            container.appendChild(tile);
+        }
+
+        // 麻将牌鼠标移动事件处理
+        function handleMahjongMouseMove(event, element) {
+            const now = Date.now();
+            if (now - lastMahjongTime < throttleDelay) {
+                return;
+            }
+            lastMahjongTime = now;
+
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            createFloatingMahjongTile(element, x, y);
+        }
+
+        // 麻将牌触摸移动事件处理
+        function handleMahjongTouchMove(event, element) {
+            
+            const now = Date.now();
+            if (now - lastMahjongTime < throttleDelay) {
+                return;
+            }
+            lastMahjongTime = now;
+
+            const touch = event.touches[0];
+            const rect = element.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            createFloatingMahjongTile(element, x, y);
+        }
+
+        // 创建浮动麻将牌
+        function createFloatingMahjongTile(element, x, y) {
+            const floatingTile = generateRandomMahjongTile({ width: 40, height: 60 });
+            floatingTile.classList.add('floating-card');
+            floatingTile.style.left = `${x - 20}px`;
+            floatingTile.style.top = `${y - 30}px`;
+
+            element.appendChild(floatingTile);
+
+            setTimeout(() => {
+                if (floatingTile.parentNode) {
+                    floatingTile.parentNode.removeChild(floatingTile);
+                }
+            }, 1500);
+        }
+
+        // 初始化UNO牌
+        function initUnoCard() {
+            const container = document.getElementById('uno-card-container');
+            container.innerHTML = '';
+            const card = generateRandomUnoCard({ width: 100, height: 150 });
+            container.appendChild(card);
+        }
+
+        // 切换UNO牌
+        function changeUnoCard() {
+            const container = document.getElementById('uno-card-container');
+            container.innerHTML = '';
+            const card = generateRandomUnoCard({ width: 100, height: 150 });
+            card.classList.add('uno-card--animated');
+            container.appendChild(card);
+        }
+
+        // UNO牌鼠标移动事件处理
+        function handleUnoMouseMove(event, element) {
+            const now = Date.now();
+            if (now - lastUnoTime < throttleDelay) {
+                return;
+            }
+            lastUnoTime = now;
+
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            createFloatingUnoCard(element, x, y);
+        }
+
+        // UNO牌触摸移动事件处理
+        function handleUnoTouchMove(event, element) {
+            
+            const now = Date.now();
+            if (now - lastUnoTime < throttleDelay) {
+                return;
+            }
+            lastUnoTime = now;
+
+            const touch = event.touches[0];
+            const rect = element.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            createFloatingUnoCard(element, x, y);
+        }
+
+        // 创建浮动UNO牌
+        function createFloatingUnoCard(element, x, y) {
+            const floatingCard = generateRandomUnoCard({ width: 40, height: 60 });
+            floatingCard.classList.add('floating-card');
+            floatingCard.style.left = `${x - 20}px`;
+            floatingCard.style.top = `${y - 30}px`;
+
+            element.appendChild(floatingCard);
+
+            setTimeout(() => {
+                if (floatingCard.parentNode) {
+                    floatingCard.parentNode.removeChild(floatingCard);
+                }
+            }, 1500);
+        }
+
+        // 页面加载完成后初始化所有牌
+        window.addEventListener('DOMContentLoaded', function() {
+            initPokerCard();
+            initMahjongTile();
+            initUnoCard();
+            startCardRain();
+        });
+
+        // 全屏牌雨功能
+        function startCardRain() {
+            const container = document.getElementById('card-rain-container');
+            
+            // 定期生成牌雨
+            setInterval(() => {
+                createRainCard(container);
+            }, 1000); // 每1000ms生成一张牌
+        }
+
+        // 创建单张牌雨
+        function createRainCard(container) {
+            // 随机选择牌的类型: 0-扑克, 1-麻将, 2-UNO
+            const cardType = Math.floor(Math.random() * 3);
+            let card;
+
+            // 根据类型生成对应的牌
+            switch(cardType) {
+                case 0:
+                    card = generateRandomPokerCard({ width: 40, height: 60 });
+                    break;
+                case 1:
+                    card = generateRandomMahjongTile({ width: 40, height: 60 });
+                    break;
+                case 2:
+                    card = generateRandomUnoCard({ width: 40, height: 60 });
+                    break;
+            }
+
+            // 添加牌雨样式类
+            card.classList.add('rain-card');
+
+            // 随机水平位置 (0-100%)
+            const randomX = Math.random() * 100;
+            card.style.left = `${randomX}%`;
+
+            // 随机动画持续时间 (3-6秒)
+            const duration = 3 + Math.random() * 3;
+            card.style.animationDuration = `${duration}s`;
+
+            // 随机延迟 (0-1秒)
+            const delay = 0;
+            card.style.animationDelay = `${delay}s`;
+
+            // 添加到容器
+            container.appendChild(card);
+
+            // 动画结束后移除元素
+            setTimeout(() => {
+                if (card.parentNode) {
+                    card.parentNode.removeChild(card);
+                }
+            }, (duration + delay) * 1000 - 100);
+        }
+    </script>
+    <!-- genAI_main_end -->
+</body>
+</html>

@@ -1,0 +1,296 @@
+/* genAI_main_start */
+/**
+ * 扑克牌样式模块
+ * 提供扑克牌的完整视觉样式
+ */
+
+/* ==================== 基础样式 ==================== */
+
+.poker-card {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 悬停效果 */
+.poker-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 激活效果 */
+.poker-card:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== 颜色主题 ==================== */
+
+/* 红色花色(红桃、方块) */
+.poker-card--red {
+  color: #e74c3c;
+}
+
+.poker-card--red .poker-card__suit,
+.poker-card--red .poker-card__symbol {
+  color: #e74c3c;
+}
+
+/* 黑色花色(黑桃、梅花) */
+.poker-card--black {
+  color: #2c3e50;
+}
+
+.poker-card--black .poker-card__suit,
+.poker-card--black .poker-card__symbol {
+  color: #2c3e50;
+}
+
+/* ==================== 角标样式 ==================== */
+
+.poker-card__corner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  font-size: 1.2em;
+}
+
+/* 顶部角标 */
+.poker-card__corner--top {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+/* 底部角标(旋转180度) */
+.poker-card__corner--bottom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+
+/* 点数样式 */
+.poker-card__rank {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+/* 花色符号样式 */
+.poker-card__suit {
+  font-size: 1.2em;
+}
+
+/* ==================== 中间符号样式 ==================== */
+
+.poker-card__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin: 20px 0;
+}
+
+.poker-card__symbol {
+  font-size: 3em;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* ==================== 响应式设计 ==================== */
+
+/* genAI_main_start */
+/* 超小尺寸扑克牌 (40px) */
+.poker-card[style*="width: 40px"] {
+  padding: 3px;
+}
+
+.poker-card[style*="width: 40px"] .poker-card__corner--top {
+  top: 3px;
+  left: 3px;
+}
+
+.poker-card[style*="width: 40px"] .poker-card__corner--bottom {
+  bottom: 3px;
+  right: 3px;
+}
+
+.poker-card[style*="width: 40px"] .poker-card__rank {
+  font-size: 0.6em;
+  margin-bottom: 0;
+}
+
+.poker-card[style*="width: 40px"] .poker-card__suit {
+  font-size: 0.5em;
+}
+
+.poker-card[style*="width: 40px"] .poker-card__symbol {
+  font-size: 1em;
+}
+/* genAI_main_end */
+
+/* 小尺寸扑克牌 */
+.poker-card[style*="width: 60px"],
+.poker-card[style*="width: 70px"],
+.poker-card[style*="width: 80px"] {
+  padding: 6px;
+}
+
+.poker-card[style*="width: 60px"] .poker-card__rank,
+.poker-card[style*="width: 70px"] .poker-card__rank,
+.poker-card[style*="width: 80px"] .poker-card__rank {
+  font-size: 1.2em;
+}
+
+.poker-card[style*="width: 60px"] .poker-card__suit,
+.poker-card[style*="width: 70px"] .poker-card__suit,
+.poker-card[style*="width: 80px"] .poker-card__suit {
+  font-size: 1em;
+}
+
+.poker-card[style*="width: 60px"] .poker-card__symbol,
+.poker-card[style*="width: 70px"] .poker-card__symbol,
+.poker-card[style*="width: 80px"] .poker-card__symbol {
+  font-size: 2em;
+}
+
+/* 大尺寸扑克牌 */
+.poker-card[style*="width: 150px"],
+.poker-card[style*="width: 160px"],
+.poker-card[style*="width: 180px"],
+.poker-card[style*="width: 200px"] {
+  padding: 15px;
+}
+
+.poker-card[style*="width: 150px"] .poker-card__rank,
+.poker-card[style*="width: 160px"] .poker-card__rank,
+.poker-card[style*="width: 180px"] .poker-card__rank,
+.poker-card[style*="width: 200px"] .poker-card__rank {
+  font-size: 2em;
+}
+
+.poker-card[style*="width: 150px"] .poker-card__suit,
+.poker-card[style*="width: 160px"] .poker-card__suit,
+.poker-card[style*="width: 180px"] .poker-card__suit,
+.poker-card[style*="width: 200px"] .poker-card__suit {
+  font-size: 1.5em;
+}
+
+.poker-card[style*="width: 150px"] .poker-card__symbol,
+.poker-card[style*="width: 160px"] .poker-card__symbol,
+.poker-card[style*="width: 180px"] .poker-card__symbol,
+.poker-card[style*="width: 200px"] .poker-card__symbol {
+  font-size: 4em;
+}
+
+/* ==================== 动画效果 ==================== */
+
+/* 入场动画 */
+@keyframes poker-card-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotateY(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+.poker-card--animated {
+  animation: poker-card-enter 0.6s ease-out;
+}
+
+/* 翻转动画 */
+@keyframes poker-card-flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+.poker-card--flip {
+  animation: poker-card-flip 0.6s ease-in-out;
+}
+
+/* ==================== 特殊状态 ==================== */
+
+/* 选中状态 */
+.poker-card--selected {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  outline: 3px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* 禁用状态 */
+.poker-card--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
+.poker-card--disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .poker-card {
+    box-shadow: none;
+    border: 2px solid #000;
+    page-break-inside: avoid;
+  }
+  
+  .poker-card:hover {
+    transform: none;
+  }
+}
+
+/* ==================== 辅助类 ==================== */
+
+/* 无边框样式 */
+.poker-card--borderless {
+  box-shadow: none;
+  border: 1px solid #ddd;
+}
+
+/* 圆角样式 */
+.poker-card--rounded {
+  border-radius: 12px;
+}
+
+/* 阴影增强 */
+.poker-card--shadow-strong {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 3D效果 */
+.poker-card--3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.poker-card--3d:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+}
+/* genAI_main_end */
