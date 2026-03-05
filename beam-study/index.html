@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>泰拉瑞亚Boss激光 尝试 - 实心光束版</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+    canvas {
+      display: block;
+    }
+    .text {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      text-shadow: 0 0 10px rgba(0,255,255,0.8);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="text">🔥 泰拉瑞亚Boss激光 - 实心光束（非空心）🔥</div>
+
+  <script type="module">
+    import * as THREE from 'https://esm.sh/three@0.157.0';
+    import { OrbitControls } from 'https://esm.sh/three@0.157.0/examples/jsm/controls/OrbitControls.js';
+    import { EffectComposer } from 'https://esm.sh/three@0.157.0/examples/jsm/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'https://esm.sh/three@0.157.0/examples/jsm/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'https://esm.sh/three@0.157.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    camera.position.set(0, 0, 5);
+
+    // ✨ 激光 Shader：模拟实心光束
+    const laserMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+        beamLength: { value: 10.0 }, // 激光长度
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        uniform float beamLength;
+        varying vec2 vUv;
+
+        void main() {
+          // UV: x=横向(0~1), y=纵向(0~1)
+          // 将 UV 映射到：横向 [-0.5, 0.5], 纵向 [0, beamLength]
+          float radialDist = (vUv.x - 0.5) * 2.0; // -1 ~ 1
+          float longitudinal = vUv.y * beamLength;  // 0 ~ beamLength
+
+          // 径向距离（绝对值）
+          float r = abs(radialDist);
+
+          // 核心半径（白色）
+          float coreRadius = 0.08;
+          // 总半径（边缘）
+          float totalRadius = 0.3;
+
+          // 如果超出半径，丢弃（透明）
+          if (r > totalRadius) discard;
+
+          // 颜色渐变：核心白 -> 边缘青
+          vec3 coreColor = vec3(2.0, 2.0, 2.0);     // 过曝白
+          vec3 edgeColor = vec3(0.0, 1.0, 1.0);     // 蓝青
+
+          float t = smoothstep(coreRadius, totalRadius, r);
+          vec3 color = mix(coreColor, edgeColor, t);
+
+          // 纵向衰减：越远越暗（可选）
+          // float fade = 1.0 - smoothstep(beamLength*0.7, beamLength, longitudinal);
+          // color *= fade;
+
+          // 脉冲
+          float pulse = 0.4 * sin(time * 3.0) + 0.6;
+          color *= pulse;
+
+          // 透明度：边缘淡出
+          float alpha = 1.0 - smoothstep(totalRadius * 0.7, totalRadius, r);
+          alpha *= 0.95;
+
+          gl_FragColor = vec4(color, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending
+    });
+
+    // 创建一个细长平面作为激光（宽=0.6, 高=10）
+    const beamGeometry = new THREE.PlaneGeometry(0.6, 10, 1, 64); // 宽度0.6，高度10
+    const beam = new THREE.Mesh(beamGeometry, laserMaterial);
+    beam.rotation.x = Math.PI / 2; // 躺平成水平光束
+    scene.add(beam);
+
+    // Bloom 后处理（关键！让白色核心发光）
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      3.0,   // 更强光晕
+      0.9,
+      0.0
+    );
+    composer.addPass(bloomPass);
+
+    // 动画
+    function animate() {
+      const time = performance.now() * 0.001;
+      requestAnimationFrame(animate);
+
+      beam.position.y = Math.sin(time * 0.7) * 1.5;
+      laserMaterial.uniforms.time.value = time;
+
+      controls.update();
+      composer.render();
+    }
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    animate();
+  </script>
+</body>
+</html>
